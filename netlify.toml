@@ -2,7 +2,7 @@
 [build]
   publish = "."
 
-# Clean URLs redirects
+# Clean URLs
 [[redirects]]
   from = "/about"
   to = "/about.html"
@@ -38,7 +38,7 @@
   to = "/thank-you.html"
   status = 200
 
-# Services Redirects
+# Services
 [[redirects]]
   from = "/services"
   to = "/services.html"
@@ -51,12 +51,12 @@
 
 [[redirects]]
   from = "/services/sip"
-  to = "/services/sip-plans.html"
+  to = "/services/sip-planning.html"
   status = 200
 
 [[redirects]]
   from = "/services/sip-planning"
-  to = "/services/sip-plans.html"
+  to = "/services/sip-planning.html"
   status = 200
 
 [[redirects]]
