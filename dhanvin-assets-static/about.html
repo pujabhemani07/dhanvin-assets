@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full antialiased">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Dhanvin Assets - Wealth Advisory Desk</title>
+  <meta name="description" content="Learn about Dhanvin Assets Pvt Ltd, our founder Dhanvin Shah, and our mission to provide structured, objective wealth management advice.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              purple: { DEFAULT: '#4B2E83', dark: '#1b0e36', light: '#6a44b5', soft: 'rgba(75, 46, 131, 0.05)' },
+              blue: { DEFAULT: '#2448D8', dark: '#162c80', light: '#5a78ff', soft: 'rgba(36, 72, 216, 0.05)' },
+              gold: { DEFAULT: '#D4AF37', dark: '#aa8721', light: '#e7c65a', soft: 'rgba(212, 175, 55, 0.08)' },
+              bg: { DEFAULT: '#FFFFFF', light: '#F8F9FC', dark: '#0f0822' },
+              text: { DEFAULT: '#1A1A1A', muted: '#4b5563' }
+            }
+          },
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+            inter: ['Inter', 'sans-serif'],
+            manrope: ['Manrope', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-full flex flex-col font-inter bg-brand-bg dark:bg-brand-bg-dark text-brand-text dark:text-gray-100 transition-colors duration-300">
+  <div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-brand-purple to-brand-blue z-50 w-0"></div>
+
+  <!-- Header Navigation -->
+  <header class="fixed top-8 left-0 right-0 z-45 py-4 bg-white/80 dark:bg-brand-purple-dark/80 backdrop-blur-xl border-b border-brand-purple/10 dark:border-brand-gold/25 shadow-lg max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 rounded-full mt-2">
+    <div class="flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5 group">
+        <svg class="w-9 h-9 text-brand-purple dark:text-brand-gold transition-transform duration-300 group-hover:scale-105" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="6" class="opacity-20" />
+          <path d="M30 25 H50 C65 25 75 35 75 50 C75 65 65 75 50 75 H30 Z" stroke="currentColor" stroke-width="8" stroke-linejoin="round" />
+          <path d="M42 58 V40 M42 40 L52 48 M42 40 L32 48" stroke="#2448D8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+          <circle cx="50" cy="50" r="6" fill="#D4AF37" />
+        </svg>
+        <div class="flex flex-col">
+          <span class="font-poppins font-bold text-lg tracking-wider leading-none text-brand-purple dark:text-white">DHANVIN</span>
+          <span class="font-sans text-[9px] font-semibold tracking-[0.25em] text-brand-blue dark:text-brand-gold uppercase mt-0.5 leading-none">ASSETS</span>
+        </div>
+      </a>
+      <nav class="hidden xl:flex items-center gap-7">
+        <a href="index.html" class="font-medium text-[13.5px] hover:text-brand-purple dark:hover:text-brand-gold transition-colors">Home</a>
+        <a href="about.html" class="font-medium text-[13.5px] text-brand-purple dark:text-brand-gold font-bold">About Us</a>
+        <a href="services.html" class="font-medium text-[13.5px] hover:text-brand-purple dark:hover:text-brand-gold transition-colors">Services</a>
+        <a href="calculators.html" class="font-medium text-[13.5px] hover:text-brand-purple dark:hover:text-brand-gold transition-colors">Calculators</a>
+        <a href="market-insights.html" class="font-medium text-[13.5px] hover:text-brand-purple dark:hover:text-brand-gold transition-colors">Market Insights</a>
+        <a href="blog.html" class="font-medium text-[13.5px] hover:text-brand-purple dark:hover:text-brand-gold transition-colors">Resources</a>
+        <a href="contact.html" class="font-medium text-[13.5px] hover:text-brand-purple dark:hover:text-brand-gold transition-colors">Contact</a>
+      </nav>
+      <div class="hidden lg:flex items-center gap-4">
+        <button class="theme-toggle p-2.5 rounded-full border border-brand-purple/10 dark:border-brand-gold/20 bg-white/40 dark:bg-brand-purple-dark/40 backdrop-blur-md text-brand-purple dark:text-brand-gold hover:scale-105 active:scale-95 transition-all cursor-pointer">
+          <svg class="sun-icon w-5 h-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="moon-icon w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="contact.html#booking" class="px-5 py-2.5 rounded-full font-poppins font-semibold text-[11px] tracking-wider uppercase bg-brand-purple dark:bg-brand-gold text-white dark:text-brand-purple-dark hover:bg-brand-blue dark:hover:bg-white hover:text-white transition-all shadow-md">Free Consultation</a>
+      </div>
+      <div class="flex items-center gap-3 xl:hidden">
+        <button class="theme-toggle p-2.5 rounded-full text-brand-purple dark:text-brand-gold">
+          <svg class="sun-icon w-5 h-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+          <svg class="moon-icon w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button id="mobile-menu-btn" class="p-2 text-brand-purple dark:text-white"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div id="mobile-menu-drawer" class="fixed inset-0 z-50 hidden pt-24 px-4 pb-6 bg-white dark:bg-brand-purple-dark/98 backdrop-blur-xl flex flex-col justify-between">
+    <div class="flex flex-col gap-4 mt-4 overflow-y-auto">
+      <a href="index.html" class="font-poppins font-semibold text-lg py-2 border-b border-gray-100 dark:border-gray-800">Home</a>
+      <a href="about.html" class="font-poppins font-semibold text-lg py-2 border-b border-gray-100 dark:border-gray-800 text-brand-purple dark:text-brand-gold font-bold">About Us</a>
+      <a href="services.html" class="font-poppins font-semibold text-lg py-2 border-b border-gray-100 dark:border-gray-800">Services</a>
+      <a href="calculators.html" class="font-poppins font-semibold text-lg py-2 border-b border-gray-100 dark:border-gray-800">Calculators</a>
+      <a href="market-insights.html" class="font-poppins font-semibold text-lg py-2 border-b border-gray-100 dark:border-gray-800">Market Insights</a>
+      <a href="blog.html" class="font-poppins font-semibold text-lg py-2 border-b border-gray-100 dark:border-gray-800">Resources</a>
+      <a href="contact.html" class="font-poppins font-semibold text-lg py-2 border-b border-gray-100 dark:border-gray-800">Contact</a>
+    </div>
+    <div class="flex flex-col gap-4 mt-6">
+      <a href="contact.html#booking" class="w-full flex items-center justify-center py-3.5 rounded-xl bg-brand-purple dark:bg-brand-gold text-white dark:text-brand-purple-dark font-poppins font-semibold uppercase tracking-wider text-xs">Book Consultation</a>
+    </div>
+    <button id="mobile-menu-close" class="absolute top-6 right-6 p-2 text-brand-purple dark:text-white"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+  </div>
+
+  <!-- Hero / Header block -->
+  <main class="flex-grow pt-36">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
+      
+      <!-- Top banner -->
+      <div class="text-center space-y-4">
+        <span class="text-xs uppercase font-extrabold tracking-widest text-brand-purple dark:text-brand-gold">Our Legacy</span>
+        <h1 class="font-poppins font-extrabold text-4xl sm:text-5xl text-brand-purple dark:text-white">About Dhanvin Assets</h1>
+        <p class="text-xs sm:text-sm text-brand-text-muted dark:text-white/60 max-w-xl mx-auto leading-relaxed">
+          AMFI Registered Mutual Fund distributor bringing scientific asset allocation, zero direct advisory fees, and rigorous research to retail portfolios.
+        </p>
+      </div>
+
+      <!-- Core Mission Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <h2 class="font-poppins font-bold text-2xl text-brand-purple dark:text-white">Our Mission & Objective</h2>
+          <p class="text-xs leading-relaxed text-brand-text-muted dark:text-white/70">
+            Dhanvin Assets was founded on a simple principle: wealth accumulation shouldn&apos;t depend on speculative timing or complex fee schedules. We operate with high transparency, evaluating rolling returns consistency, cost-to-benefit ratios, and index-beating performance metrics.
+          </p>
+          <p class="text-xs leading-relaxed text-brand-text-muted dark:text-white/70">
+            By mapping systematic SIP investments directly to client targets, we construct robust shields for families and business owners across India.
+          </p>
+        </div>
+        <div class="glass p-6 rounded-3xl border border-brand-purple/10 dark:border-brand-gold/15 space-y-4 shadow-md">
+          <h3 class="font-poppins font-bold text-sm text-brand-purple dark:text-white">Our Core Commitments</h3>
+          <ul class="space-y-3.5 text-xs text-brand-text-muted dark:text-white/60">
+            <li class="flex items-center gap-2"><span class="text-brand-gold">✓</span> <strong>Disclosed Commissions:</strong> upfront reports on AMC rates.</li>
+            <li class="flex items-center gap-2"><span class="text-brand-gold">✓</span> <strong>Rigorous Auditing:</strong> yearly mutual fund overlap analysis.</li>
+            <li class="flex items-center gap-2"><span class="text-brand-gold">✓</span> <strong>No Locked Charges:</strong> exit options are fully vetted.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Founder Desk Profile -->
+      <div class="p-8 rounded-3xl bg-brand-purple-dark text-white relative overflow-hidden shadow-2xl border border-brand-gold/25">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-brand-gold/10 blur-[60px] rounded-full pointer-events-none"></div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+          <div class="lg:col-span-4 flex flex-col items-center text-center">
+            <div class="w-32 h-32 rounded-full border-2 border-brand-gold/40 bg-brand-purple/20 flex items-center justify-center font-bold font-poppins text-white text-3xl">DS</div>
+            <h3 class="font-poppins font-bold text-base mt-4">Dhanvin Shah</h3>
+            <span class="text-[10px] text-brand-gold uppercase tracking-wider font-semibold">Founder & Lead Wealth Advisor</span>
+          </div>
+          <div class="lg:col-span-8 space-y-4">
+            <h4 class="font-poppins font-bold text-lg text-brand-gold">From the Founder&apos;s Desk</h4>
+            <p class="text-xs leading-relaxed text-white/70">
+              "We built Dhanvin Assets because we saw too many families accumulating redundant mutual funds that dilute their returns. A focused systematic plan of 4-5 high-performing funds beats 20 scattered funds every single time. My desk is committed to delivering clarity, minimizing management drag, and helping you build a legacy."
+            </p>
+            <p class="text-xs leading-relaxed text-white/50">
+              — Dhanvin Shah, Founder, Dhanvin Assets Pvt Ltd.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Corporate Values -->
+      <div class="space-y-10">
+        <div class="text-center">
+          <h2 class="font-poppins font-bold text-2xl text-brand-purple dark:text-white">Our Values</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="glass p-6 rounded-3xl border border-brand-purple/10 dark:border-brand-gold/15 text-center">
+            <h3 class="font-poppins font-bold text-sm text-brand-purple dark:text-white">Transparency</h3>
+            <p class="text-[11px] text-brand-text-muted dark:text-white/60 mt-2">Zero hidden commissions or ad-hoc processing charges. All distribution flows are documented clearly.</p>
+          </div>
+          <div class="glass p-6 rounded-3xl border border-brand-purple/10 dark:border-brand-gold/15 text-center">
+            <h3 class="font-poppins font-bold text-sm text-brand-purple dark:text-white">Discipline</h3>
+            <p class="text-[11px] text-brand-text-muted dark:text-white/60 mt-2">Goal planning that anchors you through market declines. Compound curves require time and structure.</p>
+          </div>
+          <div class="glass p-6 rounded-3xl border border-brand-purple/10 dark:border-brand-gold/15 text-center">
+            <h3 class="font-poppins font-bold text-sm text-brand-purple dark:text-white">Objectivity</h3>
+            <p class="text-[11px] text-brand-text-muted dark:text-white/60 mt-2">No star ratings dependencies. We evaluate fund rolling returns, alpha, beta, and asset overlaps objectively.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- SECTION 12: FOOTER -->
+  <footer class="w-full bg-gradient-to-b from-brand-purple-dark to-[#0e061d] text-white border-t border-brand-purple/20 pt-16 pb-8 mt-20 relative z-10 select-none">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-brand-purple/10">
+        <!-- Brand Info -->
+        <div class="lg:col-span-4 space-y-5">
+          <a href="index.html" class="flex items-center gap-2.5 group">
+            <svg class="w-9 h-9 text-brand-gold" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="6" class="opacity-20" />
+              <path d="M30 25 H50 C65 25 75 35 75 50 C75 65 65 75 50 75 H30 Z" stroke="currentColor" stroke-width="8" stroke-linejoin="round" />
+              <path d="M42 58 V40 M42 40 L52 48 M42 40 L32 48" stroke="#2448D8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+              <circle cx="50" cy="50" r="6" fill="#D4AF37" />
+            </svg>
+            <div class="flex flex-col">
+              <span class="font-poppins font-bold text-lg tracking-wider leading-none text-white">DHANVIN</span>
+              <span class="font-sans text-[9px] font-semibold tracking-[0.25em] text-brand-gold uppercase mt-0.5 leading-none">ASSETS</span>
+            </div>
+          </a>
+          <p class="text-xs text-white/50 leading-relaxed max-w-sm">
+            Dhanvin Assets Pvt Ltd is a premier wealth advisory firm dedicated to helping individuals, families, and businesses build and preserve wealth.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="lg:col-span-2 space-y-4">
+          <h4 class="font-poppins font-semibold text-xs tracking-wider uppercase text-brand-gold">Quick Links</h4>
+          <ul class="space-y-2.5 text-xs text-white/60">
+            <li><a href="index.html" class="hover:text-brand-gold transition-colors">Home</a></li>
+            <li><a href="about.html" class="hover:text-brand-gold transition-colors font-bold text-white">About Us</a></li>
+            <li><a href="services.html" class="hover:text-brand-gold transition-colors">Services</a></li>
+            <li><a href="calculators.html" class="hover:text-brand-gold transition-colors">Calculators</a></li>
+            <li><a href="market-insights.html" class="hover:text-brand-gold transition-colors">Market Insights</a></li>
+            <li><a href="blog.html" class="hover:text-brand-gold transition-colors">Resources</a></li>
+            <li><a href="contact.html" class="hover:text-brand-gold transition-colors">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="lg:col-span-3 space-y-4">
+          <h4 class="font-poppins font-semibold text-xs tracking-wider uppercase text-brand-gold">Advisory Services</h4>
+          <ul class="space-y-2.5 text-xs text-white/60 font-medium">
+            <li><a href="services/mutual-funds.html" class="hover:text-brand-gold transition-colors">Mutual Funds</a></li>
+            <li><a href="services/sip-plans.html" class="hover:text-brand-gold transition-colors">SIP Planning</a></li>
+            <li><a href="services/insurance.html" class="hover:text-brand-gold transition-colors">Insurance</a></li>
+            <li><a href="services/retirement-planning.html" class="hover:text-brand-gold transition-colors">Retirement Planning</a></li>
+            <li><a href="services/tax-saving.html" class="hover:text-brand-gold transition-colors">Tax Saving</a></li>
+            <li><a href="services/child-education-planning.html" class="hover:text-brand-gold transition-colors">Child Education Planning</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="lg:col-span-3 space-y-4">
+          <h4 class="font-poppins font-semibold text-xs tracking-wider uppercase text-brand-gold">Get in Touch</h4>
+          <ul class="space-y-3.5 text-xs text-white/60">
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-brand-gold mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+              <a href="tel:+919320114510" class="hover:text-white transition-colors font-mono">+91 9320114510</a>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-brand-gold mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              <a href="mailto:info@dhanvinassets.com" class="hover:text-white transition-colors">info@dhanvinassets.com</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-white/40">
+        <div>&copy; 2026 Dhanvin Assets Pvt Ltd. All Rights Reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

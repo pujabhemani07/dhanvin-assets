@@ -1,0 +1,90 @@
+# Dhanvin Assets Netlify Configuration
+[build]
+  publish = "."
+
+# Clean URLs redirects
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog"
+  to = "/blog.html"
+  status = 200
+
+[[redirects]]
+  from = "/calculators"
+  to = "/calculators.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/faq"
+  to = "/faq.html"
+  status = 200
+
+[[redirects]]
+  from = "/market-insights"
+  to = "/market-insights.html"
+  status = 200
+
+[[redirects]]
+  from = "/thank-you"
+  to = "/thank-you.html"
+  status = 200
+
+# Services Redirects
+[[redirects]]
+  from = "/services"
+  to = "/services.html"
+  status = 200
+
+[[redirects]]
+  from = "/services/mutual-funds"
+  to = "/services/mutual-funds.html"
+  status = 200
+
+[[redirects]]
+  from = "/services/sip"
+  to = "/services/sip-plans.html"
+  status = 200
+
+[[redirects]]
+  from = "/services/sip-planning"
+  to = "/services/sip-plans.html"
+  status = 200
+
+[[redirects]]
+  from = "/services/insurance"
+  to = "/services/insurance.html"
+  status = 200
+
+[[redirects]]
+  from = "/services/retirement-planning"
+  to = "/services/retirement-planning.html"
+  status = 200
+
+[[redirects]]
+  from = "/services/tax-saving"
+  to = "/services/tax-saving.html"
+  status = 200
+
+[[redirects]]
+  from = "/services/child-education-planning"
+  to = "/services/child-education-planning.html"
+  status = 200
+
+[[redirects]]
+  from = "/services/wealth-management"
+  to = "/services/wealth-management.html"
+  status = 200
+
+[[redirects]]
+  from = "/services/portfolio-review"
+  to = "/services/portfolio-review.html"
+  status = 200
