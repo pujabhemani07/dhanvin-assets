@@ -277,3 +277,28 @@ document.addEventListener('DOMContentLoaded', () => {
   if (hash) { const t = document.querySelector(`.calc-tab[data-tab="${hash}"]`); if (t) t.click(); }
   else { const first = document.querySelector('.calc-tab'); if (first) first.click(); }
 });
+
+/* ---- Official Dhanvin Assets Logo ---- */
+function applyOfficialDhanvinLogo() {
+  const logoPath = 'assets/dhanvin-logo.jpg';
+  const logoSelectors = [
+    'header a[href="index.html"] > svg',
+    'header a[href="/"] > svg',
+    'footer a[href="index.html"] > svg',
+    'footer a[href="/"] > svg'
+  ];
+
+  document.querySelectorAll(logoSelectors.join(',')).forEach(svg => {
+    const img = document.createElement('img');
+    img.src = logoPath;
+    img.alt = 'Dhanvin Assets Pvt Ltd';
+    img.className = 'dhanvin-official-logo';
+    img.width = 44;
+    img.height = 44;
+    img.loading = 'eager';
+    img.decoding = 'async';
+    svg.replaceWith(img);
+  });
+}
+
+window.addEventListener('load', applyOfficialDhanvinLogo);
