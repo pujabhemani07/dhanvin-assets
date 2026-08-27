@@ -302,3 +302,26 @@ function applyOfficialDhanvinLogo() {
 }
 
 window.addEventListener('load', applyOfficialDhanvinLogo);
+
+/* ---- Finalize Official Logo Presentation ---- */
+window.addEventListener('load', () => {
+  document.querySelectorAll('img.dhanvin-official-logo').forEach(img => {
+    img.src = '/assets/dhanvin-logo.jpg';
+    img.width = 44;
+    img.height = 44;
+    img.style.width = '44px';
+    img.style.height = '44px';
+    img.style.objectFit = 'cover';
+    img.style.borderRadius = '9999px';
+    img.style.flexShrink = '0';
+
+    const link = img.closest('a');
+    if (link) {
+      const textBlock = link.querySelector(':scope > div');
+      if (textBlock && !textBlock.classList.contains('dhanvin-logo-preserved')) {
+        textBlock.remove();
+      }
+      link.style.gap = '0';
+    }
+  });
+});
