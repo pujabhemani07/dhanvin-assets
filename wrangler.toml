@@ -1,0 +1,13 @@
+name = "dhanvin-assets"
+compatibility_date = "2026-08-27"
+
+[assets]
+directory = "."
+
+[[routes]]
+pattern = "dhanvinassets.com"
+custom_domain = true
+
+[[routes]]
+pattern = "www.dhanvinassets.com"
+custom_domain = true
