@@ -1,0 +1,54 @@
+/* Dhanvin Assets — reference-video visual layer
+   Keeps existing HTML/content and applies the reference site's layout, spacing,
+   branding, cards, gradients and responsive behaviour. */
+:root{--video-purple:#4b2e83;--video-blue:#2448d8;--video-gold:#d4af37;--video-bg:#f8f7fc;--video-ink:#201735}
+body{background:var(--video-bg)!important;color:var(--video-ink)}
+/* ticker */
+body>div.fixed.top-0.w-full.z-40{background:#17102c!important;padding:7px 0!important;min-height:32px!important}
+/* floating reference navigation */
+header.fixed.top-8{top:42px!important;width:min(1400px,calc(100% - 44px))!important;border-radius:28px!important;background:rgba(255,255,255,.96)!important;border:1px solid rgba(75,46,131,.10)!important;box-shadow:0 12px 38px rgba(32,20,67,.12)!important;padding:7px 24px!important}
+header.fixed.top-8>div{min-height:68px!important}
+header.fixed.top-8 nav{gap:24px!important}
+header.fixed.top-8 nav a{font-size:13px!important;color:#55515f!important}
+header.fixed.top-8 nav a:first-child{color:var(--video-purple)!important;font-weight:700!important}
+/* crop the supplied square logo so the actual wordmark is prominent */
+.da-brand-link{width:235px!important;min-width:235px!important;height:64px!important;padding:0!important;overflow:hidden!important;background:#fff!important;border-radius:12px!important}
+.da-brand-logo{width:235px!important;height:64px!important;max-width:none!important;max-height:none!important;object-fit:cover!important;object-position:center!important;filter:drop-shadow(0 4px 10px rgba(75,46,131,.10))!important}
+/* hero matching reference */
+.hero,body>section:first-of-type{background:linear-gradient(135deg,#f0e8ff 0%,#eeeaff 36%,#e8efff 72%,#fff 100%)!important}
+.hero{min-height:760px!important;padding-top:145px!important;padding-bottom:80px!important}
+.hero-container{max-width:1240px!important;gap:54px!important}
+.hero-badge{background:rgba(255,255,255,.65)!important;border-color:rgba(75,46,131,.16)!important;color:var(--video-purple)!important;box-shadow:0 6px 18px rgba(75,46,131,.06)!important}
+.hero-title{font-size:clamp(3rem,5.2vw,5.25rem)!important;line-height:1.02!important;letter-spacing:-.055em!important;color:var(--video-purple)!important}
+.hero-title .gradient-text{background:linear-gradient(90deg,#4b2e83,#2448d8)!important;-webkit-background-clip:text!important;background-clip:text!important}
+.hero-desc{font-size:1.08rem!important;max-width:650px!important;color:#4e5567!important;line-height:1.7!important}
+.hero-btns{margin-bottom:2rem!important}
+.hero-illustration{min-height:470px!important}
+.hero-svg{max-width:560px!important;filter:drop-shadow(0 22px 44px rgba(75,46,131,.16))!important}
+.float-card{border-radius:18px!important;box-shadow:0 16px 38px rgba(50,35,80,.14)!important}
+.hero-stats{background:rgba(255,255,255,.72)!important;border-color:rgba(255,255,255,.9)!important;backdrop-filter:blur(12px)!important}
+/* trusted partner strip */
+.trusted-by{background:#fff!important;padding:28px 0!important}
+.trusted-label{letter-spacing:2.2px!important}
+.partner-chip{background:#fff!important;border-color:#e8e4ef!important;box-shadow:0 3px 12px rgba(50,35,80,.04)!important}
+/* section rhythm */
+.section-padding{padding:92px 0!important}
+.section-header{margin-bottom:46px!important}
+.section-title{font-size:clamp(2rem,3.3vw,3rem)!important;letter-spacing:-.035em!important}
+.section-subtitle{max-width:680px!important}
+/* cards */
+.card,.service-card,.feature-card,.testimonial-card,.blog-card,.calculator-card{border-radius:22px!important;box-shadow:0 12px 38px rgba(58,38,93,.08)!important;border:1px solid rgba(75,46,131,.08)!important;background:#fff!important}
+.card:hover,.service-card:hover,.feature-card:hover,.testimonial-card:hover,.blog-card:hover,.calculator-card:hover{transform:translateY(-5px)!important;box-shadow:0 20px 48px rgba(58,38,93,.13)!important}
+/* purple CTA blocks */
+.cta-section,.newsletter-section{background:linear-gradient(135deg,#4b2e83,#2448d8)!important;border-radius:22px!important}
+/* floating WhatsApp button */
+.whatsapp-float,.whatsapp-button,[class*="whatsapp"]{z-index:1200}
+/* footer */
+footer{background:linear-gradient(135deg,#160d2d,#26134b)!important;color:#fff!important}
+footer a{color:rgba(255,255,255,.78)}
+footer a:hover{color:#fff}
+/* forms */
+input,select,textarea{border-radius:12px!important}
+/* mobile */
+@media(max-width:1024px){header.fixed.top-8{width:calc(100% - 24px)!important}.hero{min-height:auto!important;padding-top:135px!important}.hero-container{grid-template-columns:1fr!important;gap:34px!important}.hero-illustration{min-height:390px}.hero-svg{margin:auto}.hero-title{font-size:clamp(2.7rem,8vw,4.4rem)!important}}
+@media(max-width:640px){header.fixed.top-8{top:38px!important;width:calc(100% - 14px)!important;border-radius:20px!important;padding:5px 9px!important}header.fixed.top-8>div{min-height:52px!important}.da-brand-link{width:155px!important;min-width:155px!important;height:50px!important}.da-brand-logo{width:155px!important;height:50px!important}.hero{padding-top:118px!important;padding-bottom:55px!important}.hero-title{font-size:clamp(2.35rem,12vw,3.5rem)!important}.hero-desc{font-size:.98rem!important}.hero-btns{gap:.7rem!important}.hero-btns .btn{width:100%;justify-content:center}.hero-illustration{min-height:300px}.float-card{transform:scale(.86)}.section-padding{padding:64px 0!important}.section-title{font-size:2rem!important}}
