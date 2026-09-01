@@ -2,11 +2,21 @@
   "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
   "name": "dhanvin-assets",
   "main": "./worker/index.js",
-  "compatibility_date": "2026-08-28",
-  "workers_dev": true,
+  "compatibility_date": "2026-08-31",
   "assets": {
     "directory": ".",
     "binding": "ASSETS",
-    "run_worker_first": true
-  }
+    "run_worker_first": true,
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    {
+      "pattern": "dhanvinassets.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.dhanvinassets.com",
+      "custom_domain": true
+    }
+  ]
 }
