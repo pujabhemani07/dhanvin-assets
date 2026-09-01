@@ -56,3 +56,12 @@ function initVideoReferenceHome(){
 }
 function initVideoReferenceLogo(){ document.querySelectorAll('header a[href="index.html"] > svg, header a[href="/"] > svg').forEach(svg=>{ const link=svg.closest('a'); if(!link) return; svg.remove(); const img=document.createElement('img'); img.className='vr-logo-img'; img.src='/assets/dhanvin-logo-exact.svg'; img.alt='Dhanvin Assets Pvt Ltd'; link.classList.add('vr-logo-link'); link.prepend(img); const text=link.querySelector(':scope > div'); if(text) text.remove(); }); }
 window.addEventListener('load',()=>{initVideoReferenceHome();initVideoReferenceLogo();});
+
+/* ---- Service detail pages: load the video-reference visual layer ---- */
+(function loadServiceReferenceCSS(){
+  if(!/\/services\//.test(location.pathname)) return;
+  const link=document.createElement('link');
+  link.rel='stylesheet';
+  link.href='../css/service-video-reference.css';
+  document.head.appendChild(link);
+})();
