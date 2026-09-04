@@ -1,67 +1,89 @@
-/* =============================================
-   DHANVIN ASSETS – MAIN JS
-   ============================================= */
+/* DHANVIN ASSETS – shared interactions */
+(function(){
+  'use strict';
+  function qs(s,c){return (c||document).querySelector(s)}
+  function qsa(s,c){return Array.from((c||document).querySelectorAll(s))}
 
-window.addEventListener('load', () => {
-  const loader = document.getElementById('loader');
-  if (loader) setTimeout(() => loader.classList.add('hidden'), 600);
-  initScrollProgress();
-  initThemeToggle();
-  initNavbar();
-  initMobileMenu();
-  initCounters();
-  initSIPCalculator();
-  initFAQ();
-  initTestimonialSlider();
-  initComparisonBars();
-  initSmoothScroll();
-  initBlogFilter();
-  if (typeof AOS !== 'undefined') AOS.init({ duration: 700, once: true, offset: 80 });
-});
+  function initTheme(){
+    const html=document.documentElement;
+    const body=document.body;
+    const btn=qs('#theme')||qs('#theme-toggle');
+    const saved=localStorage.getItem('da-theme')||'light';
+    function apply(theme){
+      html.setAttribute('data-theme',theme);
+      body.classList.toggle('dark',theme==='dark');
+      if(btn){
+        const icon=btn.querySelector('i');
+        if(icon) icon.className=theme==='dark'?'fa-solid fa-sun':'fa-solid fa-moon';
+        btn.setAttribute('aria-label',theme==='dark'?'Switch to light mode':'Switch to dark mode');
+        btn.setAttribute('title',theme==='dark'?'Switch to light mode':'Switch to dark mode');
+      }
+      if(window.sipChart && typeof window.sipChart.update==='function') window.sipChart.update();
+    }
+    apply(saved);
+    if(btn) btn.addEventListener('click',function(e){e.preventDefault();apply(html.getAttribute('data-theme')==='dark'?'light':'dark');localStorage.setItem('da-theme',html.getAttribute('data-theme'));});
+  }
 
-function initScrollProgress() { const bar = document.getElementById('scroll-progress'); if (!bar) return; window.addEventListener('scroll', () => { const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100; bar.style.width = pct + '%'; }, { passive: true }); }
-function initThemeToggle() { const html = document.documentElement; const saved = localStorage.getItem('da-theme') || 'light'; html.setAttribute('data-theme', saved); updateThemeIcon(saved); const btn = document.getElementById('theme-toggle'); if (!btn) return; btn.addEventListener('click', () => { const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; html.setAttribute('data-theme', next); localStorage.setItem('da-theme', next); updateThemeIcon(next); }); }
-function updateThemeIcon(theme) { document.querySelectorAll('#theme-icon').forEach(el => { el.className = theme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun'; }); }
-function initNavbar() { const nav = document.getElementById('navbar'); if (!nav) return; window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50), { passive: true }); }
-function initMobileMenu() { const hamburger = document.getElementById('hamburger'); const menu = document.getElementById('nav-menu'); if (!hamburger || !menu) return; hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); menu.classList.toggle('open'); document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : ''; }); document.addEventListener('click', (e) => { if (!hamburger.contains(e.target) && !menu.contains(e.target)) { hamburger.classList.remove('active'); menu.classList.remove('open'); document.body.style.overflow = ''; } }); menu.querySelectorAll('.dropdown').forEach(dd => { const toggle = dd.querySelector('.dropdown-toggle'); if (toggle) toggle.addEventListener('click', (e) => { if (window.innerWidth <= 768) { e.preventDefault(); dd.classList.toggle('open'); } }); }); }
-function initCounters() { const counters = document.querySelectorAll('[data-count]'); if (!counters.length) return; const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); obs.unobserve(e.target); } }); }, { threshold: 0.5 }); counters.forEach(c => obs.observe(c)); }
-function animateCounter(el) { const target = parseInt(el.getAttribute('data-count')); const step = target / (1800 / 16); let current = 0; const t = setInterval(() => { current += step; if (current >= target) { current = target; clearInterval(t); } el.textContent = Math.floor(current).toLocaleString('en-IN'); }, 16); }
-let sipChart = null;
-function initSIPCalculator() { if (!document.getElementById('sip-amount')) return; syncRange('sip-amount', 'sip-amount-val', calcSIP); syncRange('sip-years', 'sip-years-val', calcSIP); syncRange('sip-rate', 'sip-rate-val', calcSIP); calcSIP(); }
-function syncRange(rangeId, inputId, fn) { const r = document.getElementById(rangeId), i = document.getElementById(inputId); if (!r || !i) return; r.addEventListener('input', () => { i.value = r.value; fn(); }); i.addEventListener('input', () => { r.value = i.value; fn(); }); }
-function calcSIP() { const P = parseFloat(document.getElementById('sip-amount-val').value) || 5000; const n = parseFloat(document.getElementById('sip-years-val').value) || 15; const r = parseFloat(document.getElementById('sip-rate-val').value) || 12; const mr = r / 100 / 12, mo = n * 12; const fv = P * (((Math.pow(1 + mr, mo) - 1) / mr) * (1 + mr)); const invested = P * mo; const ret = fv - invested; setText('total-invested', '₹' + fmtINR(Math.round(invested))); setText('expected-returns', '₹' + fmtINR(Math.round(ret))); setText('total-value', '₹' + fmtINR(Math.round(fv))); drawSIPChart(Math.round(invested), Math.round(ret), n, P, r); }
-function setText(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
-function fmtINR(n) { if (n >= 10000000) return (n / 10000000).toFixed(2) + ' Cr'; if (n >= 100000) return (n / 100000).toFixed(2) + ' L'; return n.toLocaleString('en-IN'); }
-function drawSIPChart(invested, returns, years, P, r) { const canvas = document.getElementById('sip-chart'); if (!canvas || typeof Chart === 'undefined') return; const dark = document.documentElement.getAttribute('data-theme') === 'dark'; const tc = dark ? '#b0aac8' : '#555770'; const gc = dark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)'; const labels = [], dataInv = [], dataFV = []; for (let y = 1; y <= years; y++) { const mo = y * 12, mr = r / 100 / 12; labels.push('Yr ' + y); dataInv.push(Math.round(P * mo)); dataFV.push(Math.round(P * (((Math.pow(1 + mr, mo) - 1) / mr) * (1 + mr)))); } if (sipChart) sipChart.destroy(); sipChart = new Chart(canvas.getContext('2d'), { type: 'bar', data: { labels, datasets: [{ label: 'Total Invested', data: dataInv, backgroundColor: 'rgba(36,72,216,0.7)', borderRadius: 4 }, { label: 'Expected Value', data: dataFV, backgroundColor: 'rgba(75,46,131,0.85)', borderRadius: 4 }] }, options: { responsive: true, interaction: { mode: 'index' }, scales: { x: { grid: { color: gc }, ticks: { color: tc, maxTicksLimit: 10 } }, y: { grid: { color: gc }, ticks: { color: tc, callback: v => v >= 1e7 ? (v/1e7).toFixed(1)+'Cr' : v >= 1e5 ? (v/1e5).toFixed(0)+'L' : v } } }, plugins: { legend: { labels: { color: tc } }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ₹' + fmtINR(ctx.parsed.y) } } } } }); }
-function initFAQ() { document.querySelectorAll('.faq-item').forEach(item => { const btn = item.querySelector('.faq-question'); if (!btn) return; btn.addEventListener('click', () => { const open = item.classList.contains('open'); document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open')); if (!open) item.classList.add('open'); }); }); }
-function initTestimonialSlider() { const track = document.getElementById('testimonial-track'); if (!track) return; const cards = track.querySelectorAll('.testimonial-card'); const dots = document.querySelectorAll('.dot'); let cur = 0, timer; function goTo(i) { cur = (i + cards.length) % cards.length; track.style.transform = `translateX(-${cur * 100}%)`; dots.forEach((d, idx) => d.classList.toggle('active', idx === cur)); } function start() { timer = setInterval(() => goTo(cur + 1), 5000); } function stop() { clearInterval(timer); } const prev = document.getElementById('prev-btn'), next = document.getElementById('next-btn'); if (prev) prev.addEventListener('click', () => { stop(); goTo(cur - 1); start(); }); if (next) next.addEventListener('click', () => { stop(); goTo(cur + 1); start(); }); dots.forEach(d => d.addEventListener('click', () => { stop(); goTo(+d.getAttribute('data-index')); start(); })); start(); }
-function initComparisonBars() { const bars = document.querySelectorAll('.comp-bar'); const vals = document.querySelectorAll('.comp-corpus-val'); if (!bars.length) return; const section = document.querySelector('.comparison-grid'); if (!section) return; const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (!e.isIntersecting) return; bars.forEach(b => setTimeout(() => { b.style.width = b.getAttribute('data-width') + '%'; }, 200)); vals.forEach(v => { const target = parseFloat(v.getAttribute('data-value')); let cur = 0; const t = setInterval(() => { cur += target / 60; if (cur >= target) { cur = target; clearInterval(t); } v.textContent = '₹' + cur.toFixed(2) + ' Cr'; }, 25); }); obs.disconnect(); }); }, { threshold: 0.3 }); obs.observe(section); }
-function initSmoothScroll() { document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', e => { const href = a.getAttribute('href'); if (href === '#') return; const target = document.querySelector(href); if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }); }); }
-function initBlogFilter() { const btns = document.querySelectorAll('.cat-btn'); const cards = document.querySelectorAll('.blog-card'); if (!btns.length) return; btns.forEach(btn => { btn.addEventListener('click', () => { btns.forEach(b => b.classList.remove('active')); btn.classList.add('active'); const cat = btn.getAttribute('data-cat'); cards.forEach(card => { card.style.display = (cat === 'all' || card.getAttribute('data-cat') === cat) ? 'block' : 'none'; }); }); }); const search = document.getElementById('blog-search'); if (search) search.addEventListener('input', () => { const q = search.value.toLowerCase(); cards.forEach(card => { card.style.display = card.textContent.toLowerCase().includes(q) ? 'block' : 'none'; }); }); }
-document.addEventListener('DOMContentLoaded', () => { const tabs = document.querySelectorAll('.calc-tab'); const panels = document.querySelectorAll('.calc-panel'); tabs.forEach(tab => { tab.addEventListener('click', () => { tabs.forEach(t => t.classList.remove('active')); panels.forEach(p => p.classList.remove('active')); tab.classList.add('active'); const panel = document.getElementById('panel-' + tab.getAttribute('data-tab')); if (panel) panel.classList.add('active'); }); }); const hash = window.location.hash.replace('#', ''); if (hash) { const t = document.querySelector(`.calc-tab[data-tab="${hash}"]`); if (t) t.click(); } else { const first = document.querySelector('.calc-tab'); if (first) first.click(); } });
+  function initNavbar(){
+    const nav=qs('#navbar'); if(!nav)return;
+    function scroll(){nav.classList.toggle('scrolled',window.scrollY>50)}
+    scroll(); window.addEventListener('scroll',scroll,{passive:true});
+  }
 
-function applyOfficialDhanvinLogo() { const logoSelectors = ['header a[href="index.html"] > svg','header a[href="/"] > svg','footer a[href="index.html"] > svg','footer a[href="/"] > svg']; document.querySelectorAll(logoSelectors.join(',')).forEach(svg => { const img = document.createElement('img'); img.src = '/assets/dhanvin-logo-exact.svg'; img.alt = 'Dhanvin Assets Pvt Ltd'; img.className = 'dhanvin-official-logo'; img.loading = 'eager'; img.decoding = 'async'; svg.replaceWith(img); }); }
-window.addEventListener('load', applyOfficialDhanvinLogo);
+  function initMobile(){
+    const hamburger=qs('#hamb')||qs('#hamburger');
+    const menu=qs('#drawer')||qs('#nav-menu');
+    if(!hamburger||!menu)return;
+    const close=qs('#drawer-close');
+    function toggle(open){
+      menu.classList.toggle('open',open); hamburger.classList.toggle('active',open); document.body.style.overflow=open?'hidden':'';
+    }
+    hamburger.addEventListener('click',function(e){e.stopPropagation();toggle(!menu.classList.contains('open'));});
+    if(close)close.addEventListener('click',function(){toggle(false)});
+    qsa('a',menu).forEach(a=>a.addEventListener('click',function(){toggle(false)}));
+  }
 
-/* ---- Video-reference homepage rebuild ---- */
-function initVideoReferenceHome(){
-  const isHome = location.pathname === '/' || /\/index\.html$/.test(location.pathname);
-  if(!isHome) return;
-  document.body.classList.add('home-reference');
-  const oldHero=document.querySelector('body.home-reference > section.relative');
-  if(!oldHero || document.querySelector('.vr-hero')) return;
-  const hero=document.createElement('section'); hero.className='vr-hero';
-  hero.innerHTML=`<div class="vr-hero-grid"><div class="vr-copy"><div class="vr-badge"><i>★</i> India's Trusted Wealth Advisors</div><h1 class="vr-title"><span>Build Wealth.</span><span class="blue">Secure Your</span><span class="blue">Future.</span></h1><p class="vr-desc">Personalized financial planning, mutual funds, SIPs, insurance, tax planning, and long-term wealth creation — all tailored to your goals.</p><div class="vr-btns"><a class="vr-btn vr-primary" href="contact.html#booking">▣ &nbsp; Book Free Consultation</a><a class="vr-btn vr-secondary" href="services.html">Explore Services &nbsp; →</a></div><div class="vr-stats"><div class="vr-stat"><b>₹10Cr+</b><small>Assets Guided</small></div><div class="vr-stat"><b>1000+</b><small>Happy Families</small></div><div class="vr-stat"><b>98%</b><small>Satisfaction</small></div></div></div><div class="vr-visual"><div class="vr-orb"></div><div class="vr-screen"><div class="vr-screen-inner"><div class="vr-chart"><svg viewBox="0 0 260 120" preserveAspectRatio="none"><polyline points="5,100 42,60 78,82 115,42 153,68 192,25 228,48 255,8" fill="none" stroke="#e4c43e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></div><div class="vr-base"></div><div class="vr-foot"></div><div class="vr-person gold"></div><div class="vr-person blue"></div><div class="vr-bars"><i></i><i></i></div><div class="vr-coin"></div><div class="vr-float vr-f1"><strong>₹10 Cr+</strong><small>Assets Guided</small></div><div class="vr-float vr-f2"><strong>Investment Plan</strong><small>12% Expected Returns</small></div><div class="vr-float vr-f3"><strong>1000+</strong><small>Happy Families</small></div><div class="vr-float vr-f4"><strong>98%</strong><small>Satisfaction</small></div></div></div>`;
-  oldHero.replaceWith(hero);
-}
-function initVideoReferenceLogo(){ document.querySelectorAll('header a[href="index.html"] > svg, header a[href="/"] > svg').forEach(svg=>{ const link=svg.closest('a'); if(!link) return; svg.remove(); const img=document.createElement('img'); img.className='vr-logo-img'; img.src='/assets/dhanvin-logo-exact.svg'; img.alt='Dhanvin Assets Pvt Ltd'; link.classList.add('vr-logo-link'); link.prepend(img); const text=link.querySelector(':scope > div'); if(text) text.remove(); }); }
-window.addEventListener('load',()=>{initVideoReferenceHome();initVideoReferenceLogo();});
+  function initScroll(){
+    const bar=qs('#scroll-progress');if(!bar)return;
+    function update(){const max=document.documentElement.scrollHeight-window.innerHeight;bar.style.width=(max>0?Math.min(100,window.scrollY/max*100):0)+'%'}
+    update();window.addEventListener('scroll',update,{passive:true});
+  }
 
-/* ---- Service detail pages: load the video-reference visual layer ---- */
-(function loadServiceReferenceCSS(){
-  if(!/\/services\//.test(location.pathname)) return;
-  const link=document.createElement('link');
-  link.rel='stylesheet';
-  link.href='../css/service-video-reference.css';
-  document.head.appendChild(link);
+  function initLoader(){const loader=qs('#loader');if(loader)setTimeout(()=>loader.classList.add('hidden'),600)}
+
+  function counters(){qsa('[data-count]').forEach(el=>{const obs=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const target=parseInt(el.dataset.count||'0',10);let cur=0;const step=Math.max(1,target/60);const t=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(t)}el.textContent=Math.floor(cur).toLocaleString('en-IN')},16);obs.unobserve(el)}),{threshold:.5});obs.observe(el)})}
+
+  let sipChart=null; window.sipChart=null;
+  function fmt(n){if(n>=1e7)return(n/1e7).toFixed(2)+' Cr';if(n>=1e5)return(n/1e5).toFixed(2)+' L';return Math.round(n).toLocaleString('en-IN')}
+  function sip(){
+    const amount=qs('#sip-amount'),years=qs('#sip-years'),rate=qs('#sip-rate');if(!amount||!years||!rate)return;
+    const av=qs('#sip-amount-val'),yv=qs('#sip-years-val'),rv=qs('#sip-rate-val');
+    function calc(){
+      const P=parseFloat(av.value)||5000,n=parseFloat(yv.value)||15,r=parseFloat(rv.value)||12,mr=r/100/12,mo=n*12;
+      const fv=P*(((Math.pow(1+mr,mo)-1)/mr)*(1+mr)),inv=P*mo,ret=fv-inv;
+      const set=(id,v)=>{const e=qs('#'+id);if(e)e.textContent='₹'+fmt(v)};set('total-invested',inv);set('expected-returns',ret);set('total-value',fv);
+      if(typeof Chart==='undefined')return;const canvas=qs('#sip-chart');if(!canvas)return;
+      if(sipChart)sipChart.destroy();const dark=document.documentElement.getAttribute('data-theme')==='dark';
+      const tc=dark?'#b0aac8':'#555770',gc=dark?'rgba(255,255,255,.07)':'rgba(0,0,0,.06)',labels=[],di=[],df=[];
+      for(let y=1;y<=n;y++){const months=y*12;labels.push('Yr '+y);di.push(Math.round(P*months));df.push(Math.round(P*(((Math.pow(1+mr,months)-1)/mr)*(1+mr))))}
+      sipChart=new Chart(canvas.getContext('2d'),{type:'bar',data:{labels,datasets:[{label:'Total Invested',data:di,backgroundColor:'rgba(36,72,216,.7)',borderRadius:4},{label:'Expected Value',data:df,backgroundColor:'rgba(75,46,131,.85)',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index'},scales:{x:{grid:{color:gc},ticks:{color:tc}},y:{grid:{color:gc},ticks:{color:tc,callback:v=>v>=1e7?(v/1e7).toFixed(1)+'Cr':v>=1e5?(v/1e5).toFixed(0)+'L':v}}},plugins:{legend:{labels:{color:tc}},tooltip:{callbacks:{label:c=>c.dataset.label+': ₹'+fmt(c.parsed.y)}}}}});
+    }
+    [[amount,av],[years,yv],[rate,rv]].forEach(([r,i])=>{r.addEventListener('input',()=>{i.value=r.value;calc()});i.addEventListener('input',()=>{r.value=i.value;calc()})});calc();
+  }
+
+  function faq(){qsa('.faq-item').forEach(item=>{const btn=qs('.faq-question',item);if(!btn)return;btn.addEventListener('click',()=>{const open=item.classList.contains('open');qsa('.faq-item').forEach(x=>x.classList.remove('open'));if(!open)item.classList.add('open')})})}
+
+  function testimonials(){const track=qs('#testimonial-track');if(!track)return;const cards=qsa('.testimonial-card',track),dots=qsa('.dot'),prev=qs('#prev-btn'),next=qs('#next-btn');let cur=0,timer;
+    function go(i){cur=(i+cards.length)%cards.length;track.style.transform='translateX(-'+cur*100+'%)';dots.forEach((d,n)=>d.classList.toggle('active',n===cur))}
+    function start(){timer=setInterval(()=>go(cur+1),5000)}function stop(){clearInterval(timer)}
+    if(prev)prev.addEventListener('click',()=>{stop();go(cur-1);start()});if(next)next.addEventListener('click',()=>{stop();go(cur+1);start()});dots.forEach(d=>d.addEventListener('click',()=>{stop();go(parseInt(d.dataset.index,10));start()}));go(0);start();
+  }
+
+  function comparison(){const section=qs('.comparison-grid');if(!section)return;const obs=new IntersectionObserver(es=>{if(!es[0].isIntersecting)return;qsa('.comp-bar').forEach(b=>setTimeout(()=>b.style.width=(b.dataset.width||0)+'%',150));qsa('.comp-corpus-val').forEach(v=>{const target=parseFloat(v.dataset.value)||0;let cur=0;const t=setInterval(()=>{cur+=target/45;if(cur>=target){cur=target;clearInterval(t)}v.textContent='₹'+cur.toFixed(2)+' Cr'},25)});obs.disconnect()},{threshold:.3});obs.observe(section)}
+
+  function blogFilter(){const btns=qsa('.cat-btn'),cards=qsa('.blog-card'),search=qs('#blog-search');if(search)search.addEventListener('input',()=>{const q=search.value.toLowerCase();cards.forEach(c=>c.style.display=c.textContent.toLowerCase().includes(q)?'block':'none')});btns.forEach(btn=>btn.addEventListener('click',()=>{btns.forEach(b=>b.classList.remove('active'));btn.classList.add('active');const cat=btn.dataset.cat;cards.forEach(c=>c.style.display=cat==='all'||c.dataset.cat===cat?'block':'none')}))}
+
+  function calcTabs(){const tabs=qsa('.calc-tab'),panels=qsa('.calc-panel');if(!tabs.length)return;function activate(tab){tabs.forEach(t=>t.classList.remove('active'));panels.forEach(p=>p.classList.remove('active'));tab.classList.add('active');const p=qs('#panel-'+tab.dataset.tab);if(p)p.classList.add('active')}tabs.forEach(t=>t.addEventListener('click',()=>activate(t)));const h=location.hash.replace('#','');const t=qs('.calc-tab[data-tab="'+h+'"]');activate(t||tabs[0])}
+
+  document.addEventListener('DOMContentLoaded',function(){initTheme();initNavbar();initMobile();initScroll();initLoader();counters();sip();faq();testimonials();comparison();blogFilter();calcTabs();if(typeof AOS!=='undefined')AOS.init({duration:700,once:true,offset:80})});
 })();
