@@ -48,8 +48,13 @@ const BRAND_JS = `
 })();`;
 
 export default {async fetch(request,env){
+ const url=new URL(request.url);
  const response=await env.ASSETS.fetch(request);
  const contentType=response.headers.get('content-type')||'';
+ /* The homepage has its own reference-video CSS/JS system. Do not layer the
+    legacy Worker skin on top of it; that caused duplicate theme handlers and
+    competing hero/navbar geometry. Inner pages continue to use the Worker skin. */
+ if((url.pathname==='/'||url.pathname==='/index.html')&&contentType.includes('text/html'))return response;
  if(!contentType.includes('text/html'))return response;
  return new HTMLRewriter()
   .on('head',{element(element){element.append(`<style id="dhanvin-reference-video">${BRAND_CSS}</style>`,{html:true});element.append(`<link rel="stylesheet" href="/css/video-reference.css">`,{html:true});element.append(`<link rel="icon" href="/assets/dhanvin-logo.svg" type="image/svg+xml">`,{html:true})}})
