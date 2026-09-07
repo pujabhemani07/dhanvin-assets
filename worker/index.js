@@ -47,14 +47,34 @@ const BRAND_JS = `
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();`;
 
+const HOME_UPDATE_JS = `
+(function(){
+ const phone='919920082826';
+ function updateHome(){
+  const path=location.pathname.replace(/\\/+$/,'')||'/';
+  if(path!=='/'&&path!=='/index.html')return;
+  const stats=document.querySelectorAll('.hero-stats .stat-item');
+  if(stats[0]){const v=stats[0].querySelector('[data-count]'),s=stats[0].querySelector('.stat-suffix');if(v)v.dataset.count='1';if(s)s.textContent='Cr+';}
+  if(stats[1]){const v=stats[1].querySelector('[data-count]'),s=stats[1].querySelector('.stat-suffix');if(v)v.dataset.count='60';if(s)s.textContent='k+';}
+  const heroCta=document.querySelector('.hero-btns .btn-primary');
+  if(heroCta)heroCta.innerHTML='<i class="fa-solid fa-calendar-check"></i> Start Planning Today';
+  const faqCta=document.querySelector('.faqs .btn-outline');
+  if(faqCta)faqCta.innerHTML='Request Your Financial Assessment <i class="fa-solid fa-arrow-right"></i>';
+  document.querySelectorAll('footer .social-links a').forEach(a=>{const h=(a.getAttribute('href')||'').toLowerCase();if(h.includes('youtube')||h.includes('linkedin'))a.remove();});
+  const contact=Array.from(document.querySelectorAll('footer .footer-col')).find(el=>/Contact Us/i.test(el.querySelector('h4')?.textContent||''));
+  if(contact)contact.innerHTML='<h4>Contact Us</h4><a href="mailto:dhanvinassetspvtltd@gmail.com">dhanvinassetspvtltd@gmail.com</a><a href="tel:+919320114510">9320114510</a><a href="tel:+919920082826">9920082826</a><a href="tel:+919823626992">9823626992</a>';
+  document.querySelectorAll('a[href*="wa.me"]').forEach(a=>{a.href='https://wa.me/'+phone;});
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',updateHome);else updateHome();
+})();`;
+
 export default {async fetch(request,env){
  const url=new URL(request.url);
  const response=await env.ASSETS.fetch(request);
  const contentType=response.headers.get('content-type')||'';
- /* The homepage has its own reference-video CSS/JS system. Do not layer the
-    legacy Worker skin on top of it; that caused duplicate theme handlers and
-    competing hero/navbar geometry. Inner pages continue to use the Worker skin. */
- if((url.pathname==='/'||url.pathname==='/index.html')&&contentType.includes('text/html'))return response;
+ if((url.pathname==='/'||url.pathname==='/index.html')&&contentType.includes('text/html')){
+  return new HTMLRewriter().on('body',{element(element){element.append(`<script id="dhanvin-home-update-js">${HOME_UPDATE_JS}<\\/script>`,{html:true})}}).transform(response);
+ }
  if(!contentType.includes('text/html'))return response;
  return new HTMLRewriter()
   .on('head',{element(element){element.append(`<style id="dhanvin-reference-video">${BRAND_CSS}</style>`,{html:true});element.append(`<link rel="stylesheet" href="/css/video-reference.css">`,{html:true});element.append(`<link rel="icon" href="/assets/dhanvin-logo.svg" type="image/svg+xml">`,{html:true})}})
