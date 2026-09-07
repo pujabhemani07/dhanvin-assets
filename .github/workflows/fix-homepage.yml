@@ -16,34 +16,40 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Update homepage values
+      - name: Apply requested homepage changes
         run: |
           python - <<'PY'
           from pathlib import Path
+          import re
+
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
 
-          replacements = {
-              'data-count="10">0</span><span class="stat-suffix">Cr+': 'data-count="1">0</span><span class="stat-suffix">Cr+',
-              'data-count="1000">0</span><span class="stat-suffix">+': 'data-count="60">0</span><span class="stat-suffix">k+',
-              '> Book Free Consultation</a><a href="#services" class="btn btn-outline btn-lg">Explore Services': '> Start Planning Today</a><a href="#services" class="btn btn-outline btn-lg">Explore Services',
-              '<strong>₹10 Cr+</strong><span>Assets Guided</span>': '<strong>₹1 Cr+</strong><span>Assets Guided</span>',
-              '<strong>1000+</strong><span>Happy Families</span>': '<strong>60k+</strong><span>Happy Families</span>',
-              'https://wa.me/919999999999': 'https://wa.me/919920082826',
-          }
-          for old, new in replacements.items():
-              s = s.replace(old, new)
+          # Requested homepage hero/stat values.
+          s = s.replace('data-count="10">0</span><span class="stat-suffix">Cr+', 'data-count="1">0</span><span class="stat-suffix">Cr+')
+          s = s.replace('data-count="1000">0</span><span class="stat-suffix">+', 'data-count="60">0</span><span class="stat-suffix">k+')
+          s = s.replace('<strong>₹10 Cr+</strong><span>Assets Guided</span>', '<strong>₹1 Cr+</strong><span>Assets Guided</span>')
+          s = s.replace('<strong>1000+</strong><span>Happy Families</span>', '<strong>60k+</strong><span>Happy Families</span>')
 
-          # Remove YouTube and LinkedIn social links from the homepage footer.
-          import re
-          s = re.sub(r'<a[^>]+href=["\'][^"\']*(?:youtube|linkedin)[^"\']*["\'][^>]*>.*?</a>', '', s, flags=re.I|re.S)
+          # Hero CTA.
+          s = s.replace('> Book Free Consultation</a><a href="#services" class="btn btn-outline btn-lg">Explore Services', '> Start Planning Today</a><a href="#services" class="btn btn-outline btn-lg">Explore Services')
 
-          # Replace the Contact Us footer column while preserving the surrounding footer layout.
+          # CTA in the "Ready to Build Your Wealth?" section only.
+          s = s.replace('<div class="cta-btns"><a href="contact.html" class="btn btn-gold btn-lg"><i class="fa-solid fa-calendar-check"></i> Book Free Consultation</a>', '<div class="cta-btns"><a href="contact.html" class="btn btn-gold btn-lg"><i class="fa-solid fa-calendar-check"></i> Request Your Financial Assessment</a>')
+
+          # Remove only YouTube and LinkedIn icons from the footer social-links row.
+          s = re.sub(r'<a href="#"><i class="fa-brands fa-youtube"></i></a>', '', s, flags=re.I)
+          s = re.sub(r'<a href="#"><i class="fa-brands fa-linkedin-in"></i></a>', '', s, flags=re.I)
+
+          # Ensure the requested Contact Us details are present one per line.
           s = re.sub(
-              r'(<div class="footer-col">\s*<h4>Contact Us</h4>).*?(</div>)',
-              r'\1<a href="mailto:dhanvinassetspvtltd@gmail.com">dhanvinassetspvtltd@gmail.com</a><a href="tel:+919320114510">9320114510</a><a href="tel:+919920082826">9920082826</a><a href="tel:+919823626992">9823626992</a>\2',
+              r'<div class="footer-col"><h4>Contact Us</h4>.*?</div>',
+              '<div class="footer-col"><h4>Contact Us</h4><a href="mailto:dhanvinassetspvtltd@gmail.com">dhanvinassetspvtltd@gmail.com</a><a href="tel:+919320114510">9320114510</a><a href="tel:+919920082826">9920082826</a><a href="tel:+919823626992">9823626992</a></div>',
               s, count=1, flags=re.I|re.S
           )
+
+          # Ensure the floating WhatsApp button uses 9920082826.
+          s = s.replace('https://wa.me/919999999999', 'https://wa.me/919920082826')
 
           p.write_text(s, encoding='utf-8')
           PY
@@ -54,5 +60,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
           git diff --cached --quiet && exit 0
-          git commit -m "Apply homepage updates directly to source"
+          git commit -m "Finalize homepage CTA and footer updates"
           git push
