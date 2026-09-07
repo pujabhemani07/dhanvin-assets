@@ -73,12 +73,13 @@ export default {async fetch(request,env){
  const response=await env.ASSETS.fetch(request);
  const contentType=response.headers.get('content-type')||'';
  if((url.pathname==='/'||url.pathname==='/index.html')&&contentType.includes('text/html')){
-  return new HTMLRewriter().on('body',{element(element){element.append(`<script id="dhanvin-home-update-js">${HOME_UPDATE_JS}<\\/script>`,{html:true})}}).transform(response);
+  const transformed=new HTMLRewriter().on('body',{element(element){element.append(`<script id="dhanvin-home-update-js">${HOME_UPDATE_JS}</script>`,{html:true})}}).transform(response);
+  const headers=new Headers(transformed.headers);headers.set('Cache-Control','no-store, no-cache, must-revalidate, max-age=0');headers.set('Pragma','no-cache');return new Response(transformed.body,{status:transformed.status,statusText:transformed.statusText,headers});
  }
  if(!contentType.includes('text/html'))return response;
  return new HTMLRewriter()
   .on('head',{element(element){element.append(`<style id="dhanvin-reference-video">${BRAND_CSS}</style>`,{html:true});element.append(`<link rel="stylesheet" href="/css/video-reference.css">`,{html:true});element.append(`<link rel="icon" href="/assets/dhanvin-logo.svg" type="image/svg+xml">`,{html:true})}})
   .on('header > div > a[href="index.html"]',{element(element){element.setAttribute('class','da-brand-link');element.setAttribute('aria-label','Dhanvin Assets Pvt Ltd home');element.setInnerContent(`<img class="da-brand-logo" src="/assets/dhanvin-logo.svg" alt="Dhanvin Assets Pvt Ltd" width="235" height="64" decoding="async" fetchpriority="high">`,{html:true})}})
-  .on('body',{element(element){element.append(`<script id="dhanvin-reference-video-js">${BRAND_JS}<\\/script>`,{html:true})}})
+  .on('body',{element(element){element.append(`<script id="dhanvin-reference-video-js">${BRAND_JS}</script>`,{html:true})}})
   .transform(response);
 }};
