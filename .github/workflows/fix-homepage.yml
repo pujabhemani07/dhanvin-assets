@@ -1,0 +1,58 @@
+name: Fix homepage content
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  update-homepage:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update homepage values
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          replacements = {
+              'data-count="10">0</span><span class="stat-suffix">Cr+': 'data-count="1">0</span><span class="stat-suffix">Cr+',
+              'data-count="1000">0</span><span class="stat-suffix">+': 'data-count="60">0</span><span class="stat-suffix">k+',
+              '> Book Free Consultation</a><a href="#services" class="btn btn-outline btn-lg">Explore Services': '> Start Planning Today</a><a href="#services" class="btn btn-outline btn-lg">Explore Services',
+              '<strong>₹10 Cr+</strong><span>Assets Guided</span>': '<strong>₹1 Cr+</strong><span>Assets Guided</span>',
+              '<strong>1000+</strong><span>Happy Families</span>': '<strong>60k+</strong><span>Happy Families</span>',
+              'https://wa.me/919999999999': 'https://wa.me/919920082826',
+          }
+          for old, new in replacements.items():
+              s = s.replace(old, new)
+
+          # Remove YouTube and LinkedIn social links from the homepage footer.
+          import re
+          s = re.sub(r'<a[^>]+href=["\'][^"\']*(?:youtube|linkedin)[^"\']*["\'][^>]*>.*?</a>', '', s, flags=re.I|re.S)
+
+          # Replace the Contact Us footer column while preserving the surrounding footer layout.
+          s = re.sub(
+              r'(<div class="footer-col">\s*<h4>Contact Us</h4>).*?(</div>)',
+              r'\1<a href="mailto:dhanvinassetspvtltd@gmail.com">dhanvinassetspvtltd@gmail.com</a><a href="tel:+919320114510">9320114510</a><a href="tel:+919920082826">9920082826</a><a href="tel:+919823626992">9823626992</a>\2',
+              s, count=1, flags=re.I|re.S
+          )
+
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit homepage source changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Apply homepage updates directly to source"
+          git push
