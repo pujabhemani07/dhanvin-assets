@@ -533,3 +533,44 @@ html[data-theme="dark"] .page-hero{background:linear-gradient(135deg,#160d2d 0%,
 /* Keep the service illustration readable in both themes. */
 .service-illustration{background:linear-gradient(135deg,#ebe5ff 0%,#dce8ff 100%)!important;color:#4b2e83!important}
 html[data-theme="dark"] .service-illustration{background:linear-gradient(135deg,#251842 0%,#182b55 100%)!important;color:#c9b8ff!important}
+
+
+/* ===== HIGH-CONTRAST SERVICE HERO ===== */
+.page-hero{
+  background:#24104f!important;
+  color:#ffffff!important;
+  min-height:300px!important;
+  padding:135px 0 75px!important;
+}
+.page-hero::before{display:none!important}
+.page-hero .container{position:relative;z-index:2}
+.page-hero-title{
+  color:#ffffff!important;
+  font-size:clamp(2.25rem,4.5vw,3.5rem)!important;
+  font-weight:800!important;
+  letter-spacing:-.02em!important;
+  text-shadow:none!important;
+  margin-bottom:1.15rem!important;
+}
+.page-hero-title i{color:#f5c842!important}
+.page-hero p{
+  color:#ffffff!important;
+  font-size:1.05rem!important;
+  font-weight:500!important;
+  line-height:1.75!important;
+  max-width:700px!important;
+  text-shadow:none!important;
+}
+.breadcrumb{
+  color:#ffffff!important;
+  font-weight:600!important;
+  font-size:.9rem!important;
+}
+.breadcrumb a{color:#ffffff!important;font-weight:600!important}
+.breadcrumb span{color:#f5c842!important;font-weight:700!important}
+.breadcrumb i{color:#d8cfff!important}
+@media(max-width:760px){
+ .page-hero{padding:115px 0 60px!important;min-height:270px!important}
+ .page-hero-title{font-size:2.15rem!important}
+ .page-hero p{font-size:.95rem!important}
+}
