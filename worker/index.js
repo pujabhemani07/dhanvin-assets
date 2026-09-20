@@ -1,3 +1,14 @@
+
+/* Final contrast fix for the site's actual video-reference service-page classes. */
+.pagehero{background:#24104f!important;color:#fff!important;min-height:300px!important;padding:150px 0 78px!important;}
+.pagehero::before,.pagehero::after{display:none!important;}
+.pagehero .wrap{position:relative!important;z-index:5!important;}
+.pagehero .kicker{color:#f5c842!important;font-weight:800!important;}
+.pagehero h1{color:#fff!important;font-weight:800!important;text-shadow:none!important;}
+.pagehero p{color:#fff!important;font-weight:500!important;opacity:1!important;}
+.crumb{color:#fff!important;font-weight:600!important;opacity:1!important;}
+html[data-theme="dark"] .pagehero{background:#120925!important;color:#fff!important;}
+html[data-theme="dark"] .pagehero h1,html[data-theme="dark"] .pagehero p,html[data-theme="dark"] .crumb{color:#fff!important;}
 const BRAND_CSS = `
 :root{--da-purple:#4b2e83;--da-blue:#2448d8;--da-gold:#d4af37;--da-ink:#201735}
 body{background:#f8f7fc!important;color:var(--da-ink);overflow-x:hidden}
