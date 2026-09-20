@@ -487,3 +487,33 @@ input,select,textarea,button{font-family:inherit}
   .hero-stats{flex-direction:column;gap:.75rem}
   .market-stats-grid{grid-template-columns:1fr}
 }
+
+
+/* ===== FINAL DARK MODE HARDENING ===== */
+html[data-theme="dark"] body{background:var(--bg-color)!important;color:var(--text-primary)!important}
+html[data-theme="dark"] .navbar.scrolled{background:rgba(15,10,30,.94)!important;border-bottom:1px solid var(--border-color)!important}
+html[data-theme="dark"] .nav-link,html[data-theme="dark"] .nav-logo .logo-text{color:var(--text-secondary)!important}
+html[data-theme="dark"] .nav-link:hover,html[data-theme="dark"] .nav-link.active{color:#d8cdf5!important}
+html[data-theme="dark"] .theme-toggle{background:var(--bg-light)!important;color:var(--text-primary)!important;border-color:var(--border-color)!important}
+html[data-theme="dark"] .dropdown-menu{background:var(--bg-card)!important;border-color:var(--border-color)!important}
+html[data-theme="dark"] .dropdown-menu li a{color:var(--text-secondary)!important}
+html[data-theme="dark"] .dropdown-menu li a:hover{background:rgba(75,46,131,.25)!important;color:#fff!important}
+html[data-theme="dark"] .hero{background:var(--gradient-hero)!important}
+html[data-theme="dark"] .hero-badge{background:rgba(75,46,131,.25)!important;color:#d8cdf5!important;border-color:rgba(107,71,184,.4)!important}
+html[data-theme="dark"] .hero-title,html[data-theme="dark"] .section-title,html[data-theme="dark"] h1,html[data-theme="dark"] h2,html[data-theme="dark"] h3,html[data-theme="dark"] h4,html[data-theme="dark"] h5,html[data-theme="dark"] h6{color:var(--text-primary)!important}
+html[data-theme="dark"] .hero-desc,html[data-theme="dark"] .section-subtitle{color:var(--text-secondary)!important}
+html[data-theme="dark"] .hero-stats,html[data-theme="dark"] .premium-card,html[data-theme="dark"] .service-card,html[data-theme="dark"] .testimonial-card,html[data-theme="dark"] .blog-card,html[data-theme="dark"] .market-stat-card,html[data-theme="dark"] .calculator-card,html[data-theme="dark"] .contact-card,html[data-theme="dark"] .benefit-card,html[data-theme="dark"] .comparison-card,html[data-theme="dark"] .calc-wrapper,html[data-theme="dark"] .related-chip{background:var(--bg-card)!important;color:var(--text-primary)!important;border-color:var(--border-color)!important}
+html[data-theme="dark"] .trusted-by,html[data-theme="dark"] .journey,html[data-theme="dark"] .early-invest{background:var(--bg-light)!important}
+html[data-theme="dark"] .partner-chip{background:var(--bg-card)!important;color:var(--text-secondary)!important;border-color:var(--border-color)!important}
+html[data-theme="dark"] .stat-label,html[data-theme="dark"] .trusted-label,html[data-theme="dark"] .comp-corpus span,html[data-theme="dark"] .market-stat-label{color:var(--text-muted)!important}
+html[data-theme="dark"] .premium-card p,html[data-theme="dark"] .service-card p,html[data-theme="dark"] .testimonial-card p,html[data-theme="dark"] .blog-card p,html[data-theme="dark"] .benefit-card p,html[data-theme="dark"] .tl-content p,html[data-theme="dark"] .comparison-card p{color:var(--text-secondary)!important}
+html[data-theme="dark"] .faq-question{background:var(--bg-card)!important;color:var(--text-primary)!important;border-color:var(--border-color)!important}
+html[data-theme="dark"] .faq-answer{background:var(--bg-card)!important;color:var(--text-secondary)!important}
+html[data-theme="dark"] input,html[data-theme="dark"] select,html[data-theme="dark"] textarea{background:#17102c!important;color:var(--text-primary)!important;border-color:var(--border-color)!important}
+html[data-theme="dark"] input::placeholder,html[data-theme="dark"] textarea::placeholder{color:#7f7798!important}
+html[data-theme="dark"] .calc-results,html[data-theme="dark"] .newsletter-form input{background:#17102c!important;color:var(--text-primary)!important}
+html[data-theme="dark"] .page-hero{background:linear-gradient(135deg,#251442,#1b2450)!important}
+html[data-theme="dark"] .service-illustration{background:var(--gradient-hero)!important}
+html[data-theme="dark"] .cta-section,html[data-theme="dark"] .newsletter-box{background:linear-gradient(135deg,#321b5d,#1f3eb5)!important}
+html[data-theme="dark"] footer{background:linear-gradient(135deg,#0b0715,#17102c)!important;color:#f0efff!important}
+html[data-theme="dark"] .mobile-drawer{background:var(--bg-color)!important;color:var(--text-primary)!important}
