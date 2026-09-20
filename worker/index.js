@@ -131,7 +131,7 @@ export default {async fetch(request,env){
  if(!contentType.includes('text/html'))return response;
  return new HTMLRewriter()
   .on('head',{element(element){element.append(`<style id="dhanvin-reference-video">${BRAND_CSS}</style>`,{html:true});element.append(`<link rel="stylesheet" href="/css/video-reference.css">`,{html:true});element.append(`<link rel="icon" href="/assets/dhanvin-logo.svg" type="image/svg+xml">`,{html:true})}})
-  .on('header > div > a[href="index.html"]',{element(element){element.remove()}})
+  .on('header > div > a[href="index.html"],header > div > a[href="../index.html"]',{element(element){element.remove()}})
   .on('body',{element(element){element.append(`<script id="dhanvin-reference-video-js">${BRAND_JS}</script>`,{html:true})}})
   .transform(response);
 }};
