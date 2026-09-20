@@ -27,6 +27,33 @@ header.fixed.top-8 nav a:first-child{color:#4b2e83!important;font-weight:700!imp
 .page-hero{background:linear-gradient(135deg,#4b2e83,#2448d8)!important}
 .whatsapp-float{z-index:1200!important}
 footer{background:linear-gradient(135deg,#160d2d,#26134b)!important}
+/* Dark-mode hardening for worker-injected reference styles. */
+html[data-theme="dark"] body{background:#0f0a1e!important;color:#f0efff!important}
+html[data-theme="dark"] header.fixed.top-8{background:rgba(15,10,30,.96)!important;border-color:#2e2550!important;box-shadow:0 12px 38px rgba(0,0,0,.35)!important}
+html[data-theme="dark"] header.fixed.top-8 nav a{color:#b0aac8!important}
+html[data-theme="dark"] header.fixed.top-8 nav a:first-child{color:#d8cdf5!important}
+html[data-theme="dark"] .da-brand-link{background:#1e1535!important}
+html[data-theme="dark"] .da-brand-logo{background:#1e1535!important}
+html[data-theme="dark"] .hero,html[data-theme="dark"] body>section:first-of-type{background:linear-gradient(135deg,#1a1130 0%,#15132b 42%,#101b36 100%)!important}
+html[data-theme="dark"] .hero-badge{background:rgba(75,46,131,.25)!important;border-color:rgba(107,71,184,.4)!important;color:#d8cdf5!important}
+html[data-theme="dark"] .hero-title{color:#f0efff!important}
+html[data-theme="dark"] .hero-title .gradient-text{background:linear-gradient(90deg,#c9b8ff,#7f9cff)!important;-webkit-background-clip:text!important;background-clip:text!important}
+html[data-theme="dark"] .hero-desc{color:#b0aac8!important}
+html[data-theme="dark"] .hero-stats{background:#1e1535!important;border-color:#2e2550!important}
+html[data-theme="dark"] .float-card{background:#1e1535!important;border-color:#2e2550!important;color:#f0efff!important}
+html[data-theme="dark"] .trusted-by{background:#1a1130!important}
+html[data-theme="dark"] .partner-chip{background:#1e1535!important;border-color:#2e2550!important;color:#b0aac8!important}
+html[data-theme="dark"] .premium-card,html[data-theme="dark"] .service-card,html[data-theme="dark"] .testimonial-card,html[data-theme="dark"] .blog-card,html[data-theme="dark"] .calculator-card,html[data-theme="dark"] .contact-card,html[data-theme="dark"] .insight-card,html[data-theme="dark"] .benefit-card,html[data-theme="dark"] .comparison-card,html[data-theme="dark"] .calc-wrapper{background:#1e1535!important;border-color:#2e2550!important;color:#f0efff!important;box-shadow:0 12px 38px rgba(0,0,0,.28)!important}
+html[data-theme="dark"] .premium-card p,html[data-theme="dark"] .service-card p,html[data-theme="dark"] .testimonial-card p,html[data-theme="dark"] .blog-card p,html[data-theme="dark"] .contact-card p,html[data-theme="dark"] .insight-card p,html[data-theme="dark"] .benefit-card p,html[data-theme="dark"] .comparison-card p,html[data-theme="dark"] .section-subtitle,html[data-theme="dark"] .tl-content p{color:#b0aac8!important}
+html[data-theme="dark"] .section-title,html[data-theme="dark"] h1,html[data-theme="dark"] h2,html[data-theme="dark"] h3,html[data-theme="dark"] h4,html[data-theme="dark"] h5,html[data-theme="dark"] h6{color:#f0efff}
+html[data-theme="dark"] .section-badge{background:rgba(75,46,131,.3)!important;border-color:rgba(107,71,184,.4)!important;color:#d8cdf5!important}
+html[data-theme="dark"] .page-hero{background:linear-gradient(135deg,#251442,#1b2450)!important}
+html[data-theme="dark"] .service-illustration{background:linear-gradient(135deg,#1a1130,#101b36)!important}
+html[data-theme="dark"] .related-chip{background:#1e1535!important;border-color:#2e2550!important;color:#b0aac8!important}
+html[data-theme="dark"] .cta-section,html[data-theme="dark"] .newsletter-box{background:linear-gradient(135deg,#321b5d,#1f3eb5)!important}
+html[data-theme="dark"] footer{background:linear-gradient(135deg,#0b0715,#17102c)!important}
+html[data-theme="dark"] .theme-toggle{background:#1a1130!important;color:#f0efff!important;border-color:#2e2550!important}
+
 input,select,textarea{border-radius:12px!important}
 @media(max-width:1024px){header.fixed.top-8{width:calc(100% - 24px)!important}.hero{min-height:auto!important;padding-top:135px!important}.hero-container{grid-template-columns:1fr!important;gap:34px!important}.hero-illustration{min-height:390px}.hero-svg{margin:auto}.hero-title{font-size:clamp(2.7rem,8vw,4.4rem)!important}}
 @media(max-width:640px){header.fixed.top-8{top:38px!important;width:calc(100% - 14px)!important;border-radius:20px!important;padding:5px 9px!important}header.fixed.top-8>div{min-height:52px!important}.da-brand-link{width:190px!important;min-width:190px!important;height:50px!important}.da-brand-logo{width:190px!important;height:50px!important}.hero{padding-top:118px!important;padding-bottom:55px!important}.hero-title{font-size:clamp(2.35rem,12vw,3.5rem)!important}.hero-desc{font-size:.98rem!important}.hero-btns .btn{width:100%;justify-content:center}.hero-illustration{min-height:300px}.section-padding{padding:64px 0!important}}
