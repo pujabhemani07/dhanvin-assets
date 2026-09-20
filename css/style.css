@@ -517,3 +517,19 @@ html[data-theme="dark"] .service-illustration{background:var(--gradient-hero)!im
 html[data-theme="dark"] .cta-section,html[data-theme="dark"] .newsletter-box{background:linear-gradient(135deg,#321b5d,#1f3eb5)!important}
 html[data-theme="dark"] footer{background:linear-gradient(135deg,#0b0715,#17102c)!important;color:#f0efff!important}
 html[data-theme="dark"] .mobile-drawer{background:var(--bg-color)!important;color:var(--text-primary)!important}
+
+
+/* ===== PAGE HERO CONTRAST FIX ===== */
+.page-hero{background:linear-gradient(135deg,#2b1750 0%,#3f2b8f 52%,#1f4fc4 100%)!important;color:#fff!important}
+.page-hero::before{background-color:rgba(0,0,0,.08)!important}
+.page-hero-title{color:#fff!important;text-shadow:0 2px 12px rgba(0,0,0,.18)!important}
+.page-hero-title i{color:#f0c843!important}
+.page-hero p{color:rgba(255,255,255,.92)!important;text-shadow:0 1px 8px rgba(0,0,0,.14)!important}
+.breadcrumb,.breadcrumb a{color:rgba(255,255,255,.82)!important}
+.breadcrumb a:hover{color:#fff!important}
+.breadcrumb i{color:rgba(255,255,255,.7)!important}
+html[data-theme="dark"] .page-hero{background:linear-gradient(135deg,#160d2d 0%,#29185b 52%,#122d70 100%)!important}
+
+/* Keep the service illustration readable in both themes. */
+.service-illustration{background:linear-gradient(135deg,#ebe5ff 0%,#dce8ff 100%)!important;color:#4b2e83!important}
+html[data-theme="dark"] .service-illustration{background:linear-gradient(135deg,#251842 0%,#182b55 100%)!important;color:#c9b8ff!important}
