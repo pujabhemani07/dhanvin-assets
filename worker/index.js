@@ -54,6 +54,20 @@ html[data-theme="dark"] .cta-section,html[data-theme="dark"] .newsletter-box{bac
 html[data-theme="dark"] footer{background:linear-gradient(135deg,#0b0715,#17102c)!important}
 html[data-theme="dark"] .theme-toggle{background:#1a1130!important;color:#f0efff!important;border-color:#2e2550!important}
 
+/* FINAL SERVICE-PAGE READABILITY OVERRIDE — must come after every injected brand rule. */
+.page-hero{background:#24104f!important;color:#fff!important;opacity:1!important;}
+.page-hero::before{display:none!important;}
+.page-hero .container{position:relative!important;z-index:3!important;}
+.page-hero-title{color:#fff!important;font-weight:800!important;text-shadow:none!important;}
+.page-hero-title i{color:#f5c842!important;}
+.page-hero p{color:#fff!important;font-weight:500!important;text-shadow:none!important;}
+.breadcrumb,.breadcrumb a{color:#fff!important;font-weight:600!important;}
+.breadcrumb span{color:#f5c842!important;font-weight:700!important;}
+.breadcrumb i{color:#d8cfff!important;}
+html[data-theme="dark"] .page-hero{background:#120925!important;color:#fff!important;}
+html[data-theme="dark"] .page-hero-title,html[data-theme="dark"] .page-hero p,html[data-theme="dark"] .breadcrumb,html[data-theme="dark"] .breadcrumb a{color:#fff!important;}
+
+
 input,select,textarea{border-radius:12px!important}
 @media(max-width:1024px){header.fixed.top-8{width:calc(100% - 24px)!important}.hero{min-height:auto!important;padding-top:135px!important}.hero-container{grid-template-columns:1fr!important;gap:34px!important}.hero-illustration{min-height:390px}.hero-svg{margin:auto}.hero-title{font-size:clamp(2.7rem,8vw,4.4rem)!important}}
 @media(max-width:640px){header.fixed.top-8{top:38px!important;width:calc(100% - 14px)!important;border-radius:20px!important;padding:5px 9px!important}header.fixed.top-8>div{min-height:52px!important}.da-brand-link{width:190px!important;min-width:190px!important;height:50px!important}.da-brand-logo{width:190px!important;height:50px!important}.hero{padding-top:118px!important;padding-bottom:55px!important}.hero-title{font-size:clamp(2.35rem,12vw,3.5rem)!important}.hero-desc{font-size:.98rem!important}.hero-btns .btn{width:100%;justify-content:center}.hero-illustration{min-height:300px}.section-padding{padding:64px 0!important}}
