@@ -38,6 +38,41 @@ header.fixed.top-8 nav a:first-child{color:#4b2e83!important;font-weight:700!imp
 .page-hero{background:linear-gradient(135deg,#4b2e83,#2448d8)!important}
 .whatsapp-float{z-index:1200!important}
 footer{background:linear-gradient(135deg,#160d2d,#26134b)!important}
+
+/* ===== ABSOLUTE FINAL FOOTER RESET ===== */
+footer.footer{display:block!important;width:100%!important;box-sizing:border-box!important;}
+footer.footer *{box-sizing:border-box!important;}
+footer.footer .container{width:min(1200px,calc(100% - 48px))!important;margin:0 auto!important;}
+footer.footer .footer-grid{display:grid!important;grid-template-columns:1.15fr 1fr 1.35fr 1.55fr!important;column-gap:56px!important;row-gap:36px!important;align-items:start!important;}
+footer.footer .footer-grid>div{display:block!important;min-width:0!important;width:auto!important;float:none!important;}
+footer.footer .footer-col h4{display:block!important;margin:0 0 18px!important;font-size:16px!important;line-height:1.25!important;}
+footer.footer .footer-grid ul,
+footer.footer ul.footer-contact{display:block!important;list-style:none!important;margin:0!important;padding:0!important;width:100%!important;float:none!important;}
+footer.footer .footer-grid ul li,
+footer.footer ul.footer-contact li{display:block!important;position:static!important;float:none!important;clear:both!important;width:100%!important;height:auto!important;margin:0 0 10px!important;padding:0!important;line-height:1.55!important;white-space:normal!important;}
+footer.footer .footer-grid ul li::before{display:none!important;}
+footer.footer .footer-grid ul li a{display:block!important;width:100%!important;margin:0!important;padding:0!important;line-height:1.55!important;white-space:normal!important;word-break:normal!important;overflow-wrap:anywhere!important;}
+footer.footer .footer-contact-col{padding-left:28px!important;border-left:1px solid rgba(255,255,255,.16)!important;}
+footer.footer ul.footer-contact li{display:flex!important;align-items:flex-start!important;gap:10px!important;}
+footer.footer ul.footer-contact li i{display:block!important;flex:0 0 18px!important;width:18px!important;margin-top:4px!important;}
+footer.footer ul.footer-contact li a{flex:1 1 auto!important;width:auto!important;}
+footer.footer .footer-brand-name{display:inline-block!important;font-size:20px!important;font-weight:800!important;margin-bottom:14px!important;color:#fff!important;text-decoration:none!important;}
+footer.footer .footer-brand-name span{color:#d4af37!important;}
+footer.footer .footer-tagline{display:block!important;max-width:270px!important;margin:0 0 22px!important;line-height:1.65!important;}
+footer.footer .social-links{display:flex!important;flex-direction:row!important;align-items:center!important;gap:12px!important;width:auto!important;}
+footer.footer .social-link{display:flex!important;align-items:center!important;justify-content:center!important;width:36px!important;height:36px!important;}
+footer.footer .footer-bottom{display:block!important;width:100%!important;margin-top:44px!important;}
+footer.footer .footer-disclaimer{display:block!important;width:100%!important;max-width:none!important;margin:0 0 10px!important;line-height:1.65!important;}
+footer.footer .footer-legal{display:flex!important;align-items:center!important;gap:16px!important;flex-wrap:wrap!important;}
+@media(max-width:900px){
+ footer.footer .footer-grid{grid-template-columns:1fr 1fr!important;column-gap:36px!important;}
+ footer.footer .footer-contact-col{padding-left:0!important;border-left:0!important;}
+}
+@media(max-width:600px){
+ footer.footer .container{width:calc(100% - 32px)!important;}
+ footer.footer .footer-grid{grid-template-columns:1fr!important;}
+ footer.footer .footer-contact-col{padding-left:0!important;border-left:0!important;}
+}
 /* FINAL FOOTER LAYOUT FIX */
 footer .footer-grid{display:grid!important;grid-template-columns:minmax(220px,1.25fr) minmax(160px,.9fr) minmax(190px,1.15fr) minmax(300px,1.5fr)!important;gap:3.5rem!important;align-items:start!important;width:100%!important}
 footer .footer-grid>div{min-width:0!important}
