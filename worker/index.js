@@ -132,6 +132,54 @@ input,select,textarea{border-radius:12px!important}
 @media(max-width:640px){header.fixed.top-8{top:38px!important;width:calc(100% - 14px)!important;border-radius:20px!important;padding:5px 9px!important}header.fixed.top-8>div{min-height:52px!important}.da-brand-link{width:190px!important;min-width:190px!important;height:50px!important}.da-brand-logo{width:190px!important;height:50px!important}.hero{padding-top:118px!important;padding-bottom:55px!important}.hero-title{font-size:clamp(2.35rem,12vw,3.5rem)!important}.hero-desc{font-size:.98rem!important}.hero-btns .btn{width:100%;justify-content:center}.hero-illustration{min-height:300px}.section-padding{padding:64px 0!important}}
 `;
 
+const SERVICE_MATCH_CSS = `
+/* Match the approved Mutual Funds visual system on every OTHER service page.
+   Mutual Funds is intentionally excluded by the Worker path check. */
+body{background:#f8f8fd!important;color:#181522!important}
+.page-hero{background:#1b1238!important;color:#fff!important;min-height:320px!important;padding:145px 0 80px!important;position:relative!important;overflow:hidden!important}
+.page-hero::before{content:""!important;display:block!important;position:absolute!important;width:520px!important;height:520px!important;right:-180px!important;top:-250px!important;border-radius:50%!important;background:radial-gradient(circle,rgba(255,255,255,.14),transparent 68%)!important;pointer-events:none!important}
+.page-hero .container{position:relative!important;z-index:2!important}
+.page-hero .breadcrumb,.page-hero .breadcrumb a{color:#fff!important;font-weight:600!important}
+.page-hero .breadcrumb span:last-child{color:#f5c842!important;font-weight:700!important}
+.page-hero .breadcrumb i{color:#d8cfff!important}
+.page-hero-title{color:#fff!important;font-weight:800!important;text-shadow:0 2px 10px rgba(0,0,0,.25)!important}
+.page-hero-title i{color:#f5c842!important}
+.page-hero p{color:#fff!important;font-weight:600!important;opacity:1!important;text-shadow:0 1px 6px rgba(0,0,0,.2)!important}
+.service-detail-intro{padding-top:76px!important;padding-bottom:76px!important}
+.section-padding{padding-top:84px!important;padding-bottom:84px!important}
+.section-padding[style*="var(--bg-light)"]{background:#faf9fd!important}
+.section-badge{background:#f0ecff!important;border:1px solid #ddd4f1!important;color:#4b2e83!important}
+.gradient-text{background:linear-gradient(100deg,#4b2e83,#2448d8)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important}
+.service-illustration{background:linear-gradient(135deg,#f0eaff,#e9edff)!important;border:1px solid #e1daf0!important;box-shadow:0 18px 45px rgba(50,35,95,.09)!important;border-radius:24px!important}
+.service-illustration i{color:#4b2e83!important;filter:drop-shadow(0 8px 18px rgba(75,46,131,.2))!important}
+.benefit-card,.step-card,.related-chip{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease!important}
+.benefit-card,.step-card{background:#fff!important;border:1px solid #e7e3ef!important;border-radius:17px!important;box-shadow:0 12px 32px rgba(49,35,91,.06)!important}
+.benefit-card:hover,.step-card:hover{transform:translateY(-5px)!important;box-shadow:0 20px 45px rgba(49,35,91,.12)!important;border-color:#d9d0ec!important}
+.benefit-icon{color:#4b2e83!important;background:#f0ecff!important}
+.step-num{background:#fff!important;border:1px solid #ddd6e8!important;color:#4b2e83!important;box-shadow:0 8px 20px rgba(51,34,91,.08)!important}
+.step-card:hover .step-num{background:#4b2e83!important;color:#fff!important;border-color:#4b2e83!important}
+.related-chip{background:#f0ecff!important;border:1px solid #ddd4f1!important;color:#4b2e83!important}
+.related-chip:hover{background:#4b2e83!important;color:#fff!important;transform:translateY(-3px)!important}
+.cta-section{background:linear-gradient(135deg,#4b2e83,#2448d8)!important}
+.cta-box{background:transparent!important}
+.btn-gold{background:#d4af37!important;color:#24104f!important;box-shadow:0 10px 24px rgba(212,175,55,.25)!important}
+.btn-whatsapp{background:#20d76b!important;color:#fff!important}
+html[data-theme="dark"] body{background:#110b25!important;color:#f8f6ff!important}
+html[data-theme="dark"] .page-hero{background:#120925!important}
+html[data-theme="dark"] .section-padding[style*="var(--bg-light)"]{background:#15102a!important}
+html[data-theme="dark"] .service-detail-intro{background:#110b25!important}
+html[data-theme="dark"] .service-illustration{background:linear-gradient(135deg,#201638,#17203f)!important;border-color:#3b2d55!important;box-shadow:0 18px 45px rgba(0,0,0,.28)!important}
+html[data-theme="dark"] .section-badge{background:rgba(75,46,131,.3)!important;border-color:rgba(107,71,184,.4)!important;color:#d8cdf5!important}
+html[data-theme="dark"] .benefit-card,html[data-theme="dark"] .step-card{background:#201638!important;border-color:#3b2d55!important;color:#f8f6ff!important;box-shadow:0 12px 38px rgba(0,0,0,.28)!important}
+html[data-theme="dark"] .benefit-card p,html[data-theme="dark"] .step-card p{color:#bdb5cc!important}
+html[data-theme="dark"] .benefit-icon{background:rgba(75,46,131,.3)!important;color:#d8cdf5!important}
+html[data-theme="dark"] .step-num{background:#201638!important;border-color:#3b2d55!important;color:#d8cdf5!important}
+html[data-theme="dark"] .related-chip{background:#201638!important;border-color:#3b2d55!important;color:#d8cdf5!important}
+html[data-theme="dark"] .section-title,html[data-theme="dark"] h2,html[data-theme="dark"] h3,html[data-theme="dark"] h4{color:#f8f6ff!important}
+html[data-theme="dark"] .service-detail-intro p,html[data-theme="dark"] .section-padding p{color:#bdb5cc!important}
+html[data-theme="dark"] .cta-section{background:linear-gradient(135deg,#321b5d,#1f3eb5)!important}
+`;
+
 const BRAND_JS = `
 (function(){
  function init(){
@@ -188,7 +236,7 @@ export default {async fetch(request,env){
  }
  if(!contentType.includes('text/html'))return response;
  return new HTMLRewriter()
-  .on('head',{element(element){element.append(`<style id="dhanvin-reference-video">${BRAND_CSS}</style>`,{html:true});element.append(`<link rel="stylesheet" href="/css/video-reference.css">`,{html:true});element.append(`<link rel="icon" href="/assets/dhanvin-logo.svg" type="image/svg+xml">`,{html:true})}})
+  .on('head',{element(element){element.append(`<style id="dhanvin-reference-video">${BRAND_CSS}</style>`,{html:true});if(url.pathname.startsWith("/services/")&&!url.pathname.endsWith("/mutual-funds.html"))element.append(`<style id="dhanvin-service-match">${SERVICE_MATCH_CSS}</style>`,{html:true});element.append(`<link rel="stylesheet" href="/css/video-reference.css">`,{html:true});element.append(`<link rel="icon" href="/assets/dhanvin-logo.svg" type="image/svg+xml">`,{html:true})}})
   .on('header > div > a[href="index.html"],header > div > a[href="../index.html"]',{element(element){element.remove()}})
   .on('footer.footer',{element(element){element.setInnerContent(`<div class="container"><div class="footer-grid"><div class="footer-brand"><a href="/" class="footer-brand-name">Dhanvin <span>Assets</span></a><p class="footer-tagline">Your trusted partner in building lasting wealth and securing your family's financial future.</p><div class="social-links"><a href="#" class="social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="https://wa.me/919920082826" class="social-link" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a></div></div><div class="footer-col"><h4>Quick Links</h4><ul><li><a href="/">Home</a></li><li><a href="/about.html">About</a></li><li><a href="/calculators.html">Calculators</a></li><li><a href="/resources.html">Resources</a></li><li><a href="/contact.html">Contact</a></li></ul></div><div class="footer-col"><h4>Our Services</h4><ul><li><a href="/services/mutual-funds.html">Mutual Funds</a></li><li><a href="/services/sip-planning.html">SIP Planning</a></li><li><a href="/services/insurance.html">Insurance</a></li><li><a href="/services/retirement-planning.html">Retirement Planning</a></li><li><a href="/services/tax-saving.html">Tax Saving</a></li><li><a href="/services/child-education-planning.html">Child Education</a></li><li><a href="/services/wealth-management.html">Wealth Management</a></li><li><a href="/services/portfolio-review.html">Portfolio Review</a></li></ul></div><div class="footer-col footer-contact-col"><h4>Contact Us</h4><ul class="footer-contact"><li><i class="fa-solid fa-envelope"></i><a href="mailto:dhanvinassetspvtltd@gmail.com">dhanvinassetspvtltd@gmail.com</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919320114510">9320114510</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919920082826">9920082826</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919823626992">9823626992</a></li></ul></div></div><div class="footer-bottom"><p class="footer-disclaimer"><strong>Disclaimer:</strong> Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing.</p><div class="footer-legal"><span>© 2025 Dhanvin Assets. All rights reserved.</span><a href="/disclaimer.html">Disclaimer</a></div></div></div>`,{html:true})}})
   .on('body',{element(element){element.append(`<script id="dhanvin-reference-video-js">${BRAND_JS}</script>`,{html:true})}})
