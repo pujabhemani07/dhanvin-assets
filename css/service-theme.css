@@ -38,3 +38,8 @@ html[data-theme="dark"] .service-page-theme .step-num{background:#201638;border-
 html[data-theme="dark"] .service-page-theme .related-chip{background:#201638!important;border-color:#3b2d55!important;color:#d8cdf5!important}
 html[data-theme="dark"] .service-page-theme .section-title,html[data-theme="dark"] .service-page-theme h2,html[data-theme="dark"] .service-page-theme h3,html[data-theme="dark"] .service-page-theme h4{color:#f8f6ff}
 @media(max-width:760px){.service-page-theme .page-hero{padding:125px 0 60px!important;min-height:280px}.service-page-theme .service-detail-intro,.service-page-theme .section-padding{padding-top:60px;padding-bottom:60px}}
+
+/* Official logo sizing for service pages */
+.service-page-theme .site-logo-link{display:flex!important;align-items:center!important;width:205px;height:62px;overflow:hidden}
+.service-page-theme .site-logo{width:190px;height:58px;object-fit:contain;object-position:center}
+@media(max-width:760px){.service-page-theme .site-logo-link{width:170px;height:54px}.service-page-theme .site-logo{width:160px;height:52px}}
