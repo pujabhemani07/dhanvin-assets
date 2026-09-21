@@ -38,6 +38,30 @@ header.fixed.top-8 nav a:first-child{color:#4b2e83!important;font-weight:700!imp
 .page-hero{background:linear-gradient(135deg,#4b2e83,#2448d8)!important}
 .whatsapp-float{z-index:1200!important}
 footer{background:linear-gradient(135deg,#160d2d,#26134b)!important}
+/* FINAL FOOTER LAYOUT FIX */
+footer .footer-grid{display:grid!important;grid-template-columns:minmax(220px,1.25fr) minmax(160px,.9fr) minmax(190px,1.15fr) minmax(300px,1.5fr)!important;gap:3.5rem!important;align-items:start!important;width:100%!important}
+footer .footer-grid>div{min-width:0!important}
+footer .footer-logo{display:inline-flex!important;align-items:center!important;margin-bottom:1rem!important}
+footer .footer-tagline{display:block!important;max-width:260px!important;line-height:1.65!important;margin:0 0 1.5rem!important}
+footer .footer-grid ul{display:flex!important;flex-direction:column!important;gap:.65rem!important;list-style:none!important;margin:0!important;padding:0!important}
+footer .footer-grid ul li{display:block!important;margin:0!important;padding:0!important;line-height:1.5!important}
+footer .footer-grid ul li a{display:block!important;white-space:normal!important;line-height:1.5!important}
+footer .footer-col h4{margin:0 0 1rem!important}
+footer .footer-contact li{display:flex!important;align-items:flex-start!important;gap:.65rem!important;margin:0 0 .8rem!important}
+footer .footer-contact li a{display:inline!important;white-space:normal!important;word-break:break-word!important}
+footer .social-links{display:flex!important;flex-direction:row!important;gap:.75rem!important;margin-top:1rem!important}
+footer .social-link{display:flex!important;width:36px!important;height:36px!important;align-items:center!important;justify-content:center!important}
+footer .footer-bottom{display:block!important;width:100%!important}
+footer .footer-disclaimer{display:block!important;max-width:1100px!important;line-height:1.65!important}
+footer .footer-legal{display:flex!important;align-items:center!important;gap:1.5rem!important;flex-wrap:wrap!important}
+@media(max-width:900px){
+ footer .footer-grid{grid-template-columns:1fr 1fr!important;gap:2.5rem!important}
+}
+@media(max-width:600px){
+ footer .footer-grid{grid-template-columns:1fr!important;gap:2rem!important}
+ footer .footer-tagline{max-width:320px!important}
+}
+
 /* Dark-mode hardening for worker-injected reference styles. */
 html[data-theme="dark"] body{background:#0f0a1e!important;color:#f0efff!important}
 html[data-theme="dark"] header.fixed.top-8{background:rgba(15,10,30,.96)!important;border-color:#2e2550!important;box-shadow:0 12px 38px rgba(0,0,0,.35)!important}
