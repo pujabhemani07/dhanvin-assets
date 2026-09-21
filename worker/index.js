@@ -194,8 +194,8 @@ export default {async fetch(request,env){
  const response=await env.ASSETS.fetch(request);
  const contentType=response.headers.get('content-type')||'';
  if((url.pathname==='/'||url.pathname==='/index.html')&&contentType.includes('text/html')){
-  const transformed=new HTMLRewriter().on('body',{element(element){element.append(`<script id="dhanvin-home-update-js">${HOME_UPDATE_JS}</script><script id="dhanvin-footer-fix-js">${FOOTER_FIX_JS}</script>`,{html:true})}}).transform(response);
-  const headers=new Headers(transformed.headers);headers.set('Cache-Control','no-store, no-cache, must-revalidate, max-age=0');headers.set('Pragma','no-cache');return new Response(transformed.body,{status:transformed.status,statusText:transformed.statusText,headers});
+  const transformed=new HTMLRewriter().on('body',{element(element){element.append(`<script id="dhanvin-home-update-js">${HOME_UPDATE_JS}</script><script id="dhanvin-footer-fix-js">${FOOTER_FIX_JS}</script><meta name="dhanvin-build" content="2026-09-21-contact-disclaimer-v2">`,{html:true})}}).transform(response);
+  const headers=new Headers(transformed.headers);headers.set('Cache-Control','no-store, no-cache, must-revalidate, max-age=0');headers.set('Pragma','no-cache');headers.set('X-Dhanvin-Build','2026-09-21-contact-disclaimer-v2');return new Response(transformed.body,{status:transformed.status,statusText:transformed.statusText,headers});
  }
  if(!contentType.includes('text/html'))return response;
  return new HTMLRewriter()
