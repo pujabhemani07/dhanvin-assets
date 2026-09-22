@@ -8,7 +8,7 @@ header.fixed.top-8 nav{gap:24px!important}
 header.fixed.top-8 nav a{font-size:13px!important;color:#55515f!important}
 header.fixed.top-8 nav a:first-child{color:#4b2e83!important;font-weight:700!important}
 .da-brand-link{display:flex!important;align-items:center!important;justify-content:flex-start!important;width:235px!important;min-width:235px!important;height:64px!important;padding:0!important;overflow:hidden!important;background:#fff!important;border-radius:10px!important}
-.da-brand-logo{width:235px!important;height:64px!important;max-width:none!important;max-height:none!important;object-fit:cover!important;object-position:center center!important;display:block!important;background:#fff!important;filter:none!important}
+.da-brand-logo{width:235px!important;height:64px!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:center center!important;display:block!important;background:#fff!important;filter:none!important}
 .hero,body>section:first-of-type{background:linear-gradient(135deg,#f0e8ff 0%,#eeeaff 36%,#e8efff 72%,#fff 100%)!important}
 .hero{min-height:760px!important;padding-top:145px!important;padding-bottom:80px!important}
 .hero-container{max-width:1240px!important;gap:54px!important}
