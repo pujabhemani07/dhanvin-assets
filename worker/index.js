@@ -242,6 +242,3 @@ export default {async fetch(request,env){
   .transform(response);
 }};
 
-/* FINAL OFFICIAL LOGO DISPLAY */
-.da-brand-link{display:flex!important;align-items:center!important;width:235px!important;height:64px!important;overflow:visible!important;background:transparent!important}
-.da-brand-logo{display:block!important;width:235px!important;height:auto!important;max-width:235px!important;max-height:64px!important;object-fit:contain!important;object-position:center!important;filter:none!important;background:transparent!important}
