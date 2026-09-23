@@ -241,3 +241,7 @@ export default {async fetch(request,env){
   .on('body',{element(element){if(url.pathname.startsWith("/services/")&&!url.pathname.endsWith("/mutual-funds.html"))element.setAttribute("class",(element.getAttribute("class")||"")+" service-page-theme");element.append(`<script id="dhanvin-reference-video-js">${BRAND_JS}</script>`,{html:true})}})
   .transform(response);
 }};
+
+/* FINAL OFFICIAL LOGO DISPLAY */
+.da-brand-link{display:flex!important;align-items:center!important;width:235px!important;height:64px!important;overflow:visible!important;background:transparent!important}
+.da-brand-logo{display:block!important;width:235px!important;height:auto!important;max-width:235px!important;max-height:64px!important;object-fit:contain!important;object-position:center!important;filter:none!important;background:transparent!important}
