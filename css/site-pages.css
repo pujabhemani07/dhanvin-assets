@@ -4,3 +4,7 @@ body.night{background:#110b25;color:#f8f6ff}body.night .site-nav,body.night .car
 /* Official logo: crop the supplied square artwork through its centered logo band. */
 .site-nav .brand{display:flex!important;align-items:center!important;width:205px!important;height:62px!important;overflow:hidden!important;background:#fff!important;border-radius:8px!important}
 .site-nav .brand img{display:block!important;width:205px!important;height:62px!important;max-width:none!important;object-fit:contain!important;object-position:center center!important;filter:none!important}
+
+/* FINAL OFFICIAL LOGO DISPLAY */
+.site-logo-link{display:flex!important;align-items:center!important;width:205px!important;height:62px!important;overflow:visible!important;background:transparent!important}
+.site-logo{display:block!important;width:205px!important;height:auto!important;max-width:205px!important;max-height:62px!important;object-fit:contain!important;object-position:center!important;filter:none!important}
