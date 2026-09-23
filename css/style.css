@@ -598,3 +598,7 @@ html[data-theme="dark"] .service-illustration{background:linear-gradient(135deg,
 .site-logo-link{display:flex!important;align-items:center!important;justify-content:flex-start!important;width:205px;height:62px;overflow:hidden;}
 .footer-logo{filter:none!important;background:transparent!important;}
 @media(max-width:760px){.logo-wrap .logo,.site-logo-link .site-logo{width:160px;height:52px}.site-logo-link{width:170px;height:54px}}
+
+/* FINAL OFFICIAL LOGO DISPLAY */
+.logo-wrap{display:flex!important;align-items:center!important;justify-content:flex-start!important;width:205px!important;height:62px!important;flex:0 0 205px!important;overflow:visible!important;background:transparent!important}
+.logo-wrap .logo{display:block!important;width:205px!important;height:auto!important;max-width:205px!important;max-height:62px!important;object-fit:contain!important;object-position:center!important;visibility:visible!important;opacity:1!important}
