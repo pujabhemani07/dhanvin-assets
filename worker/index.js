@@ -1,3 +1,17 @@
+const GLOBAL_CONTACT_FIX_JS = \`
+document.querySelectorAll('a[href^="mailto:"],a[href*="wa.me"],a[href^="tel:"]').forEach(a=>{
+  const h=(a.getAttribute('href')||'').toLowerCase();
+  if(h.startsWith('mailto:')) a.setAttribute('href','mailto:dhanvinassetspvtltd@gmail.com');
+  if(h.includes('wa.me')) a.setAttribute('href','https://wa.me/919920082826');
+  if(h.startsWith('tel:') && h.includes('9999999999')) a.setAttribute('href','tel:+919920082826');
+});
+document.querySelectorAll('body *').forEach(el=>{
+  if(el.children.length===0 && el.textContent){
+    el.textContent=el.textContent.replaceAll('hello@dhanvinassets.com','dhanvinassetspvtltd@gmail.com').replaceAll('info@dhanvinassets.com','dhanvinassetspvtltd@gmail.com');
+  }
+});
+\`;
+
 const BRAND_CSS = `
 :root{--da-purple:#4b2e83;--da-blue:#2448d8;--da-gold:#d4af37;--da-ink:#201735}
 body{background:#f8f7fc!important;color:var(--da-ink);overflow-x:hidden}
@@ -231,8 +245,8 @@ export default {async fetch(request,env){
  const response=await env.ASSETS.fetch(request);
  const contentType=response.headers.get('content-type')||'';
  if((url.pathname==='/'||url.pathname==='/index.html')&&contentType.includes('text/html')){
-  const transformed=new HTMLRewriter().on('body',{element(element){element.append(`<script id="dhanvin-home-update-js">${HOME_UPDATE_JS}</script><script id="dhanvin-footer-fix-js">${FOOTER_FIX_JS}</script><meta name="dhanvin-build" content="2026-09-21-contact-disclaimer-v2">`,{html:true})}}).transform(response);
-  const headers=new Headers(transformed.headers);headers.set('Cache-Control','no-store, no-cache, must-revalidate, max-age=0');headers.set('Pragma','no-cache');headers.set('X-Dhanvin-Build','2026-09-21-contact-disclaimer-v2');return new Response(transformed.body,{status:transformed.status,statusText:transformed.statusText,headers});
+  const transformed=new HTMLRewriter().on('body',{element(element){element.append(`<script id="dhanvin-home-update-js">${HOME_UPDATE_JS}</script><script id="dhanvin-footer-fix-js">${FOOTER_FIX_JS}</script><meta name="dhanvin-build" content="2026-09-28-contact-deployment-fix-v1">`,{html:true})}}).transform(response);
+  const headers=new Headers(transformed.headers);headers.set('Cache-Control','no-store, no-cache, must-revalidate, max-age=0');headers.set('Pragma','no-cache');headers.set('X-Dhanvin-Build','2026-09-28-contact-deployment-fix-v1');return new Response(transformed.body,{status:transformed.status,statusText:transformed.statusText,headers});
  }
  if(!contentType.includes('text/html'))return response;
  return new HTMLRewriter()
@@ -240,7 +254,7 @@ export default {async fetch(request,env){
   .on('img.logo',{element(element){const src=element.getAttribute('src')||'';if(src.includes('dhanvin-logo-exact.svg'))element.setAttribute('src',src.replace(/\?v=\d+/,'?v=14'));}}})
   .on('img.site-logo',{element(element){const src=element.getAttribute('src')||'';if(src.includes('dhanvin-logo-exact.svg'))element.setAttribute('src',src.replace(/\?v=\d+/,'?v=14'));}}})
   .on('footer.footer',{element(element){element.setInnerContent(`<div class="container"><div class="footer-grid"><div class="footer-brand"><a href="/" class="footer-brand-name">Dhanvin <span>Assets</span></a><p class="footer-tagline">Your trusted partner in building lasting wealth and securing your family's financial future.</p><div class="social-links"><a href="#" class="social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="https://wa.me/919920082826" class="social-link" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a></div></div><div class="footer-col"><h4>Quick Links</h4><ul><li><a href="/">Home</a></li><li><a href="/about.html">About</a></li><li><a href="/calculators.html">Calculators</a></li><li><a href="/resources.html">Resources</a></li><li><a href="/contact.html">Contact</a></li></ul></div><div class="footer-col"><h4>Our Services</h4><ul><li><a href="/services/mutual-funds.html">Mutual Funds</a></li><li><a href="/services/sip-planning.html">SIP Planning</a></li><li><a href="/services/insurance.html">Insurance</a></li><li><a href="/services/retirement-planning.html">Retirement Planning</a></li><li><a href="/services/tax-saving.html">Tax Saving</a></li><li><a href="/services/child-education-planning.html">Child Education</a></li><li><a href="/services/wealth-management.html">Wealth Management</a></li><li><a href="/services/portfolio-review.html">Portfolio Review</a></li></ul></div><div class="footer-col footer-contact-col"><h4>Contact Us</h4><ul class="footer-contact"><li><i class="fa-solid fa-envelope"></i><a href="mailto:dhanvinassetspvtltd@gmail.com">dhanvinassetspvtltd@gmail.com</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919320114510">9320114510</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919920082826">9920082826</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919823626992">9823626992</a></li></ul></div></div><div class="footer-bottom"><p class="footer-disclaimer"><strong>Disclaimer:</strong> Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing.</p><div class="footer-legal"><span>© 2025 Dhanvin Assets. All rights reserved.</span><a href="/disclaimer.html">Disclaimer</a></div></div></div>`,{html:true})}})
-  .on('body',{element(element){if(url.pathname.startsWith("/services/")&&!url.pathname.endsWith("/mutual-funds.html"))element.setAttribute("class",(element.getAttribute("class")||"")+" service-page-theme");element.append(`<script id="dhanvin-reference-video-js">${BRAND_JS}</script>`,{html:true})}})
+  .on('body',{element(element){if(url.pathname.startsWith("/services/")&&!url.pathname.endsWith("/mutual-funds.html"))element.setAttribute("class",(element.getAttribute("class")||"")+" service-page-theme");element.append(`<script id="dhanvin-reference-video-js">${BRAND_JS}</script><script id="dhanvin-global-contact-fix">${GLOBAL_CONTACT_FIX_JS}</script>`,{html:true})}})
   .transform(response);
 }};
 
