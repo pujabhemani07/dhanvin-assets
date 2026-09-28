@@ -1,4 +1,4 @@
-const GLOBAL_CONTACT_FIX_JS = \`
+const GLOBAL_CONTACT_FIX_JS = `
 document.querySelectorAll('a[href^="mailto:"],a[href*="wa.me"],a[href^="tel:"]').forEach(a=>{
   const h=(a.getAttribute('href')||'').toLowerCase();
   if(h.startsWith('mailto:')) a.setAttribute('href','mailto:dhanvinassetspvtltd@gmail.com');
@@ -10,7 +10,7 @@ document.querySelectorAll('body *').forEach(el=>{
     el.textContent=el.textContent.replaceAll('hello@dhanvinassets.com','dhanvinassetspvtltd@gmail.com').replaceAll('info@dhanvinassets.com','dhanvinassetspvtltd@gmail.com');
   }
 });
-\`;
+`;
 
 const BRAND_CSS = `
 :root{--da-purple:#4b2e83;--da-blue:#2448d8;--da-gold:#d4af37;--da-ink:#201735}
