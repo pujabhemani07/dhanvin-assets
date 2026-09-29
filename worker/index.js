@@ -169,6 +169,18 @@ html[data-theme="dark"] .page-hero-title,html[data-theme="dark"] .page-hero p,ht
 input,select,textarea{border-radius:12px!important}
 @media(max-width:1024px){header.fixed.top-8{width:calc(100% - 24px)!important}.hero{min-height:auto!important;padding-top:135px!important}.hero-container{grid-template-columns:1fr!important;gap:34px!important}.hero-illustration{min-height:390px}.hero-svg{margin:auto}.hero-title{font-size:clamp(2.7rem,8vw,4.4rem)!important}}
 @media(max-width:640px){header.fixed.top-8{top:38px!important;width:calc(100% - 14px)!important;border-radius:20px!important;padding:5px 9px!important}header.fixed.top-8>div{min-height:52px!important}.da-brand-link{width:190px!important;min-width:190px!important;height:50px!important}.da-brand-logo{width:190px!important;height:50px!important}.hero{padding-top:118px!important;padding-bottom:55px!important}.hero-title{font-size:clamp(2.35rem,12vw,3.5rem)!important}.hero-desc{font-size:.98rem!important}.hero-btns .btn{width:100%;justify-content:center}.hero-illustration{min-height:300px}.section-padding{padding:64px 0!important}}
+
+/* ===== FINAL FOOTER ROW OVERRIDE ===== */
+footer.footer .footer-grid{display:grid!important;grid-template-columns:minmax(240px,1.2fr) minmax(180px,.9fr) minmax(220px,1.05fr) minmax(250px,1.2fr)!important;gap:36px 48px!important;align-items:start!important}
+footer.footer .footer-col{display:flex!important;flex-direction:column!important;align-items:flex-start!important;min-width:0!important}
+footer.footer .footer-col h4{display:block!important;width:100%!important;margin:0 0 18px!important}
+footer.footer .footer-col>ul{display:flex!important;flex-direction:column!important;align-items:flex-start!important;width:100%!important;gap:0!important;margin:0!important;padding:0!important;list-style:none!important}
+footer.footer .footer-col>ul>li{display:block!important;flex:0 0 auto!important;width:100%!important;height:auto!important;margin:0 0 10px!important;padding:0!important;line-height:1.55!important;white-space:normal!important;float:none!important;clear:both!important}
+footer.footer .footer-col>ul>li>a{display:block!important;width:100%!important;height:auto!important;margin:0!important;padding:0!important;line-height:1.55!important;white-space:normal!important}
+footer.footer .footer-contact-col ul.footer-contact{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:0!important;width:100%!important}
+footer.footer .footer-contact-col ul.footer-contact>li{display:flex!important;flex:0 0 auto!important;width:100%!important;margin:0 0 10px!important}
+@media(max-width:900px){footer.footer .footer-grid{grid-template-columns:1fr 1fr!important}}
+@media(max-width:600px){footer.footer .footer-grid{grid-template-columns:1fr!important}}
 `;
 
 const SERVICE_MATCH_CSS = `
