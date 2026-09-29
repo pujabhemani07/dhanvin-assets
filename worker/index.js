@@ -84,6 +84,12 @@ footer .footer-grid{grid-template-columns:minmax(250px,1.2fr) minmax(180px,.85fr
 footer .footer-grid>div{min-width:0!important}
 footer .footer-grid ul{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:0!important;list-style:none!important;margin:0!important;padding:0!important}
 footer .footer-grid ul li{display:block!important;width:100%!important;height:auto!important;margin:0 0 12px!important;padding:0!important;line-height:1.45!important;white-space:normal!important;float:none!important;clear:both!important}
+footer.footer .footer-col ul:not(.footer-contact),footer.footer .footer-grid .footer-col ul:not(.footer-contact){display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;gap:0!important;width:100%!important}
+footer.footer .footer-col ul:not(.footer-contact)>li,footer.footer .footer-grid .footer-col ul:not(.footer-contact)>li{display:block!important;flex:0 0 auto!important;width:100%!important;margin:0 0 10px!important;padding:0!important;line-height:1.55!important;white-space:normal!important}
+footer.footer .footer-col ul:not(.footer-contact)>li>a{display:block!important;width:100%!important}
+footer.footer .footer-contact-col ul.footer-contact{display:flex!important;flex-direction:column!important;gap:0!important}
+footer.footer .footer-contact-col ul.footer-contact>li{display:flex!important;flex:0 0 auto!important;width:100%!important;margin:0 0 10px!important;padding:0!important}
+
 footer .footer-grid ul li a{display:inline-block!important;width:auto!important;max-width:100%!important;line-height:1.45!important;white-space:normal!important;word-break:normal!important;overflow-wrap:anywhere!important;margin:0!important;padding:0!important}
 footer .footer-col h4{display:block!important;margin:0 0 20px!important;line-height:1.25!important}
 footer .footer-brand-name{display:inline-block!important;line-height:1.25!important;margin:0 0 16px!important}
