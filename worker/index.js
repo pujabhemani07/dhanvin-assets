@@ -7,7 +7,7 @@ document.querySelectorAll('a[href^="mailto:"],a[href*="wa.me"],a[href^="tel:"]')
 });
 document.querySelectorAll('body *').forEach(el=>{
   if(el.children.length===0 && el.textContent){
-    el.textContent=el.textContent.replaceAll('hello@dhanvinassets.com','info@dhanvinassets.com').replaceAll('info@dhanvinassets.com','info@dhanvinassets.com');
+    el.textContent=el.textContent.replaceAll('hello@dhanvinassets.com','info@dhanvinassets.com').replaceAll('dhanvinassetspvtltd@gmail.com','info@dhanvinassets.com');
   }
 });
 `;
@@ -23,6 +23,8 @@ header.fixed.top-8 nav a{font-size:13px!important;color:#55515f!important}
 header.fixed.top-8 nav a:first-child{color:#4b2e83!important;font-weight:700!important}
 .da-brand-link{display:flex!important;align-items:center!important;justify-content:flex-start!important;width:235px!important;min-width:235px!important;height:64px!important;padding:0!important;overflow:hidden!important;background:#fff!important;border-radius:10px!important}
 .da-brand-logo{width:235px!important;height:64px!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:center center!important;display:block!important;background:#fff!important;filter:none!important}
+/* Official logo removed site-wide per current brand direction. */
+.logo-wrap,.da-brand-link,.da-brand-logo,.logo,.site-logo,.footer-logo,.navbar-brand img{display:none!important}
 .hero,body>section:first-of-type{background:linear-gradient(135deg,#f0e8ff 0%,#eeeaff 36%,#e8efff 72%,#fff 100%)!important}
 .hero{min-height:760px!important;padding-top:145px!important;padding-bottom:80px!important}
 .hero-container{max-width:1240px!important;gap:54px!important}
@@ -229,6 +231,8 @@ const HOME_UPDATE_JS = `
   const stats=document.querySelectorAll('.hero-stats .stat-item');
   if(stats[0]){const v=stats[0].querySelector('[data-count]'),s=stats[0].querySelector('.stat-suffix');if(v)v.dataset.count='1';if(s)s.textContent='Cr+';}
   if(stats[1]){const v=stats[1].querySelector('[data-count]'),s=stats[1].querySelector('.stat-suffix');if(v)v.dataset.count='500';if(s)s.textContent='+';}
+  document.querySelectorAll('.float-card-1').forEach(card=>{const value=card.querySelector('strong'),label=card.querySelector('span');if(value)value.textContent='₹1 Cr+';if(label)label.textContent='AUM';});
+  document.querySelectorAll('.float-card-2').forEach(card=>{const value=card.querySelector('strong'),label=card.querySelector('span');if(value)value.textContent='500+';if(label)label.textContent='Happy Families';});
   const heroCta=document.querySelector('.hero-btns .btn-primary');
   if(heroCta)heroCta.innerHTML='<i class="fa-solid fa-calendar-check"></i> Start Planning Today';
   const faqCta=document.querySelector('.faqs .btn-outline');
@@ -247,13 +251,16 @@ export default {async fetch(request,env){
  const contentType=response.headers.get('content-type')||'';
  if((url.pathname==='/'||url.pathname==='/index.html')&&contentType.includes('text/html')){
   const transformed=new HTMLRewriter().on('body',{element(element){element.append(`<script id="dhanvin-home-update-js">${HOME_UPDATE_JS}</script><script id="dhanvin-footer-fix-js">${FOOTER_FIX_JS}</script><meta name="dhanvin-build" content="2026-09-29-homepage-update-v2">`,{html:true})}}).transform(response);
-  const headers=new Headers(transformed.headers);headers.set('Cache-Control','no-store, no-cache, must-revalidate, max-age=0');headers.set('Pragma','no-cache');headers.set('X-Dhanvin-Build','2026-09-28-contact-deployment-fix-v1');return new Response(transformed.body,{status:transformed.status,statusText:transformed.statusText,headers});
+  const headers=new Headers(transformed.headers);headers.set('Cache-Control','no-store, no-cache, must-revalidate, max-age=0');headers.set('Pragma','no-cache');headers.set('X-Dhanvin-Build','2026-09-29-logo-aum-referral-email-v1');return new Response(transformed.body,{status:transformed.status,statusText:transformed.statusText,headers});
  }
  if(!contentType.includes('text/html'))return response;
  return new HTMLRewriter()
   .on('head',{element(element){element.append(`<style id="dhanvin-reference-video">${BRAND_CSS}</style>`,{html:true});if(url.pathname.startsWith("/services/")&&!url.pathname.endsWith("/mutual-funds.html"))element.append(`<link rel="stylesheet" href="/css/service-theme.css">`,{html:true});element.append(`<link rel="stylesheet" href="/css/video-reference.css">`,{html:true});element.append(``,{html:true})}})
   .on('img.logo',{element(element){const src=element.getAttribute('src')||'';element.remove();}})
-  .on('img.site-logo',{element(element){const src=element.getAttribute('src')||'';element.remove();}})
+  .on('img.site-logo',{element(element){element.remove();}})
+  .on('.logo-wrap',{element(element){element.remove();}})
+  .on('.da-brand-link',{element(element){element.remove();}})
+  .on('img.da-brand-logo',{element(element){element.remove();}})
   .on('footer.footer',{element(element){element.setInnerContent(`<div class="container"><div class="footer-grid"><div class="footer-brand"><a href="/" class="footer-brand-name">Dhanvin <span>Assets</span></a><p class="footer-tagline">Your trusted partner in building lasting wealth and securing your family's financial future.</p><div class="social-links"><a href="#" class="social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="https://wa.me/919920082826" class="social-link" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a></div></div><div class="footer-col"><h4>Quick Links</h4><ul><li><a href="/">Home</a></li><li><a href="/about.html">About</a></li><li><a href="/calculators.html">Calculators</a></li><li><a href="/resources.html">Resources</a></li><li><a href="/contact.html">Contact</a></li></ul></div><div class="footer-col"><h4>Our Services</h4><ul><li><a href="/services/mutual-funds.html">Mutual Funds</a></li><li><a href="/services/sip-planning.html">SIP Planning</a></li><li><a href="/services/insurance.html">Insurance</a></li><li><a href="/services/retirement-planning.html">Retirement Planning</a></li><li><a href="/services/tax-saving.html">Tax Saving</a></li><li><a href="/services/child-education-planning.html">Child Education</a></li><li><a href="/services/wealth-management.html">Wealth Management</a></li><li><a href="/services/portfolio-review.html">Portfolio Review</a></li></ul></div><div class="footer-col footer-contact-col"><h4>Contact Us</h4><ul class="footer-contact"><li><i class="fa-solid fa-envelope"></i><a href="mailto:info@dhanvinassets.com">info@dhanvinassets.com</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919320114510">9320114510</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919920082826">9920082826</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919823626992">9823626992</a></li></ul></div></div><div class="footer-bottom"><p class="footer-disclaimer"><strong>Disclaimer:</strong> Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing.</p><div class="footer-legal"><span>© 2025 Dhanvin Assets. All rights reserved.</span><a href="/disclaimer.html">Disclaimer</a></div></div></div>`,{html:true})}})
   .on('body',{element(element){if(url.pathname.startsWith("/services/")&&!url.pathname.endsWith("/mutual-funds.html"))element.setAttribute("class",(element.getAttribute("class")||"")+" service-page-theme");element.append(`<script id="dhanvin-reference-video-js">${BRAND_JS}</script><script id="dhanvin-global-contact-fix">${GLOBAL_CONTACT_FIX_JS}</script>`,{html:true})}})
   .transform(response);
