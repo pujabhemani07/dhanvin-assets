@@ -192,6 +192,7 @@ html[data-theme="dark"] .related-chip{background:#201638!important;border-color:
 html[data-theme="dark"] .section-title,html[data-theme="dark"] h2,html[data-theme="dark"] h3,html[data-theme="dark"] h4{color:#f8f6ff!important}
 html[data-theme="dark"] .service-detail-intro p,html[data-theme="dark"] .section-padding p{color:#bdb5cc!important}
 html[data-theme="dark"] .cta-section{background:linear-gradient(135deg,#321b5d,#1f3eb5)!important}
+ .footer-contact{display:flex!important;flex-direction:column!important;gap:12px!important;margin:0!important;padding:0!important;list-style:none!important}.footer-contact li{display:flex!important;align-items:flex-start!important;gap:10px!important;margin:0!important;padding:0!important;white-space:normal!important}.footer-contact li a{display:inline-block!important;line-height:1.5!important;word-break:break-word!important}.footer-contact li i{width:16px!important;flex:0 0 16px!important}.footer-contact-col{min-width:0!important}
 `;
 
 const BRAND_JS = `
