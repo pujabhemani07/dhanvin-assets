@@ -292,7 +292,6 @@ export default {async fetch(request,env){
  if(!contentType.includes('text/html'))return response;
  return new HTMLRewriter()
   .on('head',{element(element){element.append(`<style id="dhanvin-reference-video">${BRAND_CSS}</style>`,{html:true});if(url.pathname.startsWith("/services/")&&!url.pathname.endsWith("/mutual-funds.html"))element.append(`<link rel="stylesheet" href="/css/service-theme.css">`,{html:true});element.append(`<link rel="stylesheet" href="/css/video-reference.css">`,{html:true});element.append(``,{html:true})}})
-                .on('img.da-brand-logo',{element(element){element.setAttribute('src','/assets/dhanvin-logo-exact.svg');element.removeAttribute('srcset');element.removeAttribute('width');element.removeAttribute('height');}})
                 .on('footer.footer',{element(element){element.setInnerContent(FOOTER_HTML,{html:true})}})
   .on('body',{element(element){
     if(url.pathname.startsWith("/services/")&&!url.pathname.endsWith("/mutual-funds.html"))element.setAttribute("class",(element.getAttribute("class")||"")+" service-page-theme");
