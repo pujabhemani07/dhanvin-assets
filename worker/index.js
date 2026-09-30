@@ -248,15 +248,13 @@ const BRAND_JS = `
 })();`;
 
 
-const FOOTER_FIX_JS = `
-(function(){
- function fixFooter(){
-  document.querySelectorAll('footer.footer').forEach(function(footer){
-   footer.innerHTML = '<div class="container"><div class="footer-grid"><div class="footer-brand"><a href="/" class="footer-brand-name">Dhanvin Assets Pvt Ltd</a><p class="footer-tagline">Your trusted partner in building lasting wealth and securing your family\'s financial future.</p><p class="footer-registration">AMFI-registered Mutual Fund Distributor<br>ARN-307259<br>Validity 29-AUG-2027</p><div class="social-links"><a href="#" class="social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="https://wa.me/919920082826" class="social-link" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a></div></div><div class="footer-col"><h4>Quick Links</h4><ul><li><a href="/">Home</a></li><li><a href="/about.html">About</a></li><li><a href="/calculators.html">Calculators</a></li><li><a href="/resources.html">Resources</a></li><li><a href="/contact.html">Contact</a></li></ul></div><div class="footer-col"><h4>Our Services</h4><ul><li><a href="/services/mutual-funds.html">Mutual Funds</a></li><li><a href="/services/sip-planning.html">SIP Planning</a></li><li><a href="/services/insurance.html">Insurance</a></li><li><a href="/services/retirement-planning.html">Retirement Planning</a></li><li><a href="/services/tax-saving.html">Tax Saving</a></li><li><a href="/services/child-education-planning.html">Child Education</a></li><li><a href="/services/wealth-management.html">Wealth Management</a></li><li><a href="/services/portfolio-review.html">Portfolio Review</a></li></ul></div><div class="footer-col footer-contact-col"><h4>Contact Us</h4><ul class="footer-contact"><li><i class="fa-solid fa-envelope"></i><a href="mailto:info@dhanvinassets.com">info@dhanvinassets.com</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919320114510">9320114510</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919920082826">9920082826</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919823626992">9823626992</a></li></ul></div></div><div class="footer-bottom"><p class="footer-disclaimer"><strong>Disclaimer:</strong> Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing.</p><div class="footer-legal"><span>© 2025 Dhanvin Assets. All rights reserved.</span><a href="/disclaimer.html">Disclaimer</a></div></div></div>';
-  });
- }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',fixFooter);else fixFooter();
-})();`;
+const FOOTER_HTML = `
+<div class="container"><div class="footer-grid">
+<div class="footer-brand"><a href="/" class="footer-brand-name">Dhanvin Assets</a><p class="footer-tagline">Your trusted partner in building lasting wealth and securing your family's financial future.</p><div class="social-links"><a href="#" class="social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="https://wa.me/919920082826" class="social-link" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a></div></div>
+<div class="footer-col"><h4>Quick Links</h4><ul><li><a href="/">Home</a></li><li><a href="/about.html">About Us</a></li><li><a href="/calculators.html">Calculators</a></li><li><a href="/market-insights.html">Market Insights</a></li><li><a href="/blog.html">Blog &amp; Resources</a></li><li><a href="/faq.html">FAQs</a></li><li><a href="/contact.html">Contact Us</a></li></ul></div>
+<div class="footer-col"><h4>Our Services</h4><ul><li><a href="/services/mutual-funds.html">Mutual Funds</a></li><li><a href="/services/sip-planning.html">SIP Planning</a></li><li><a href="/services/insurance.html">Insurance</a></li><li><a href="/services/retirement-planning.html">Retirement Planning</a></li><li><a href="/services/tax-saving.html">Tax Saving</a></li><li><a href="/services/child-education-planning.html">Child Education</a></li><li><a href="/services/wealth-management.html">Wealth Management</a></li><li><a href="/services/portfolio-review.html">Portfolio Review</a></li></ul></div>
+<div class="footer-col footer-contact-col"><h4>Contact Us</h4><ul class="footer-contact"><li><i class="fa-solid fa-envelope"></i><a href="mailto:info@dhanvinassets.com">info@dhanvinassets.com</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919320114510">9320114510</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919920082826">9920082826</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919823626992">9823626992</a></li></ul></div>
+</div><div class="footer-bottom"><p class="footer-disclaimer"><strong>Disclaimer:</strong> Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Past performance is not indicative of future returns.</p><div class="footer-legal"><span>© 2025 Dhanvin Assets. All rights reserved.</span><a href="/disclaimer.html">Privacy Policy</a><a href="/disclaimer.html">Terms of Use</a></div></div></div>`;
 const HOME_UPDATE_JS = `
 (function(){
  const phone='919920082826';
@@ -284,10 +282,7 @@ export default {async fetch(request,env){
  const url=new URL(request.url);
  const response=await env.ASSETS.fetch(request);
  const contentType=response.headers.get('content-type')||'';
- if((url.pathname==='/'||url.pathname==='/index.html')&&contentType.includes('text/html')){
-  const transformed=new HTMLRewriter().on('body',{element(element){element.append(`<script id="dhanvin-home-update-js">${HOME_UPDATE_JS}</script><script id="dhanvin-footer-fix-js">${FOOTER_FIX_JS}</script><meta name="dhanvin-build" content="2026-09-29-homepage-update-v2">`,{html:true})}}).transform(response);
-  const headers=new Headers(transformed.headers);headers.set('Cache-Control','no-store, no-cache, must-revalidate, max-age=0');headers.set('Pragma','no-cache');headers.set('X-Dhanvin-Build','2026-09-29-footer-registration-layout-v1');return new Response(transformed.body,{status:transformed.status,statusText:transformed.statusText,headers});
- }
+ const isHomepage=url.pathname==='/'||url.pathname==='/index.html';
  if(!contentType.includes('text/html'))return response;
  return new HTMLRewriter()
   .on('head',{element(element){element.append(`<style id="dhanvin-reference-video">${BRAND_CSS}</style>`,{html:true});if(url.pathname.startsWith("/services/")&&!url.pathname.endsWith("/mutual-funds.html"))element.append(`<link rel="stylesheet" href="/css/service-theme.css">`,{html:true});element.append(`<link rel="stylesheet" href="/css/video-reference.css">`,{html:true});element.append(``,{html:true})}})
@@ -296,8 +291,18 @@ export default {async fetch(request,env){
   .on('.logo-wrap',{element(element){element.remove();}})
   .on('.da-brand-link',{element(element){element.remove();}})
   .on('img.da-brand-logo',{element(element){element.remove();}})
-  .on('footer.footer',{element(element){element.setInnerContent(`<div class="container"><div class="footer-grid"><div class="footer-brand"><a href="/" class="footer-brand-name">Dhanvin <span>Assets</span></a><p class="footer-tagline">Your trusted partner in building lasting wealth and securing your family's financial future.</p><div class="social-links"><a href="#" class="social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="https://wa.me/919920082826" class="social-link" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a></div></div><div class="footer-col"><h4>Quick Links</h4><ul><li><a href="/">Home</a></li><li><a href="/about.html">About</a></li><li><a href="/calculators.html">Calculators</a></li><li><a href="/resources.html">Resources</a></li><li><a href="/contact.html">Contact</a></li></ul></div><div class="footer-col"><h4>Our Services</h4><ul><li><a href="/services/mutual-funds.html">Mutual Funds</a></li><li><a href="/services/sip-planning.html">SIP Planning</a></li><li><a href="/services/insurance.html">Insurance</a></li><li><a href="/services/retirement-planning.html">Retirement Planning</a></li><li><a href="/services/tax-saving.html">Tax Saving</a></li><li><a href="/services/child-education-planning.html">Child Education</a></li><li><a href="/services/wealth-management.html">Wealth Management</a></li><li><a href="/services/portfolio-review.html">Portfolio Review</a></li></ul></div><div class="footer-col footer-contact-col"><h4>Contact Us</h4><ul class="footer-contact"><li><i class="fa-solid fa-envelope"></i><a href="mailto:info@dhanvinassets.com">info@dhanvinassets.com</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919320114510">9320114510</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919920082826">9920082826</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919823626992">9823626992</a></li></ul></div></div><div class="footer-bottom"><p class="footer-disclaimer"><strong>Disclaimer:</strong> Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing.</p><div class="footer-legal"><span>© 2025 Dhanvin Assets. All rights reserved.</span><a href="/disclaimer.html">Disclaimer</a></div></div></div>`,{html:true})}})
-  .on('body',{element(element){if(url.pathname.startsWith("/services/")&&!url.pathname.endsWith("/mutual-funds.html"))element.setAttribute("class",(element.getAttribute("class")||"")+" service-page-theme");element.append(`<script id="dhanvin-reference-video-js">${BRAND_JS}</script><script id="dhanvin-global-contact-fix">${GLOBAL_CONTACT_FIX_JS}</script>`,{html:true})}})
+  .on('footer.footer',{element(element){element.setInnerContent(FOOTER_HTML,{html:true})}})
+  .on('body',{element(element){
+    if(url.pathname.startsWith("/services/")&&!url.pathname.endsWith("/mutual-funds.html"))element.setAttribute("class",(element.getAttribute("class")||"")+" service-page-theme");
+    const homepageScript=isHomepage?`<script id="dhanvin-home-update-js">${HOME_UPDATE_JS}</script>`:"";
+    element.append(homepageScript+`<script id="dhanvin-reference-video-js">${BRAND_JS}</script><script id="dhanvin-global-contact-fix">${GLOBAL_CONTACT_FIX_JS}</script>`,{html:true});
+  }})
   .transform(response);
+  const headers=new Headers(transformed.headers);
+  if(isHomepage){
+    headers.set('Cache-Control','no-store, no-cache, must-revalidate, max-age=0');
+    headers.set('Pragma','no-cache');
+    headers.set('X-Dhanvin-Build','2026-09-30-single-authoritative-footer-v1');
+  }
+  return new Response(transformed.body,{status:transformed.status,statusText:transformed.statusText,headers});
 }};
-
