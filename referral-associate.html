@@ -9,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="stylesheet" href="css/video-reference.css">
 <link rel="stylesheet" href="css/site-pages.css">
 <style>
 .referral-page{overflow:hidden}
@@ -89,6 +88,42 @@
 .referral-panel{padding:1.35rem}
 }
 </style>
+<style id="referral-site-polish">
+:root{--ra-purple:#4b2e83;--ra-blue:#2448d8;--ra-teal:#48d3c6;--ra-gold:#d4af37;--ra-ink:#201735}
+body{margin:0;font-family:Inter,Arial,sans-serif;background:#f8f7fc;color:var(--ra-ink)}
+.wrap{width:min(1180px,calc(100% - 40px));margin:auto}
+.site-nav{position:sticky;top:0;z-index:1000;width:100%;display:flex;align-items:center;gap:28px;padding:12px 28px;background:rgba(255,255,255,.97);border-bottom:1px solid #ebe7f2;box-shadow:0 8px 25px rgba(35,20,75,.07);box-sizing:border-box}
+.site-nav .brand{display:none}
+.site-nav .navlinks{display:flex;align-items:center;justify-content:center;gap:24px;flex:1}
+.site-nav .navlinks a{color:#4c4758;text-decoration:none;font-size:.84rem;font-weight:700;white-space:nowrap}
+.site-nav .navlinks a:hover,.site-nav .navlinks a.active{color:var(--ra-purple)}
+.site-nav .nav-actions{display:flex;align-items:center;gap:10px}
+.site-nav .theme{width:38px;height:38px;border:1px solid #e1dceb;border-radius:50%;background:#fff;color:var(--ra-purple);cursor:pointer}
+.site-nav .consult{display:inline-flex;padding:10px 16px;border-radius:999px;background:linear-gradient(135deg,var(--ra-purple),var(--ra-blue));color:#fff!important}
+.hamb{display:none;border:0;background:none;font-size:1.35rem;color:var(--ra-purple)}
+.drawer{display:none}
+.referral-page h1,.referral-page h2,.referral-page h3,.referral-page h4{font-family:Poppins,Inter,sans-serif}
+.referral-hero{padding:76px 0 72px}
+.referral-hero .wrap{max-width:1180px}
+.referral-hero h1{letter-spacing:-.045em}
+.referral-hero .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:42px;align-items:center}
+.referral-visual{position:relative}
+.referral-visual:after{content:"";position:absolute;inset:18px 0 0 0;border-radius:30px;background:linear-gradient(135deg,rgba(72,211,198,.09),rgba(245,200,66,.08));pointer-events:none}
+.referral-section .wrap{position:relative}
+.referral-section.soft{background:#f3f0f8}
+.referral-cta{box-shadow:0 24px 60px rgba(35,20,75,.16)}
+.footer{background:linear-gradient(135deg,#160d2d,#26134b);color:#fff;padding:58px 0 20px}
+.footergrid{display:grid;grid-template-columns:1.4fr 1fr 1fr .9fr;gap:40px}
+.footer img{max-width:150px;filter:brightness(0) invert(1);margin-bottom:14px}
+.footer p{color:rgba(255,255,255,.68);font-size:.82rem;line-height:1.7}
+.footer h4{margin:0 0 14px;color:#fff}
+.footer a{display:block;color:rgba(255,255,255,.72);text-decoration:none;font-size:.82rem;margin:0 0 10px}
+.footer a:hover{color:#f5c842}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:35px;padding-top:18px;text-align:center;color:rgba(255,255,255,.55);font-size:.72rem}
+.wa{position:fixed;right:22px;bottom:22px;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:#20d76b;color:#fff;text-decoration:none;box-shadow:0 12px 30px rgba(0,0,0,.18);z-index:1200;font-size:1.4rem}
+@media(max-width:980px){.site-nav{padding:11px 16px}.site-nav .navlinks,.site-nav .nav-actions{display:none}.site-nav .hamb{display:block;margin-left:auto}.drawer{position:fixed;inset:0 0 0 auto;width:min(330px,86vw);z-index:1500;background:#fff;display:flex;flex-direction:column;padding:70px 24px 24px;gap:4px;transform:translateX(105%);transition:transform .25s ease;box-shadow:-20px 0 60px rgba(0,0,0,.16)}.drawer.open{transform:translateX(0)}.drawer a{padding:13px 10px;color:#383343;text-decoration:none;font-weight:700;border-radius:10px}.drawer a.active,.drawer a:hover{background:#f1edfa;color:var(--ra-purple)}.drawer .close{position:absolute;top:16px;right:18px;border:0;background:none;font-size:2rem;color:#555}.referral-hero .hero-grid{grid-template-columns:1fr}.footergrid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.wrap{width:calc(100% - 30px)}.referral-hero{padding:58px 0}.referral-hero h1{font-size:clamp(2.2rem,12vw,3.3rem)}.referral-product-row{grid-template-columns:repeat(2,1fr)}.referral-product-grid{grid-template-columns:repeat(2,1fr)}.footergrid{grid-template-columns:1fr}.referral-tier-grid{grid-template-columns:1fr}.referral-two{grid-template-columns:1fr}}
+</style>
 </head>
 <body class="referral-page">
 <div class="ticker"><div class="ticker-track"><div class="tick">↗ NIFTY 50 <b>24,832</b> <span class="up">+1.12%</span></div><div class="tick">↗ SENSEX <b>81,455</b> <span class="up">+0.95%</span></div><div class="tick">↗ GOLD <b>₹71,240/10g</b> <span class="up">+0.45%</span></div><div class="tick">↗ USD/INR <b>83.42</b> <span class="up">+0.12%</span></div></div></div>
@@ -104,19 +139,19 @@
 <section class="referral-hero">
 <div class="wrap">
 <div class="referral-breadcrumb"><a href="index.html">Home</a> / Referral Associate</div>
+<div class="hero-grid">
+<div>
 <div class="referral-kicker"><i class="fa-solid fa-handshake"></i> Referral Associate Program</div>
-<h1>Turn Your <span>Network Into Income.</span></h1>
-<p>Empower others to grow financially and participate in the Referral Associate Program with Dhanvin Assets.</p>
-<div class="referral-hero-actions"><a class="btn primary" href="contact.html#booking"><i class="fa-solid fa-user-plus"></i> Become a Referral Associate</a><a class="btn secondary" href="#commission"><i class="fa-solid fa-arrow-down"></i> View Referral Structure</a></div>
+<h1>Your Network.<br><span>Their Future.<br>Your Income.</span></h1>
+<p>Empower others to grow financially and build a meaningful professional association with Dhanvin Assets. Connect your network with our financial solutions and participate in the referral program.</p>
+<div class="referral-hero-actions"><a class="btn primary" href="contact.html#booking"><i class="fa-solid fa-user-plus"></i> Become a Referral Associate</a><a class="btn secondary" href="#commission"><i class="fa-solid fa-arrow-down"></i> See How It Works</a></div>
+</div>
 <div class="referral-visual">
-<div class="referral-visual-card"><h3>Earn 20% Across Every Product</h3><div class="referral-product-row">
-<div class="referral-product"><i class="fa-solid fa-chart-line"></i>PMS</div>
-<div class="referral-product"><i class="fa-solid fa-building"></i>AIF</div>
-<div class="referral-product"><i class="fa-solid fa-chart-column"></i>Mutual Funds</div>
-<div class="referral-product"><i class="fa-solid fa-shield-halved"></i>Insurance</div>
-<div class="referral-product"><i class="fa-solid fa-file-invoice-dollar"></i>Fixed Income</div>
+<div class="referral-visual-card"><h3><i class="fa-solid fa-chart-line" style="color:#48d3c6;margin-right:7px"></i> Earn Across Multiple Products</h3><div class="referral-product-row">
+<div class="referral-product"><i class="fa-solid fa-chart-line"></i>PMS</div><div class="referral-product"><i class="fa-solid fa-building"></i>AIF</div><div class="referral-product"><i class="fa-solid fa-chart-column"></i>Mutual Funds</div><div class="referral-product"><i class="fa-solid fa-shield-halved"></i>Insurance</div><div class="referral-product"><i class="fa-solid fa-file-invoice-dollar"></i>Fixed Income</div>
 </div></div>
-<div class="referral-visual-card referral-stat"><div><strong>20%</strong><span>Program highlight<br>shown in the provided creative</span></div><i class="fa-solid fa-coins" style="font-size:2.2rem;color:#f5c842"></i></div>
+<div class="referral-visual-card" style="margin-top:12px"><div class="referral-stat"><div><strong>20%</strong><span>Program highlight shown<br>in the supplied creative</span></div><i class="fa-solid fa-coins" style="font-size:2.2rem;color:#f5c842"></i></div></div>
+</div>
 </div>
 </div>
 </section>
