@@ -286,13 +286,7 @@ export default {async fetch(request,env){
  if(!contentType.includes('text/html'))return response;
  return new HTMLRewriter()
   .on('head',{element(element){element.append(`<style id="dhanvin-reference-video">${BRAND_CSS}</style>`,{html:true});if(url.pathname.startsWith("/services/")&&!url.pathname.endsWith("/mutual-funds.html"))element.append(`<link rel="stylesheet" href="/css/service-theme.css">`,{html:true});element.append(`<link rel="stylesheet" href="/css/video-reference.css">`,{html:true});element.append(``,{html:true})}})
-  .on('img.logo',{element(element){element.remove();}})
-  .on('img.site-logo',{element(element){element.remove();}})
-  .on('img',{element(element){const src=(element.getAttribute('src')||'').toLowerCase();if(src.includes('dhanvin-logo'))element.remove();}})
-  .on('.brand',{element(element){element.remove();}})
-  .on('.loader-logo',{element(element){element.remove();}})
-  .on('.logo-wrap',{element(element){element.remove();}})
-  .on('.da-brand-link',{element(element){element.remove();}})
+              .on('.da-brand-link',{element(element){element.remove();}})
   .on('img.da-brand-logo',{element(element){element.remove();}})
   .on('footer.footer',{element(element){element.setInnerContent(FOOTER_HTML,{html:true})}})
   .on('body',{element(element){
