@@ -620,3 +620,6 @@ footer.footer .footer-contact{display:flex!important;flex-direction:column!impor
 footer.footer .footer-contact>li{display:flex!important;width:100%!important;margin:0 0 10px!important}
 @media(max-width:900px){footer.footer .footer-grid{grid-template-columns:1fr 1fr!important}}
 @media(max-width:600px){footer.footer .footer-grid{grid-template-columns:1fr!important}}
+
+/* FINAL: hide all logo/brand image elements site-wide */
+.logo-wrap,.logo-wrap .logo,.site-logo-link,.site-logo,.footer-logo,.da-brand-link,.da-brand-logo,.navbar-brand img,[src*="dhanvin-logo"]{display:none!important;visibility:hidden!important;width:0!important;height:0!important;max-width:0!important;max-height:0!important;overflow:hidden!important;}
