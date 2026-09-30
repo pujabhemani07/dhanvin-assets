@@ -28,8 +28,8 @@ jobs:
           # Requested homepage hero/stat values.
           s = s.replace('data-count="10">0</span><span class="stat-suffix">Cr+', 'data-count="1">0</span><span class="stat-suffix">Cr+')
           s = s.replace('data-count="500">0</span><span class="stat-suffix">+', 'data-count="60">0</span><span class="stat-suffix">k+')
-          s = s.replace('<strong>₹1 Cr+</strong><span>AUM</span>', '<strong>₹1 Cr+</strong><span>Assets Guided</span>')
-          s = s.replace('<strong>500+</strong><span>Happy Families</span>', '<strong>60k+</strong><span>Happy Families</span>')
+          s = s.replace('<strong>₹1 Cr+</strong><span>AUM</span>', '<strong>₹1 Cr+</strong><span>AUM</span>')
+          s = s.replace('<strong>500+</strong><span>Happy Families</span>', '<strong>500+</strong><span>Happy Families</span>')
 
           # Hero CTA.
           s = s.replace('> Book Free Consultation</a><a href="#services" class="btn btn-outline btn-lg">Explore Services', '> Start Planning Today</a><a href="#services" class="btn btn-outline btn-lg">Explore Services')
