@@ -21,10 +21,16 @@ header.fixed.top-8>div{min-height:68px!important}
 header.fixed.top-8 nav{gap:24px!important}
 header.fixed.top-8 nav a{font-size:13px!important;color:#55515f!important}
 header.fixed.top-8 nav a:first-child{color:#4b2e83!important;font-weight:700!important}
-.da-brand-link{display:flex!important;align-items:center!important;justify-content:flex-start!important;width:235px!important;min-width:235px!important;height:64px!important;padding:0!important;overflow:hidden!important;background:#fff!important;border-radius:10px!important}
-.da-brand-logo{width:235px!important;height:64px!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:center center!important;display:block!important;background:#fff!important;filter:none!important}
-/* Official logo removed site-wide per current brand direction. */
-.logo-wrap,.da-brand-link,.da-brand-logo,.logo,.site-logo,.footer-logo,.navbar-brand img{display:none!important}
+.da-brand-link{display:flex!important;align-items:center!important;justify-content:flex-start!important;flex:0 0 auto!important;width:205px!important;min-width:205px!important;height:58px!important;padding:0!important;overflow:visible!important;background:transparent!important;border-radius:0!important;text-decoration:none!important}
+.da-brand-logo{display:block!important;width:205px!important;height:auto!important;max-width:205px!important;max-height:58px!important;object-fit:contain!important;object-position:left center!important;background:transparent!important;filter:none!important;opacity:1!important}
+.nav-inner{display:flex!important;align-items:center!important;gap:22px!important}
+.nav-inner>.links{flex:1 1 auto!important;min-width:0!important}
+.nav-inner>.actions{flex:0 0 auto!important}
+@media(max-width:760px){
+  .da-brand-link{width:155px!important;min-width:155px!important;height:44px!important}
+  .da-brand-logo{width:155px!important;max-width:155px!important;max-height:44px!important}
+}
+/* Do not hide the official logo. */
 .hero,body>section:first-of-type{background:linear-gradient(135deg,#f0e8ff 0%,#eeeaff 36%,#e8efff 72%,#fff 100%)!important}
 .hero{min-height:760px!important;padding-top:145px!important;padding-bottom:80px!important}
 .hero-container{max-width:1240px!important;gap:54px!important}
