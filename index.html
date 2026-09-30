@@ -11,6 +11,52 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/video-pages.css">
+<style id="referral-home-design">
+.nav-referral-link{display:inline-flex!important;align-items:center!important;white-space:nowrap!important;font-weight:700!important;color:#4b2e83!important}
+.nav-referral-link:hover{color:#2448d8!important}
+.referral-associate{position:relative;overflow:hidden;background:linear-gradient(180deg,#fbfaff 0%,#f4f1fb 100%)!important}
+.referral-associate:before{content:"";position:absolute;width:520px;height:520px;right:-260px;top:40px;border-radius:50%;background:radial-gradient(circle,rgba(72,211,198,.13),transparent 68%);pointer-events:none}
+.referral-associate:after{content:"";position:absolute;width:420px;height:420px;left:-260px;bottom:-220px;border-radius:50%;background:radial-gradient(circle,rgba(75,46,131,.1),transparent 68%);pointer-events:none}
+.referral-associate>.container{position:relative;z-index:2}
+.referral-home-head{text-align:center;max-width:760px;margin:0 auto 42px}
+.referral-home-head .section-badge{display:inline-flex;align-items:center;gap:8px}
+.referral-home-head .section-title{margin-top:14px}
+.referral-home-card{display:grid;grid-template-columns:1.05fr .95fr;min-height:430px;border-radius:30px;overflow:hidden;background:linear-gradient(135deg,#1a0e38 0%,#33205f 52%,#075f68 100%);box-shadow:0 28px 70px rgba(45,27,79,.18);position:relative;color:#fff}
+.referral-home-card:after{content:"";position:absolute;right:-120px;top:-160px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 65%)}
+.referral-home-main{padding:54px 52px;position:relative;z-index:3}
+.referral-home-kicker{display:inline-flex;align-items:center;gap:8px;color:#f5c842;font-size:.75rem;font-weight:800;letter-spacing:1.5px}
+.referral-home-main h3{font-size:clamp(2rem,3.3vw,3.15rem);line-height:1.08;margin:14px 0 16px;color:#fff}
+.referral-home-main h3 span{background:linear-gradient(90deg,#48d3c6,#f5c842);-webkit-background-clip:text;background-clip:text;color:transparent}
+.referral-home-main p{max-width:600px;color:rgba(255,255,255,.82);font-size:1rem;line-height:1.8;margin-bottom:25px}
+.referral-home-actions{display:flex;flex-wrap:wrap;gap:12px}
+.referral-home-actions .btn{border-radius:999px}
+.referral-home-actions .btn-outline{border-color:rgba(255,255,255,.42);color:#fff;background:rgba(255,255,255,.04)}
+.referral-home-note{margin-top:24px;color:rgba(255,255,255,.58);font-size:.72rem}
+.referral-home-note i{color:#f5c842;margin-right:5px}
+.referral-home-visual{position:relative;min-height:430px;display:grid;place-items:center;overflow:hidden}
+.referral-orbit{position:absolute;border:1px solid rgba(255,255,255,.16);border-radius:50%}
+.referral-orbit-a{width:390px;height:390px}.referral-orbit-b{width:280px;height:280px;border-color:rgba(72,211,198,.24);transform:rotate(28deg)}
+.referral-network{width:250px;height:250px;position:relative}
+.network-center,.network-person{position:absolute;display:grid;place-items:center;border-radius:50%;color:#fff;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.network-center{width:78px;height:78px;left:86px;top:86px;background:linear-gradient(135deg,#48d3c6,#f5c842);color:#1b1238;font-size:1.6rem;z-index:2}
+.network-person{width:48px;height:48px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(8px);font-size:.9rem}
+.network-person:after{content:"";position:absolute;width:96px;height:1px;background:rgba(255,255,255,.25);transform-origin:left center;left:24px;top:24px;z-index:-1}
+.network-person.p1{left:18px;top:25px}.network-person.p2{right:12px;top:32px}.network-person.p3{left:4px;bottom:25px}.network-person.p4{right:2px;bottom:18px}
+.referral-earn-badge{position:absolute;right:45px;top:54px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(12px);padding:12px 16px;border-radius:17px;text-align:center;transform:rotate(4deg)}
+.referral-earn-badge strong{display:block;font-size:1.7rem;line-height:1;background:linear-gradient(90deg,#48d3c6,#f5c842);-webkit-background-clip:text;background-clip:text;color:transparent}
+.referral-earn-badge span{display:block;font-size:.62rem;color:rgba(255,255,255,.72);margin-top:4px}
+.referral-income-arrow{position:absolute;right:72px;bottom:55px;color:#f5c842;font-size:2.5rem;transform:rotate(-25deg)}
+.referral-home-bottom{margin-top:18px;display:grid;grid-template-columns:1.35fr 1fr;gap:18px}
+.referral-slab-strip,.referral-product-strip{background:#fff;border:1px solid rgba(75,46,131,.1);border-radius:22px;padding:18px;box-shadow:0 12px 35px rgba(49,35,91,.06)}
+.referral-slab-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.referral-slab{text-align:center;padding:12px 7px;border-radius:15px;background:#f5f2fb}
+.referral-slab span{display:block;font-size:.7rem;color:#777}.referral-slab strong{display:block;font-size:1.45rem;color:#4b2e83}.referral-slab small{color:#888;font-size:.65rem}
+.referral-product-strip{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.referral-product-strip span{display:inline-flex;align-items:center;gap:6px;padding:8px 10px;border-radius:12px;background:#f6f5fa;color:#4a4654;font-size:.68rem;font-weight:700}
+.referral-product-strip i{color:#4b2e83}
+@media(max-width:980px){.referral-home-card{grid-template-columns:1fr}.referral-home-visual{min-height:340px}.referral-home-bottom{grid-template-columns:1fr}.nav-referral-link{display:none!important}}
+@media(max-width:640px){.referral-home-main{padding:34px 24px}.referral-home-card{border-radius:22px}.referral-home-visual{min-height:310px}.referral-orbit-a{width:280px;height:280px}.referral-orbit-b{width:210px;height:210px}.network-center{left:86px;top:86px}.network-person.p1{left:0}.network-person.p2{right:0}.network-person.p3{left:0}.network-person.p4{right:0}.referral-earn-badge{right:15px;top:24px}.referral-income-arrow{right:28px;bottom:25px}.referral-slab-strip{grid-template-columns:repeat(2,1fr)}}
+</style>
 </head>
 <body>
 <div id="loader" class="loader-overlay"><div class="loader-content"><div class="loader-logo">Dhanvin <span>Assets</span></div><div class="loader-spinner"></div></div></div>
@@ -38,6 +84,7 @@
 <div class="nav-dropdown"><a href="services.html">Services <i class="fa-solid fa-chevron-down"></i></a><div class="nav-dropdown-menu">
 <a href="services/mutual-funds.html">Mutual Funds</a><a href="services/sip-planning.html">SIP Planning</a><a href="services/insurance.html">Insurance</a><a href="services/retirement-planning.html">Retirement Planning</a><a href="services/tax-saving.html">Tax Saving</a><a href="services/child-education-planning.html">Child Education</a><a href="services/wealth-management.html">Wealth Management</a><a href="services/portfolio-review.html">Portfolio Review</a>
 </div></div>
+<a class="nav-referral-link" href="referral-associate.html">Referral Associate</a>
 <div class="nav-dropdown"><a href="calculators.html">Calculators <i class="fa-solid fa-chevron-down"></i></a><div class="nav-dropdown-menu"><a href="calculators.html#sip">SIP Calculator</a><a href="calculators.html#emi">EMI Calculator</a><a href="calculators.html#retirement">Retirement Calculator</a><a href="calculators.html#education">Education Calculator</a><a href="calculators.html#goal">Goal Planner</a></div></div>
 <a href="market-insights.html">Market Insights</a><a href="blog.html">Resources</a><a href="contact.html">Contact</a>
 </div>
@@ -66,7 +113,57 @@
 
 <section class="journey section-padding"><div class="container"><div class="section-header" data-aos="fade-up"><span class="section-badge">Your Path</span><h2 class="section-title">Your <span class="gradient-text">Financial Journey</span></h2><p class="section-subtitle">Six simple steps to transform your financial life with Dhanvin Assets.</p></div><div class="timeline-horizontal" data-aos="fade-up"><div class="timeline-step"><div class="tl-dot">1</div><div class="tl-content"><i class="fa-solid fa-calendar-plus"></i><h4>Book Consultation</h4><p>Free 30-min session with our advisor.</p></div></div><div class="timeline-connector"></div><div class="timeline-step"><div class="tl-dot">2</div><div class="tl-content"><i class="fa-solid fa-file-waveform"></i><h4>Financial Assessment</h4><p>Analyze income, assets & liabilities.</p></div></div><div class="timeline-connector"></div><div class="timeline-step"><div class="tl-dot">3</div><div class="tl-content"><i class="fa-solid fa-map-location-dot"></i><h4>Goal Planning</h4><p>Define short, medium & long-term goals.</p></div></div><div class="timeline-connector"></div><div class="timeline-step"><div class="tl-dot">4</div><div class="tl-content"><i class="fa-solid fa-chess"></i><h4>Investment Strategy</h4><p>Craft a personalised multi-asset plan.</p></div></div><div class="timeline-connector"></div><div class="timeline-step"><div class="tl-dot">5</div><div class="tl-content"><i class="fa-solid fa-rotate"></i><h4>Regular Reviews</h4><p>Quarterly portfolio review & rebalancing.</p></div></div><div class="timeline-connector"></div><div class="timeline-step"><div class="tl-dot tl-dot-gold">6</div><div class="tl-content"><i class="fa-solid fa-trophy"></i><h4>Financial Freedom</h4><p>Achieve goals and live on your own terms.</p></div></div></div></div></section>
 
-<section class="referral-associate section-padding" id="referral-associate" data-section="referral-associate"><div class="container"><div class="section-header" data-aos="fade-up"><span class="section-badge">Referral Associate</span><h2 class="section-title">Grow Together With <span class="gradient-text">Dhanvin Assets</span></h2><p class="section-subtitle">Refer friends, family members and businesses who are looking for financial guidance, and build a meaningful professional association with us.</p></div><div class="referral-wrap" data-aos="fade-up"><div class="referral-copy"><div class="referral-icon"><i class="fa-solid fa-handshake"></i></div><h3>Become a Referral Associate</h3><p>Know someone who needs help with investments, insurance, tax planning or long-term financial goals? Introduce them to our team and be part of their financial journey.</p><a class="btn btn-primary" href="contact.html"><i class="fa-solid fa-user-plus"></i> Become a Referral Associate</a></div><div class="referral-benefits"><div class="referral-benefit"><i class="fa-solid fa-share-nodes"></i><div><strong>Refer</strong><span>Connect people who need financial guidance.</span></div></div><div class="referral-benefit"><i class="fa-solid fa-people-group"></i><div><strong>Connect</strong><span>Help your network access personalised advice.</span></div></div><div class="referral-benefit"><i class="fa-solid fa-chart-line"></i><div><strong>Grow Together</strong><span>Build a long-term professional association.</span></div></div></div></div></div></section>
+<section class="referral-associate section-padding" id="referral-associate" data-section="referral-associate">
+<div class="container">
+  <div class="referral-home-head" data-aos="fade-up">
+    <span class="section-badge"><i class="fa-solid fa-handshake"></i> Referral Associate Program</span>
+    <h2 class="section-title">Turn Your <span class="gradient-text">Network Into Income.</span></h2>
+    <p class="section-subtitle">Empower people around you to access financial solutions while building a meaningful professional association with Dhanvin Assets.</p>
+  </div>
+
+  <div class="referral-home-card" data-aos="fade-up">
+    <div class="referral-home-main">
+      <div class="referral-home-kicker"><i class="fa-solid fa-users"></i> GROW • REFER • EARN</div>
+      <h3>Become a <span>Referral Associate</span></h3>
+      <p>Know someone looking for investments, insurance, tax planning or long-term financial goals? Introduce them to our team and grow with every eligible referral.</p>
+      <div class="referral-home-actions">
+        <a class="btn btn-primary" href="referral-associate.html"><i class="fa-solid fa-arrow-right"></i> Explore Referral Program</a>
+        <a class="btn btn-outline" href="contact.html"><i class="fa-solid fa-user-plus"></i> Become a Referral Associate</a>
+      </div>
+      <div class="referral-home-note"><i class="fa-solid fa-shield-halved"></i> Program rates and eligibility are subject to current program terms.</div>
+    </div>
+
+    <div class="referral-home-visual">
+      <div class="referral-orbit referral-orbit-a"></div><div class="referral-orbit referral-orbit-b"></div>
+      <div class="referral-network">
+        <span class="network-person p1"><i class="fa-solid fa-user"></i></span>
+        <span class="network-person p2"><i class="fa-solid fa-user"></i></span>
+        <span class="network-person p3"><i class="fa-solid fa-user"></i></span>
+        <span class="network-person p4"><i class="fa-solid fa-user"></i></span>
+        <span class="network-center"><i class="fa-solid fa-handshake"></i></span>
+      </div>
+      <div class="referral-earn-badge"><strong>20%</strong><span>Program highlight</span></div>
+      <div class="referral-income-arrow"><i class="fa-solid fa-arrow-trend-up"></i></div>
+    </div>
+  </div>
+
+  <div class="referral-home-bottom" data-aos="fade-up">
+    <div class="referral-slab-strip">
+      <div class="referral-slab"><span>1–10</span><strong>10%</strong><small>Referrals</small></div>
+      <div class="referral-slab"><span>11–25</span><strong>20%</strong><small>Referrals</small></div>
+      <div class="referral-slab"><span>26–50</span><strong>30%</strong><small>Referrals</small></div>
+      <div class="referral-slab"><span>51+</span><strong>40%</strong><small>Referrals</small></div>
+    </div>
+    <div class="referral-product-strip">
+      <span><i class="fa-solid fa-chart-line"></i>PMS</span>
+      <span><i class="fa-solid fa-building"></i>AIF</span>
+      <span><i class="fa-solid fa-chart-column"></i>Mutual Funds</span>
+      <span><i class="fa-solid fa-shield-halved"></i>Insurance</span>
+      <span><i class="fa-solid fa-file-invoice-dollar"></i>Fixed Income</span>
+    </div>
+  </div>
+</div>
+</section>
 
 <section class="calculator-section section-padding" id="sip-calculator"><div class="container"><div class="section-header" data-aos="fade-up"><span class="section-badge">Calculator</span><h2 class="section-title">SIP <span class="gradient-text">Returns Calculator</span></h2><p class="section-subtitle">See how your investments can grow over time with the power of compounding.</p></div><div class="calc-wrapper" data-aos="fade-up"><div class="calc-inputs"><div class="calc-field"><label>Monthly Investment (₹)</label><div class="range-input-group"><input type="range" id="sip-amount" min="500" max="100000" step="500" value="5000"><input type="number" id="sip-amount-val" value="5000"></div></div><div class="calc-field"><label>Investment Duration (Years)</label><div class="range-input-group"><input type="range" id="sip-years" min="1" max="40" step="1" value="15"><input type="number" id="sip-years-val" value="15"></div></div><div class="calc-field"><label>Expected Annual Return (%)</label><div class="range-input-group"><input type="range" id="sip-rate" min="4" max="30" step="0.5" value="12"><input type="number" id="sip-rate-val" value="12" step="0.5"></div></div><div class="calc-results"><div class="result-item"><span class="result-label">Total Invested</span><span class="result-value manrope" id="total-invested">—</span></div><div class="result-item highlight"><span class="result-label">Expected Returns</span><span class="result-value manrope" id="expected-returns">—</span></div><div class="result-item total"><span class="result-label">Total Value</span><span class="result-value manrope" id="total-value">—</span></div></div><a href="contact.html" class="btn btn-primary btn-block">Start Your SIP Now <i class="fa-solid fa-arrow-right"></i></a></div><div class="calc-chart-wrap"><canvas id="sip-chart"></canvas></div></div></div></section>
 
