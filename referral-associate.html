@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Referral Associate Program | Dhanvin Assets Pvt Ltd">
+<title>Referral Associate Program | Dhanvin Assets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="css/video-reference.css">
+<link rel="stylesheet" href="css/site-pages.css">
+<style>
+.referral-page{overflow:hidden}
+.referral-hero{position:relative;background:linear-gradient(135deg,#15102f 0%,#24104f 52%,#0e5c66 100%);color:#fff;padding:92px 0 84px}
+.referral-hero:before{content:"";position:absolute;width:520px;height:520px;right:-180px;top:-210px;border-radius:50%;background:radial-gradient(circle,rgba(72,211,198,.28),transparent 68%)}
+.referral-hero:after{content:"";position:absolute;width:360px;height:360px;left:-180px;bottom:-210px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.18),transparent 70%)}
+.referral-hero .wrap{position:relative;z-index:1}
+.referral-breadcrumb{font-size:.78rem;text-transform:uppercase;letter-spacing:1.4px;color:rgba(255,255,255,.7);margin-bottom:1.25rem}
+.referral-breadcrumb a{color:rgba(255,255,255,.8)}
+.referral-kicker{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:.45rem .85rem;font-size:.76rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:1.2rem}
+.referral-kicker i{color:#f5c842}
+.referral-hero h1{font-size:clamp(2.3rem,5vw,4.4rem);line-height:1.02;max-width:780px;margin:0 0 1.25rem}
+.referral-hero h1 span{background:linear-gradient(90deg,#48d3c6,#f5c842);-webkit-background-clip:text;background-clip:text;color:transparent}
+.referral-hero p{max-width:680px;color:rgba(255,255,255,.86);font-size:1.08rem;line-height:1.8;margin:0 0 2rem}
+.referral-hero-actions{display:flex;flex-wrap:wrap;gap:.85rem}
+.referral-hero .btn.primary{background:linear-gradient(135deg,#48d3c6,#f5c842);color:#17112e;border:0}
+.referral-hero .btn.secondary{border:1px solid rgba(255,255,255,.4);color:#fff;background:rgba(255,255,255,.06)}
+.referral-visual{margin-top:3rem;display:grid;grid-template-columns:1.15fr .85fr;gap:1rem}
+.referral-visual-card{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);backdrop-filter:blur(14px);border-radius:22px;padding:1.35rem}
+.referral-visual-card h3{margin:0 0 .9rem;font-size:1rem}
+.referral-product-row{display:grid;grid-template-columns:repeat(5,1fr);gap:.55rem}
+.referral-product{padding:.85rem .45rem;border-radius:14px;background:rgba(255,255,255,.09);text-align:center;font-size:.72rem;color:rgba(255,255,255,.85)}
+.referral-product i{display:block;font-size:1.25rem;color:#f5c842;margin-bottom:.4rem}
+.referral-stat{display:flex;align-items:end;justify-content:space-between;gap:1rem}
+.referral-stat strong{font-size:3rem;line-height:1;background:linear-gradient(90deg,#48d3c6,#f5c842);-webkit-background-clip:text;background-clip:text;color:transparent}
+.referral-stat span{font-size:.82rem;color:rgba(255,255,255,.7);line-height:1.4}
+.referral-section{padding:78px 0}
+.referral-section.soft{background:var(--soft-bg,#f7f5fb)}
+.referral-head{text-align:center;max-width:720px;margin:0 auto 3rem}
+.referral-head .kicker{color:var(--primary);font-size:.76rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}
+.referral-head h2{font-size:clamp(1.8rem,3vw,2.65rem);margin:.6rem 0 .8rem}
+.referral-head h2 span{color:var(--primary)}
+.referral-head p{color:var(--text-secondary,#666);line-height:1.75;margin:0}
+.referral-tier-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.referral-tier{background:var(--card-bg,#fff);border:1px solid rgba(75,46,131,.12);border-radius:20px;padding:1.5rem;text-align:center;box-shadow:0 12px 30px rgba(35,20,75,.07);position:relative;overflow:hidden}
+.referral-tier:before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#4b2e83,#48d3c6,#d4af37)}
+.referral-tier i{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;background:rgba(75,46,131,.08);color:var(--primary);font-size:1.25rem}
+.referral-tier strong{display:block;font-size:2rem;color:var(--primary);margin:.35rem 0}
+.referral-tier h3{font-size:1rem;margin:0}
+.referral-tier p{font-size:.8rem;color:var(--text-secondary,#666);margin:.4rem 0 0}
+.referral-two{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.referral-panel{background:var(--card-bg,#fff);border:1px solid rgba(75,46,131,.12);border-radius:22px;padding:2rem;box-shadow:0 12px 30px rgba(35,20,75,.07)}
+.referral-panel h3{margin:0 0 1.1rem;font-size:1.25rem}
+.referral-panel h3 i{color:var(--primary);margin-right:.45rem}
+.referral-checks{display:grid;gap:.75rem}
+.referral-check{display:flex;gap:.7rem;align-items:flex-start;padding:.75rem .8rem;border-radius:13px;background:rgba(75,46,131,.045)}
+.referral-check i{color:#c89f20;margin-top:.2rem}
+.referral-check strong{display:block;font-size:.92rem}
+.referral-check span{display:block;color:var(--text-secondary,#666);font-size:.8rem;line-height:1.5;margin-top:.15rem}
+.referral-product-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.7rem}
+.referral-product-light{border:1px solid rgba(75,46,131,.12);border-radius:15px;padding:1rem .5rem;text-align:center}
+.referral-product-light i{display:block;color:var(--primary);font-size:1.25rem;margin-bottom:.5rem}
+.referral-product-light span{font-size:.75rem;font-weight:700;color:var(--text-primary,#222)}
+.referral-note{margin-top:1rem;font-size:.76rem;color:var(--text-muted,#777);line-height:1.6}
+.referral-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.referral-step{background:var(--card-bg,#fff);border:1px solid rgba(75,46,131,.12);border-radius:20px;padding:1.6rem}
+.referral-step-num{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#4b2e83,#2448d8);color:#fff;font-weight:800;margin-bottom:1rem}
+.referral-step h3{font-size:1rem;margin-bottom:.45rem}
+.referral-step p{font-size:.86rem;color:var(--text-secondary,#666);line-height:1.65;margin:0}
+.referral-cta{background:linear-gradient(135deg,#1b1238,#284d72 60%,#0f6f70);color:#fff;text-align:center;border-radius:28px;padding:3.2rem 1.5rem;position:relative;overflow:hidden}
+.referral-cta:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;right:-130px;top:-170px;background:rgba(245,200,66,.15)}
+.referral-cta>*{position:relative;z-index:1}
+.referral-cta h2{font-size:clamp(1.8rem,3vw,2.6rem);margin:0 0 .7rem}
+.referral-cta p{color:rgba(255,255,255,.8);max-width:650px;margin:0 auto 1.5rem;line-height:1.7}
+.referral-cta .btn{background:linear-gradient(135deg,#48d3c6,#f5c842);color:#17112e;border:0}
+@media(max-width:900px){
+.referral-tier-grid{grid-template-columns:repeat(2,1fr)}
+.referral-two,.referral-visual{grid-template-columns:1fr}
+.referral-product-grid{grid-template-columns:repeat(5,1fr)}
+}
+@media(max-width:640px){
+.referral-hero{padding:70px 0 60px}
+.referral-section{padding:58px 0}
+.referral-tier-grid,.referral-steps{grid-template-columns:1fr}
+.referral-product-row,.referral-product-grid{grid-template-columns:repeat(2,1fr)}
+.referral-stat strong{font-size:2.4rem}
+.referral-panel{padding:1.35rem}
+}
+</style>
+</head>
+<body class="referral-page">
+<div class="ticker"><div class="ticker-track"><div class="tick">↗ NIFTY 50 <b>24,832</b> <span class="up">+1.12%</span></div><div class="tick">↗ SENSEX <b>81,455</b> <span class="up">+0.95%</span></div><div class="tick">↗ GOLD <b>₹71,240/10g</b> <span class="up">+0.45%</span></div><div class="tick">↗ USD/INR <b>83.42</b> <span class="up">+0.12%</span></div></div></div>
+<nav class="site-nav">
+<a class="brand" href="index.html"><img src="assets/dhanvin-logo-exact.svg" alt="Dhanvin Assets Pvt Ltd"></a>
+<div class="navlinks"><a href="index.html">Home</a><a href="about.html">About Us</a><a href="services.html">Services</a><a class="active" href="referral-associate.html">Referral Associate</a><a href="calculators.html">Calculators</a><a href="market-insights.html">Market Insights</a><a href="blog.html">Resources</a><a href="contact.html">Contact</a></div>
+<div class="nav-actions"><button class="theme" onclick="document.body.classList.toggle('night')" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button><a class="consult" href="contact.html#booking">Book Consultation</a></div>
+<button class="hamb" onclick="document.getElementById('drawer').classList.add('open')" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+</nav>
+<div class="drawer" id="drawer"><button class="close" onclick="this.parentElement.classList.remove('open')">×</button><a href="index.html">Home</a><a href="about.html">About Us</a><a href="services.html">Services</a><a class="active" href="referral-associate.html">Referral Associate</a><a href="calculators.html">Calculators</a><a href="market-insights.html">Market Insights</a><a href="blog.html">Resources</a><a href="contact.html">Contact</a></div>
+
+<main>
+<section class="referral-hero">
+<div class="wrap">
+<div class="referral-breadcrumb"><a href="index.html">Home</a> / Referral Associate</div>
+<div class="referral-kicker"><i class="fa-solid fa-handshake"></i> Referral Associate Program</div>
+<h1>Turn Your <span>Network Into Income.</span></h1>
+<p>Empower others to grow financially and participate in the Referral Associate Program with Dhanvin Assets.</p>
+<div class="referral-hero-actions"><a class="btn primary" href="contact.html#booking"><i class="fa-solid fa-user-plus"></i> Become a Referral Associate</a><a class="btn secondary" href="#commission"><i class="fa-solid fa-arrow-down"></i> View Referral Structure</a></div>
+<div class="referral-visual">
+<div class="referral-visual-card"><h3>Earn 20% Across Every Product</h3><div class="referral-product-row">
+<div class="referral-product"><i class="fa-solid fa-chart-line"></i>PMS</div>
+<div class="referral-product"><i class="fa-solid fa-building"></i>AIF</div>
+<div class="referral-product"><i class="fa-solid fa-chart-column"></i>Mutual Funds</div>
+<div class="referral-product"><i class="fa-solid fa-shield-halved"></i>Insurance</div>
+<div class="referral-product"><i class="fa-solid fa-file-invoice-dollar"></i>Fixed Income</div>
+</div></div>
+<div class="referral-visual-card referral-stat"><div><strong>20%</strong><span>Program highlight<br>shown in the provided creative</span></div><i class="fa-solid fa-coins" style="font-size:2.2rem;color:#f5c842"></i></div>
+</div>
+</div>
+</section>
+
+<section class="referral-section" id="commission">
+<div class="wrap">
+<div class="referral-head"><div class="kicker">Grow &amp; Earn More</div><h2>Referral <span>Commission Structure</span></h2><p>The referral slabs below reproduce the structure shown in the promotional creative you provided.</p></div>
+<div class="referral-tier-grid">
+<div class="referral-tier"><i class="fa-solid fa-user"></i><h3>1–10 Referrals</h3><strong>10%</strong><p>Referral slab shown in creative</p></div>
+<div class="referral-tier"><i class="fa-solid fa-users"></i><h3>11–25 Referrals</h3><strong>20%</strong><p>Referral slab shown in creative</p></div>
+<div class="referral-tier"><i class="fa-solid fa-user-group"></i><h3>26–50 Referrals</h3><strong>30%</strong><p>Referral slab shown in creative</p></div>
+<div class="referral-tier"><i class="fa-solid fa-people-group"></i><h3>51+ Referrals</h3><strong>40%</strong><p>Referral slab shown in creative</p></div>
+</div>
+</div>
+</section>
+
+<section class="referral-section soft">
+<div class="wrap">
+<div class="referral-two">
+<div class="referral-panel">
+<h3><i class="fa-solid fa-circle-check"></i> Program Highlights</h3>
+<div class="referral-checks">
+<div class="referral-check"><i class="fa-solid fa-coins"></i><div><strong>Flat 20% Commission</strong><span>Highlighted in the supplied promotional creative.</span></div></div>
+<div class="referral-check"><i class="fa-solid fa-layer-group"></i><div><strong>Multiple Products</strong><span>Products shown include PMS, AIF, Mutual Funds, Insurance and Fixed Income.</span></div></div>
+<div class="referral-check"><i class="fa-solid fa-infinity"></i><div><strong>Unlimited Earning Potential</strong><span>Presented as a program highlight in the supplied creative.</span></div></div>
+</div>
+</div>
+<div class="referral-panel">
+<h3><i class="fa-solid fa-briefcase"></i> Products Featured</h3>
+<div class="referral-product-grid">
+<div class="referral-product-light"><i class="fa-solid fa-chart-line"></i><span>PMS</span></div>
+<div class="referral-product-light"><i class="fa-solid fa-building"></i><span>AIF</span></div>
+<div class="referral-product-light"><i class="fa-solid fa-chart-column"></i><span>Mutual Funds</span></div>
+<div class="referral-product-light"><i class="fa-solid fa-shield-halved"></i><span>Insurance</span></div>
+<div class="referral-product-light"><i class="fa-solid fa-file-invoice-dollar"></i><span>Fixed Income</span></div>
+</div>
+<p class="referral-note">Commission language and rates are reproduced from the supplied creative. Final eligibility, payout calculations, product applicability and program terms should be confirmed with Dhanvin Assets before participation.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="referral-section">
+<div class="wrap">
+<div class="referral-head"><div class="kicker">How It Works</div><h2>Refer. <span>Connect. Grow.</span></h2><p>A simple three-step flow for introducing people in your network to Dhanvin Assets.</p></div>
+<div class="referral-steps">
+<div class="referral-step"><div class="referral-step-num">01</div><h3>Refer</h3><p>Identify people in your network who are looking for financial products or guidance.</p></div>
+<div class="referral-step"><div class="referral-step-num">02</div><h3>Connect</h3><p>Introduce the prospect to the Dhanvin Assets team for the relevant product conversation.</p></div>
+<div class="referral-step"><div class="referral-step-num">03</div><h3>Grow Together</h3><p>Continue building your professional association through eligible referrals.</p></div>
+</div>
+</div>
+</section>
+
+<section class="referral-section soft">
+<div class="wrap">
+<div class="referral-cta">
+<h2>Start Earning Today!</h2>
+<p>Interested in becoming a Referral Associate? Contact the Dhanvin Assets team to discuss the program and participation terms.</p>
+<a class="btn" href="contact.html#booking"><i class="fa-solid fa-phone"></i> Contact Us</a>
+<p style="font-size:.78rem;margin-top:1.2rem;margin-bottom:0">9320114510 · www.dhanvinassets.com</p>
+</div>
+</div>
+</section>
+
+<section class="section" style="padding-top:0">
+<div class="wrap">
+<div class="disclaimer-card" style="max-width:1050px;margin:0 auto">
+<h3 style="margin-top:0">Important Information</h3>
+<p style="line-height:1.75;color:#555">The referral rates, product list, earning language and registration details displayed here are based on the promotional creative supplied for this page. They are not independently verified by this website build. Please confirm current program terms, eligibility, applicable regulations and payout conditions directly with Dhanvin Assets before relying on them.</p>
+<div class="contact-rows" style="margin-top:18px">
+<div class="contact-row"><i class="fa-solid fa-file-signature"></i><span>NSE Registration Number shown in creative: <strong>AP0297597003</strong></span></div>
+<div class="contact-row"><i class="fa-solid fa-file-signature"></i><span>BSE Registration Number shown in creative: <strong>AP01044601169816</strong></span></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="footer"><div class="wrap footergrid"><div><img src="assets/dhanvin-logo-exact.svg" class="footerlogo" alt="Dhanvin Assets"><p>Personalized financial planning for long-term wealth creation.</p></div><div><h4>Company</h4><a href="about.html">About Us</a><a href="services.html">Services</a><a href="referral-associate.html">Referral Associate</a><a href="contact.html">Contact</a></div><div><h4>Resources</h4><a href="calculators.html">Calculators</a><a href="market-insights.html">Market Insights</a><a href="blog.html">Resources</a></div><div><h4>Support</h4><a href="faq.html">FAQ</a><a href="contact.html#booking">Consultation</a></div></div><div class="footer-bottom">© 2026 Dhanvin Assets Pvt Ltd. All rights reserved.</div></footer>
+<a class="wa" href="https://wa.me/919320114510" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+</body>
+</html>
