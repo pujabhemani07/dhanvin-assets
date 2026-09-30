@@ -27,9 +27,9 @@ jobs:
 
           # Requested homepage hero/stat values.
           s = s.replace('data-count="10">0</span><span class="stat-suffix">Cr+', 'data-count="1">0</span><span class="stat-suffix">Cr+')
-          s = s.replace('data-count="1000">0</span><span class="stat-suffix">+', 'data-count="60">0</span><span class="stat-suffix">k+')
-          s = s.replace('<strong>₹10 Cr+</strong><span>Assets Guided</span>', '<strong>₹1 Cr+</strong><span>Assets Guided</span>')
-          s = s.replace('<strong>1000+</strong><span>Happy Families</span>', '<strong>60k+</strong><span>Happy Families</span>')
+          s = s.replace('data-count="500">0</span><span class="stat-suffix">+', 'data-count="60">0</span><span class="stat-suffix">k+')
+          s = s.replace('<strong>₹1 Cr+</strong><span>AUM</span>', '<strong>₹1 Cr+</strong><span>Assets Guided</span>')
+          s = s.replace('<strong>500+</strong><span>Happy Families</span>', '<strong>60k+</strong><span>Happy Families</span>')
 
           # Hero CTA.
           s = s.replace('> Book Free Consultation</a><a href="#services" class="btn btn-outline btn-lg">Explore Services', '> Start Planning Today</a><a href="#services" class="btn btn-outline btn-lg">Explore Services')
@@ -41,12 +41,8 @@ jobs:
           s = re.sub(r'<a href="#"><i class="fa-brands fa-youtube"></i></a>', '', s, flags=re.I)
           s = re.sub(r'<a href="#"><i class="fa-brands fa-linkedin-in"></i></a>', '', s, flags=re.I)
 
-          # Ensure the requested Contact Us details are present one per line.
-          s = re.sub(
-              r'<div class="footer-col"><h4>Contact Us</h4>.*?</div>',
-              '<div class="footer-col"><h4>Contact Us</h4><a href="mailto:dhanvinassetspvtltd@gmail.com">dhanvinassetspvtltd@gmail.com</a><a href="tel:+919320114510">9320114510</a><a href="tel:+919920082826">9920082826</a><a href="tel:+919823626992">9823626992</a></div>',
-              s, count=1, flags=re.I|re.S
-          )
+          # Footer HTML/contact details are owned by worker/index.js.
+          # Do not rewrite footer markup here; this avoids reintroducing stale footer structure or email values.
 
           # Ensure the floating WhatsApp button uses 9920082826.
           s = s.replace('https://wa.me/919999999999', 'https://wa.me/919920082826')
