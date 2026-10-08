@@ -1,3 +1,4 @@
+const PREMIUM_V='2026-10-08a';
 const GLOBAL_CONTACT_FIX_JS = `
 document.querySelectorAll('a[href^="mailto:"],a[href*="wa.me"],a[href^="tel:"]').forEach(a=>{
   const h=(a.getAttribute('href')||'').toLowerCase();
@@ -251,7 +252,7 @@ const FOOTER_HTML = `
 <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="/">Home</a></li><li><a href="/about.html">About Us</a></li><li><a href="/referral-associate.html">Referral Associate</a></li><li><a href="/calculators.html">Calculators</a></li><li><a href="/market-insights.html">Market Insights</a></li><li><a href="/blog.html">Blog &amp; Resources</a></li><li><a href="/faq.html">FAQs</a></li><li><a href="/contact.html">Contact Us</a></li></ul></div>
 <div class="footer-col"><h4>Our Services</h4><ul><li><a href="/services/mutual-funds.html">Mutual Funds</a></li><li><a href="/services/sip-planning.html">SIP Planning</a></li><li><a href="/services/insurance.html">Insurance</a></li><li><a href="/services/retirement-planning.html">Retirement Planning</a></li><li><a href="/services/tax-saving.html">Tax Saving</a></li><li><a href="/services/child-education-planning.html">Child Education</a></li><li><a href="/services/wealth-management.html">Wealth Management</a></li><li><a href="/services/portfolio-review.html">Portfolio Review</a></li></ul></div>
 <div class="footer-col footer-contact-col"><h4>Contact Us</h4><ul class="footer-contact"><li><i class="fa-solid fa-envelope"></i><a href="mailto:info@dhanvinassets.com">info@dhanvinassets.com</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919320114510">9320114510</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919920082826">9920082826</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919823626992">9823626992</a></li></ul></div>
-</div><div class="footer-bottom"><p class="footer-disclaimer"><strong>Disclaimer:</strong> Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Past performance is not indicative of future returns.</p><div class="footer-legal"><span>© 2025 Dhanvin Assets. All rights reserved.</span><a href="/disclaimer.html">Privacy Policy</a><a href="/disclaimer.html">Terms of Use</a></div></div></div>`;
+</div><div class="footer-bottom"><p class="footer-disclaimer"><strong>Disclaimer:</strong> Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Past performance is not indicative of future returns.</p><div class="footer-regulatory" role="group" aria-label="Regulatory information"><div class="fr-main"><strong class="fr-name">DHANVIN ASSETS PVT LTD</strong><span class="fr-line">AMFI-registered Mutual Fund Distributor</span><span class="fr-arn"><b>ARN-307259</b><i>Validity: 29-AUG-2027</i></span></div><div class="fr-ids"><span><em>NSE Registration No.</em>AP0297597003</span><span><em>BSE Registration No.</em>AP01044601169816</span></div></div><div class="footer-legal"><span>© 2025 Dhanvin Assets. All rights reserved.</span><a href="/disclaimer.html">Privacy Policy</a><a href="/disclaimer.html">Terms of Use</a></div></div></div>`;
 const HOME_UPDATE_JS = `
 (function(){
  const phone='919920082826';
@@ -280,19 +281,19 @@ export default {async fetch(request,env){
  const isHomepage=url.pathname==='/'||url.pathname==='/index.html';
  if(!contentType.includes('text/html'))return response;
  return new HTMLRewriter()
-  .on('head',{element(element){element.append(`<style id="dhanvin-reference-video">${BRAND_CSS}</style>`,{html:true});if(url.pathname.startsWith("/services/")&&!url.pathname.endsWith("/mutual-funds.html"))element.append(`<link rel="stylesheet" href="/css/service-theme.css">`,{html:true});element.append(`<link rel="stylesheet" href="/css/video-reference.css">`,{html:true});element.append(``,{html:true})}})
+  .on('head',{element(element){element.append(`<style id="dhanvin-reference-video">${BRAND_CSS}</style>`,{html:true});if(url.pathname.startsWith("/services/")&&!url.pathname.endsWith("/mutual-funds.html"))element.append(`<link rel="stylesheet" href="/css/service-theme.css">`,{html:true});element.append(`<link rel="stylesheet" href="/css/video-reference.css">`,{html:true});element.append(`<link rel="stylesheet" href="/css/premium.css?v=${PREMIUM_V}">`,{html:true})}})
                 .on('footer.footer',{element(element){element.setInnerContent(FOOTER_HTML,{html:true})}})
   .on('body',{element(element){
     if(url.pathname.startsWith("/services/")&&!url.pathname.endsWith("/mutual-funds.html"))element.setAttribute("class",(element.getAttribute("class")||"")+" service-page-theme");
     const homepageScript=isHomepage?`<script id="dhanvin-home-update-js">${HOME_UPDATE_JS}</script>`:"";
-    element.append(homepageScript+`<script id="dhanvin-reference-video-js">${BRAND_JS}</script><script id="dhanvin-global-contact-fix">${GLOBAL_CONTACT_FIX_JS}</script>`,{html:true});
+    element.append(homepageScript+`<script id="dhanvin-reference-video-js">${BRAND_JS}</script><script id="dhanvin-global-contact-fix">${GLOBAL_CONTACT_FIX_JS}</script><script src="/js/premium.js?v=${PREMIUM_V}" defer></script>`,{html:true});
   }})
   .transform(response);
   const headers=new Headers(transformed.headers);
   if(isHomepage){
     headers.set('Cache-Control','no-store, no-cache, must-revalidate, max-age=0');
     headers.set('Pragma','no-cache');
-    headers.set('X-Dhanvin-Build','2026-09-30-single-authoritative-footer-v1');
+    headers.set('X-Dhanvin-Build','2026-10-08-premium-v1');
   }
   return new Response(transformed.body,{status:transformed.status,statusText:transformed.statusText,headers});
 }};
