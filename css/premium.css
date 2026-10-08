@@ -174,3 +174,6 @@ input:focus,textarea:focus,select:focus{box-shadow:0 0 0 3px rgba(36,72,216,.18)
   @keyframes pfTickFlash{0%{background:rgba(72,211,198,.35)}100%{background:transparent}}
 }
 @media(max-width:640px){.ticker-status{padding-left:28px;font-size:9px}}
+.ticker .tick{padding:0 18px;white-space:nowrap}
+.ticker .tick.tick-flash{animation:pfTickFlash 1.2s ease-out}
+.ticker .ticker-msg{opacity:.8;font-style:italic}

@@ -1,0 +1,48 @@
+/* Market Insights — live dashboard. Brand tokens only (--p purple, --b blue, --g gold) from video-reference.css */
+.ml{padding-top:10px}
+.ml .head p.ml-sub{color:var(--muted,#697083);max-width:720px;margin:10px 0 0;font-size:.95rem}
+.ml-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:26px}
+.ml-card{background:#fff;border:1px solid var(--line,#e7e3ef);border-radius:22px;box-shadow:var(--shadow,0 18px 45px rgba(50,35,95,.09));
+  padding:22px 22px 14px;min-width:0;position:relative;overflow:hidden}
+.ml-card::before{content:"";position:absolute;left:0;top:0;right:0;height:4px;background:linear-gradient(90deg,var(--p,#4b2e83),var(--b,#2448d8))}
+.ml-card.wide{grid-column:1/-1}
+.ml-card header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}
+.ml-card h3{margin:0;font:700 1.05rem/1.25 Poppins,Inter,sans-serif;color:var(--ink,#181522)}
+.ml-stamp{font-size:.7rem;color:var(--muted,#697083);white-space:nowrap;padding-top:4px}
+.ml-stamp.stale{color:var(--g,#d4af37)}
+.ml-tabs{display:flex;gap:8px;overflow-x:auto;padding:2px 0 12px;scrollbar-width:none}
+.ml-tabs::-webkit-scrollbar{display:none}
+.ml-tabs button{flex:0 0 auto;border:1px solid var(--line,#e7e3ef);background:var(--bg,#f8f8fd);color:var(--ink,#181522);
+  font:600 .76rem/1 Inter,sans-serif;padding:8px 14px;border-radius:999px;cursor:pointer;transition:all .25s ease}
+.ml-tabs button:hover{border-color:var(--b,#2448d8)}
+.ml-tabs button.on{background:var(--p,#4b2e83);border-color:var(--p,#4b2e83);color:#fff}
+.ml-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:12px;padding:11px 2px;border-top:1px solid var(--line,#e7e3ef)}
+.ml-row:first-child{border-top:0}
+.ml-id{min-width:0}
+.ml-id b{display:block;font:700 .88rem/1.2 Poppins,Inter,sans-serif;color:var(--ink,#181522)}
+.ml-id small{display:block;color:var(--muted,#697083);font-size:.72rem;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ml-px{font:600 .88rem/1 Inter,sans-serif;color:var(--ink,#181522);text-align:right;font-variant-numeric:tabular-nums}
+.ml-chip{min-width:70px;text-align:center;padding:6px 8px;border-radius:999px;font:700 .74rem/1 Inter,sans-serif;font-variant-numeric:tabular-nums}
+.ml-up{background:rgba(53,219,138,.16);color:#0a7d4d}
+.ml-down{background:rgba(255,104,112,.16);color:#c0262f}
+.ml-flat{background:var(--bg,#f8f8fd);color:var(--muted,#697083)}
+.ml-lvl{font-size:.72rem;color:var(--muted,#697083);text-align:right}
+.ml-lvl b{display:block;color:var(--ink,#181522);font-size:.8rem}
+.ml-fhead,.ml-frow{display:grid;grid-template-columns:minmax(0,2.4fr) repeat(4,minmax(64px,1fr));gap:10px;align-items:center}
+.ml-fhead{font:700 .66rem/1 Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#697083);padding:6px 2px 8px}
+.ml-fhead span:not(:first-child),.ml-frow>span:not(:first-child){text-align:right}
+.ml-frow{padding:11px 2px;border-top:1px solid var(--line,#e7e3ef);font-size:.82rem;font-variant-numeric:tabular-nums}
+.ml-frow .ml-id b{font-size:.84rem;white-space:normal}
+.ml-frow .ml-id small{white-space:normal}
+.ml-empty,.ml-msg{padding:26px 6px;text-align:center;color:var(--muted,#697083);font-size:.86rem}
+.ml-skel{height:44px;margin:8px 0;border-radius:12px;background:linear-gradient(90deg,var(--bg,#f8f8fd) 25%,#eeeaf7 50%,var(--bg,#f8f8fd) 75%);background-size:200% 100%;animation:mlSh 1.3s infinite linear}
+@keyframes mlSh{to{background-position:-200% 0}}
+.ml-disclaimer{margin:20px 0 0;padding:14px 18px;border-radius:14px;background:var(--bg,#f8f8fd);border:1px solid var(--line,#e7e3ef);
+  border-left:4px solid var(--g,#d4af37);color:var(--muted,#697083);font-size:.76rem;line-height:1.6}
+@media(max-width:900px){.ml-grid{grid-template-columns:1fr}}
+@media(max-width:620px){
+  .ml-card{padding:18px 16px 10px;border-radius:18px}
+  .ml-fhead span:nth-child(5),.ml-frow>span:nth-child(5){display:none}
+  .ml-fhead,.ml-frow{grid-template-columns:minmax(0,2fr) repeat(3,minmax(54px,1fr))}
+}
+@media (prefers-reduced-motion:reduce){.ml-skel{animation:none}}

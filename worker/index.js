@@ -317,9 +317,68 @@ async function handleTicker(request,ctx){
  return out;
 }
 
+
+/* ===== Market Insights data (IndianAPI) — /api/market?section=trending|active|highlow|funds =====
+   The API key lives ONLY here as a Cloudflare secret (INDIANAPI_KEY); it is never sent to the browser.
+   Responses are cached (short during market hours, long otherwise) to protect the plan's credits,
+   and the last good copy is served if the provider is down or rate-limited. */
+const MI_SECTIONS={
+ trending:{path:'/trending',ttl:300},
+ active:{path:'/NSE_most_active',ttl:300},
+ highlow:{path:'/fetch_52_week_high_low_data',ttl:900},
+ funds:{path:'/mutual_funds',ttl:3600}
+};
+function miJson(obj,status,cc){return new Response(JSON.stringify(obj),{status:status||200,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':cc||'no-store','X-Robots-Tag':'noindex'}});}
+function miMarketHours(){const d=new Date(Date.now()+19800000),day=d.getUTCDay(),m=d.getUTCHours()*60+d.getUTCMinutes();return day>=1&&day<=5&&m>=545&&m<=960;}
+function miNum(v){const n=typeof v==='number'?v:parseFloat(String(v==null?'':v).replace(/[^0-9.\-]/g,''));return isFinite(n)?n:null;}
+function miSym(t){return String(t||'').replace(/\.(NS|BO|BSE|NSE)$/i,'');}
+function miList(a){return Array.isArray(a)?a:[];}
+const MI_NORM={
+ trending(j){const t=(j&&j.trending_stocks)||{};
+  const m=a=>miList(a).slice(0,5).map(x=>({symbol:miSym(x.ticker_id),name:x.company_name||'',price:miNum(x.price),pct:miNum(x.percent_change),chg:miNum(x.net_change)})).filter(x=>x.symbol&&x.price!==null);
+  return {gainers:m(t.top_gainers),losers:m(t.top_losers)};},
+ active(j){const a=Array.isArray(j)?j:miList(j&&(j.data||j.stocks));
+  return {stocks:a.slice(0,10).map(x=>({symbol:miSym(x.ticker),name:x.company||'',price:miNum(x.price),pct:miNum(x.percent_change),chg:miNum(x.net_change),vol:miNum(x.volume)})).filter(x=>x.symbol&&x.price!==null)};},
+ highlow(j){const n=(j&&j.NSE_52WeekHighLow)||{};
+  const m=(a,k)=>miList(a).slice(0,8).map(x=>({symbol:miSym(x.ticker),name:x.company||'',price:miNum(x.price),level:miNum(x[k])})).filter(x=>x.symbol&&x.price!==null);
+  return {high:m(n.high52Week,'52_week_high'),low:m(n.low52Week,'52_week_low')};},
+ funds(j){const cats=[];
+  Object.keys(j||{}).forEach(g=>{const v=j[g];
+   const add=(name,arr)=>{const funds=miList(arr).map(f=>({name:f.fund_name||'',nav:miNum(f.latest_nav),pct:miNum(f.percentage_change),asset:miNum(f.asset_size),r1y:miNum(f['1_year_return']),r3y:miNum(f['3_year_return']),r5y:miNum(f['5_year_return']),rating:miNum(f.star_rating)})).filter(f=>f.name&&f.nav!==null);
+    // neutral ordering: largest schemes by AUM (not by past return)
+    funds.sort((a,b)=>(b.asset||0)-(a.asset||0)); if(funds.length) cats.push({group:g,name:name,funds:funds.slice(0,6)});};
+   if(Array.isArray(v)) add(g,v); else if(v&&typeof v==='object') Object.keys(v).forEach(c=>add(c,v[c]));});
+  return {categories:cats.slice(0,10)};}
+};
+async function handleMarket(request,env,ctx){
+ const sec=new URL(request.url).searchParams.get('section'), def=MI_SECTIONS[sec];
+ if(!def) return miJson({error:'bad_section'},400);
+ if(!env.INDIANAPI_KEY) return miJson({error:'not_configured'},503);
+ const ttl=miMarketHours()?def.ttl:21600;
+ const ck=new Request('https://cache.local/market/'+sec), sk=new Request('https://cache.local/market-stale/'+sec);
+ const hit=await caches.default.match(ck); if(hit) return hit;
+ try{
+  const base=String(env.INDIANAPI_BASE||'https://stock.indianapi.in').replace(/\/+$/,'');
+  const hdr=env.INDIANAPI_HEADER||'X-Api-Key';
+  const r=await fetch(base+def.path,{headers:{[hdr]:env.INDIANAPI_KEY,'Accept':'application/json'}});
+  if(r.status===401||r.status===403){const e=new Error('auth');e.code='upstream_auth';throw e;}
+  if(r.status===429){const e=new Error('rate');e.code='rate_limited';throw e;}
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  const body={section:sec,updated:new Date().toISOString(),source:'IndianAPI',data:MI_NORM[sec](await r.json())};
+  const fresh=miJson(body,200,'public, max-age='+ttl), stale=miJson(body,200,'public, max-age=86400');
+  ctx.waitUntil(Promise.all([caches.default.put(ck,fresh.clone()),caches.default.put(sk,stale)]));
+  return fresh;
+ }catch(e){
+  const st=await caches.default.match(sk);
+  if(st){const b=await st.json();b.stale=true;return miJson(b,200,'public, max-age=60');}
+  return miJson({error:e.code||'unavailable'},502);
+ }
+}
+
 export default {async fetch(request,env,ctx){
  const url=new URL(request.url);
  if(url.pathname==='/api/ticker') return handleTicker(request,ctx);
+ if(url.pathname==='/api/market') return handleMarket(request,env,ctx);
  const response=await env.ASSETS.fetch(request);
  const contentType=response.headers.get('content-type')||'';
  const isHomepage=url.pathname==='/'||url.pathname==='/index.html';
@@ -337,7 +396,7 @@ export default {async fetch(request,env,ctx){
   if(isHomepage){
     headers.set('Cache-Control','no-store, no-cache, must-revalidate, max-age=0');
     headers.set('Pragma','no-cache');
-    headers.set('X-Dhanvin-Build','2026-10-09-live-ticker-v1');
+    headers.set('X-Dhanvin-Build','2026-10-09-market-insights-v1');
   }
   return new Response(transformed.body,{status:transformed.status,statusText:transformed.statusText,headers});
 }};
