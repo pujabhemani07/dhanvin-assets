@@ -13,7 +13,7 @@ html{scrollbar-width:thin;scrollbar-color:#4B2E83 transparent}
 ::-webkit-scrollbar{width:10px;height:10px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:linear-gradient(#4B2E83,#2448D8);border-radius:10px;border:2px solid transparent;background-clip:padding-box}
-::-webkit-scrollbar-thumb:hover{background:linear-gradient(#D4AF37,#4B2E83);background-clip:padding-box;border:2px solid transparent}
+::-webkit-scrollbar-thumb:hover{background:linear-gradient(#48D3C6,#2448D8);background-clip:padding-box;border:2px solid transparent}
 
 /* ---------- Button shine sweep (no colour change) ---------- */
 .btn,.consult,.primary{position:relative;overflow:hidden;isolation:isolate}
@@ -29,11 +29,11 @@ html{scrollbar-width:thin;scrollbar-color:#4B2E83 transparent}
   transition:box-shadow .35s ease,border-color .35s ease,transform .35s ease}
 .premium-card:hover,.service-card:hover,.card:hover,.insight:hover,.benefit-card:hover,
 .step-card:hover,.referral-tier:hover,.referral-step:hover,.referral-visual-card:hover{
-  box-shadow:0 26px 60px rgba(75,46,131,.18),0 0 0 1px rgba(212,175,55,.35)}
+  box-shadow:0 26px 60px rgba(75,46,131,.18),0 0 0 1px rgba(36,72,216,.30)}
 
 /* glare layer injected by premium.js */
 .pf-glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;
-  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.34),rgba(212,175,55,.10) 40%,transparent 65%);
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.36),rgba(72,211,198,.12) 40%,transparent 65%);
   transition:opacity .3s ease;z-index:2}
 .pf-tilting>.pf-glare{opacity:1}
 .pf-tilting{will-change:transform}
@@ -52,32 +52,40 @@ html{scrollbar-width:thin;scrollbar-color:#4B2E83 transparent}
   @keyframes pfBreath{0%,100%{filter:drop-shadow(0 22px 44px rgba(75,46,131,.16))}50%{filter:drop-shadow(0 30px 56px rgba(36,72,216,.24))}}
 }
 
-/* ---------- Custom cursor (desktop / fine pointers only) ---------- */
+/* ---------- Custom cursor (desktop / fine pointers only) ----------
+   Brand blue / teal / purple only — no gold. */
 .pf-cursor-dot,.pf-cursor-ring,.pf-cursor-fx{position:fixed;pointer-events:none;z-index:2147483000;left:0;top:0}
 .pf-cursor-fx{width:100vw;height:100vh;z-index:2147482990}
-.pf-cursor-dot{width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#D4AF37;
-  box-shadow:0 0 0 2px rgba(255,255,255,.85),0 0 14px 2px rgba(212,175,55,.75);
+.pf-cursor-dot{width:9px;height:9px;margin:-4.5px 0 0 -4.5px;border-radius:50%;background:#4B2E83;
+  box-shadow:0 0 0 2px rgba(255,255,255,.92),0 0 16px 3px rgba(36,72,216,.65);
   opacity:0;transition:opacity .25s ease,width .25s ease,height .25s ease,margin .25s ease,background .25s ease;will-change:transform}
-.pf-cursor-ring{width:38px;height:38px;margin:-19px 0 0 -19px;border-radius:50%;
-  border:1.5px solid #D4AF37;box-shadow:0 0 0 1px rgba(75,46,131,.28),inset 0 0 12px rgba(212,175,55,.18);
+.pf-cursor-ring{width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;opacity:0;
+  box-shadow:0 0 18px rgba(72,211,198,.40),0 0 0 1px rgba(255,255,255,.28);
   transition:opacity .25s ease,width .3s cubic-bezier(.2,.8,.2,1),height .3s cubic-bezier(.2,.8,.2,1),
-             margin .3s cubic-bezier(.2,.8,.2,1),background .3s ease,border-color .3s ease;will-change:transform}
-.pf-cursor-ring span{font:700 10px/1 Poppins,Inter,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;
+             margin .3s cubic-bezier(.2,.8,.2,1),background .3s ease,box-shadow .3s ease;will-change:transform}
+.pf-cursor-ring::before{content:"";position:absolute;inset:0;border-radius:50%;padding:2.5px;
+  background:conic-gradient(from 0deg,#2448D8,#48D3C6,#4B2E83,#2448D8);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
+  animation:pfSpin 2.4s linear infinite}
+@keyframes pfSpin{to{transform:rotate(360deg)}}
+.pf-cursor-ring span{position:relative;font:700 10px/1 Poppins,Inter,Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;
   color:#fff;opacity:0;transition:opacity .2s ease;white-space:nowrap}
 .pf-cursor-on .pf-cursor-dot,.pf-cursor-on .pf-cursor-ring{opacity:1}
 .pf-cursor-hide .pf-cursor-dot,.pf-cursor-hide .pf-cursor-ring{opacity:0!important}
 
-.pf-state-link .pf-cursor-ring{width:62px;height:62px;margin:-31px 0 0 -31px;background:rgba(212,175,55,.16);border-color:#D4AF37}
-.pf-state-link .pf-cursor-dot{width:5px;height:5px;margin:-2.5px 0 0 -2.5px}
-.pf-state-card .pf-cursor-ring{width:78px;height:78px;margin:-39px 0 0 -39px;background:rgba(75,46,131,.88);border-color:#D4AF37}
+.pf-state-link .pf-cursor-ring{width:66px;height:66px;margin:-33px 0 0 -33px;background:rgba(36,72,216,.14);box-shadow:0 0 26px rgba(36,72,216,.45),0 0 0 1px rgba(255,255,255,.3)}
+.pf-state-link .pf-cursor-dot{width:6px;height:6px;margin:-3px 0 0 -3px;background:#2448D8}
+.pf-state-card .pf-cursor-ring{width:82px;height:82px;margin:-41px 0 0 -41px;background:rgba(75,46,131,.92);box-shadow:0 0 30px rgba(36,72,216,.55)}
 .pf-state-card .pf-cursor-ring span{opacity:1}
 .pf-state-card .pf-cursor-dot{opacity:0}
-.pf-state-text .pf-cursor-ring{width:6px;height:34px;margin:-17px 0 0 -3px;border-radius:4px;background:#2448D8;border-color:#48D3C6}
-.pf-state-down .pf-cursor-ring{transform-origin:center}
+.pf-state-text .pf-cursor-ring{width:6px;height:34px;margin:-17px 0 0 -3px;border-radius:4px;background:#2448D8;box-shadow:0 0 12px rgba(72,211,198,.6)}
+.pf-state-text .pf-cursor-ring::before{display:none}
 .pf-ripple{position:fixed;pointer-events:none;z-index:2147482995;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;
-  border:2px solid #48D3C6;animation:pfRipple .7s ease-out forwards}
-@keyframes pfRipple{to{transform:scale(7);opacity:0;border-color:#D4AF37}}
+  border:2px solid #48D3C6;animation:pfRipple .75s ease-out forwards}
+.pf-ripple.b{border-color:#2448D8;animation-delay:.09s}
+@keyframes pfRipple{to{transform:scale(8);opacity:0;border-color:#4B2E83}}
 
 /* hide the native cursor only once the custom one is live */
 html.pf-cursor-active,html.pf-cursor-active *{cursor:none!important}
@@ -85,6 +93,49 @@ html.pf-cursor-active :is(input,textarea,select,[contenteditable="true"]):not([t
 
 @media (hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){
   .pf-cursor-dot,.pf-cursor-ring,.pf-cursor-fx,.pf-ripple{display:none!important}
+}
+
+/* ---------- Site-wide premium polish ---------- */
+html{scroll-padding-top:96px}
+:focus-visible{outline:2px solid #48D3C6;outline-offset:3px;border-radius:6px}
+
+/* mouse-follow spotlight on dark/gradient sections (injected by premium.js) */
+.pf-spotlight{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .45s ease;z-index:0;
+  background:radial-gradient(560px circle at var(--sx,50%) var(--sy,50%),rgba(72,211,198,.15),rgba(36,72,216,.09) 42%,transparent 70%)}
+.pf-has-spot:hover>.pf-spotlight{opacity:1}
+
+/* nav link underline grows on hover (active link keeps its own style) */
+.links>a:not(.active):not(.consult),.navlinks a:not(.active):not(.consult),.nav-dropdown>a:not(.active){
+  background-image:linear-gradient(90deg,#2448D8,#48D3C6);background-repeat:no-repeat;background-position:0 100%;
+  background-size:0 2px;transition:background-size .35s ease,color .25s ease}
+.links>a:not(.active):not(.consult):hover,.navlinks a:not(.active):not(.consult):hover,.nav-dropdown>a:not(.active):hover{background-size:100% 2px}
+
+/* icons spring when their card is hovered */
+.card-icon,.svc-icon,.card .icon,.benefit-card .icon,.step-card .icon{transition:transform .45s cubic-bezier(.34,1.56,.64,1)}
+.premium-card:hover .card-icon,.service-card:hover .svc-icon,.card:hover .icon,.benefit-card:hover .icon,.step-card:hover .icon{transform:translateY(-4px) rotate(-7deg) scale(1.1)}
+
+/* footer + social micro-interactions */
+footer .footer-grid ul li a,footer .footer-col a{transition:translate .25s ease,color .25s ease}
+footer .footer-grid ul li a:hover,footer .footer-col a:hover{translate:5px 0}
+.social-link,.social-links a{transition:translate .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease}
+.social-link:hover,.social-links a:hover{translate:0 -5px;box-shadow:0 10px 22px rgba(36,72,216,.35)}
+
+/* hero stats + floating cards */
+.stat-item,.stat{transition:translate .3s ease}
+.stat-item:hover,.stat:hover{translate:0 -4px}
+.float-card:hover{box-shadow:0 18px 40px rgba(36,72,216,.28)}
+
+/* tickers / partner marquee pause on hover */
+.ticker-wrap:hover .marquee-inner-ticker,.marquee-outer:hover .marquee-inner,.ticker:hover .ticker-track{animation-play-state:paused}
+
+/* form focus glow in brand blue */
+input:focus,textarea:focus,select:focus{box-shadow:0 0 0 3px rgba(36,72,216,.18);border-color:#2448D8;outline:none}
+
+@media (prefers-reduced-motion:no-preference){
+  main{animation:pfPageIn .9s ease backwards}
+  @keyframes pfPageIn{from{opacity:0}}
+  .whatsapp-float{animation:pfPulse 2.8s ease-out infinite}
+  @keyframes pfPulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.55)}70%{box-shadow:0 0 0 18px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
 }
 
 /* ---------- Regulatory block in footer (after Disclaimer) ---------- */

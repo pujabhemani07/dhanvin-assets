@@ -1,4 +1,4 @@
-const PREMIUM_V='2026-10-08a';
+const PREMIUM_V='2026-10-08b';
 const GLOBAL_CONTACT_FIX_JS = `
 document.querySelectorAll('a[href^="mailto:"],a[href*="wa.me"],a[href^="tel:"]').forEach(a=>{
   const h=(a.getAttribute('href')||'').toLowerCase();
