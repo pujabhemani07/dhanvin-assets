@@ -268,8 +268,6 @@ const HOME_UPDATE_JS = `
   const faqCta=document.querySelector('.faqs .btn-outline');
   if(faqCta)faqCta.innerHTML='Request Your Financial Assessment <i class="fa-solid fa-arrow-right"></i>';
   document.querySelectorAll('footer .social-links a').forEach(a=>{const h=(a.getAttribute('href')||'').toLowerCase();if(h.includes('youtube')||h.includes('linkedin'))a.remove();});
-  const contact=Array.from(document.querySelectorAll('footer .footer-col')).find(el=>/Contact Us/i.test((el.querySelector('h4')?el.querySelector('h4').textContent:'')));
-  if(contact)contact.innerHTML='<h4>Contact Us</h4><ul class="footer-contact"><li><i class="fa-solid fa-envelope"></i><a href="mailto:info@dhanvinassets.com">info@dhanvinassets.com</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919320114510">9320114510</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919920082826">9920082826</a></li><li><i class="fa-solid fa-phone"></i><a href="tel:+919823626992">9823626992</a></li></ul>';
   document.querySelectorAll('a[href*="wa.me"]').forEach(a=>{a.href='https://wa.me/'+phone;});
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',updateHome);else updateHome();
