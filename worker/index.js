@@ -21,16 +21,9 @@ header.fixed.top-8>div{min-height:68px!important}
 header.fixed.top-8 nav{gap:24px!important}
 header.fixed.top-8 nav a{font-size:13px!important;color:#55515f!important}
 header.fixed.top-8 nav a:first-child{color:#4b2e83!important;font-weight:700!important}
-.da-brand-link{display:flex!important;align-items:center!important;justify-content:flex-start!important;flex:0 0 auto!important;width:205px!important;min-width:205px!important;height:58px!important;padding:0!important;overflow:visible!important;background:transparent!important;border-radius:0!important;text-decoration:none!important}
-.da-brand-logo{display:block!important;width:205px!important;height:auto!important;max-width:205px!important;max-height:58px!important;object-fit:contain!important;object-position:left center!important;background:transparent!important;filter:none!important;opacity:1!important}
 .nav-inner{display:flex!important;align-items:center!important;gap:22px!important}
 .nav-inner>.links{flex:1 1 auto!important;min-width:0!important}
 .nav-inner>.actions{flex:0 0 auto!important}
-@media(max-width:760px){
-  .da-brand-link{width:155px!important;min-width:155px!important;height:44px!important}
-  .da-brand-logo{width:155px!important;max-width:155px!important;max-height:44px!important}
-}
-/* Do not hide the official logo. */
 .hero,body>section:first-of-type{background:linear-gradient(135deg,#f0e8ff 0%,#eeeaff 36%,#e8efff 72%,#fff 100%)!important}
 .hero{min-height:760px!important;padding-top:145px!important;padding-bottom:80px!important}
 .hero-container{max-width:1240px!important;gap:54px!important}
@@ -136,8 +129,6 @@ html[data-theme="dark"] body{background:#0f0a1e!important;color:#f0efff!importan
 html[data-theme="dark"] header.fixed.top-8{background:rgba(15,10,30,.96)!important;border-color:#2e2550!important;box-shadow:0 12px 38px rgba(0,0,0,.35)!important}
 html[data-theme="dark"] header.fixed.top-8 nav a{color:#b0aac8!important}
 html[data-theme="dark"] header.fixed.top-8 nav a:first-child{color:#d8cdf5!important}
-html[data-theme="dark"] .da-brand-link{background:#1e1535!important}
-html[data-theme="dark"] .da-brand-logo{background:#1e1535!important}
 html[data-theme="dark"] .hero,html[data-theme="dark"] body>section:first-of-type{background:linear-gradient(135deg,#1a1130 0%,#15132b 42%,#101b36 100%)!important}
 html[data-theme="dark"] .hero-badge{background:rgba(75,46,131,.25)!important;border-color:rgba(107,71,184,.4)!important;color:#d8cdf5!important}
 html[data-theme="dark"] .hero-title{color:#f0efff!important}
@@ -174,7 +165,7 @@ html[data-theme="dark"] .page-hero-title,html[data-theme="dark"] .page-hero p,ht
 
 input,select,textarea{border-radius:12px!important}
 @media(max-width:1024px){header.fixed.top-8{width:calc(100% - 24px)!important}.hero{min-height:auto!important;padding-top:135px!important}.hero-container{grid-template-columns:1fr!important;gap:34px!important}.hero-illustration{min-height:390px}.hero-svg{margin:auto}.hero-title{font-size:clamp(2.7rem,8vw,4.4rem)!important}}
-@media(max-width:640px){header.fixed.top-8{top:38px!important;width:calc(100% - 14px)!important;border-radius:20px!important;padding:5px 9px!important}header.fixed.top-8>div{min-height:52px!important}.da-brand-link{width:190px!important;min-width:190px!important;height:50px!important}.da-brand-logo{width:190px!important;height:50px!important}.hero{padding-top:118px!important;padding-bottom:55px!important}.hero-title{font-size:clamp(2.35rem,12vw,3.5rem)!important}.hero-desc{font-size:.98rem!important}.hero-btns .btn{width:100%;justify-content:center}.hero-illustration{min-height:300px}.section-padding{padding:64px 0!important}}
+@media(max-width:640px){header.fixed.top-8{top:38px!important;width:calc(100% - 14px)!important;border-radius:20px!important;padding:5px 9px!important}header.fixed.top-8>div{min-height:52px!important}.hero{padding-top:118px!important;padding-bottom:55px!important}.hero-title{font-size:clamp(2.35rem,12vw,3.5rem)!important}.hero-desc{font-size:.98rem!important}.hero-btns .btn{width:100%;justify-content:center}.hero-illustration{min-height:300px}.section-padding{padding:64px 0!important}}
 
 /* ===== FINAL FOOTER ROW OVERRIDE ===== */
 footer.footer .footer-grid{display:grid!important;grid-template-columns:minmax(240px,1.2fr) minmax(180px,.9fr) minmax(220px,1.05fr) minmax(250px,1.2fr)!important;gap:36px 48px!important;align-items:start!important}
