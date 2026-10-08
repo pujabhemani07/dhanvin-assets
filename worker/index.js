@@ -269,7 +269,7 @@ const HOME_UPDATE_JS = `
   if(path!=='/'&&path!=='/index.html')return;
   const stats=document.querySelectorAll('.hero-stats .stat-item');
   if(stats[0]){const v=stats[0].querySelector('[data-count]'),s=stats[0].querySelector('.stat-suffix');if(v)v.dataset.count='1';if(s)s.textContent='Cr+';}
-  if(stats[1]){const v=stats[1].querySelector('[data-count]'),s=stats[1].querySelector('.stat-suffix');if(v)v.dataset.count='500';if(s)s.textContent='+';}
+  if(stats[1]){const v=stats[1].querySelector('[data-count]'),s=stats[1].querySelector('.stat-suffix'),l=stats[1].querySelector('.stat-label');if(v){v.dataset.count='500';v.textContent='500';}if(s)s.textContent='+';if(l)l.textContent='Happy Families';}
   document.querySelectorAll('.float-card-1').forEach(card=>{const value=card.querySelector('strong'),label=card.querySelector('span');if(value)value.textContent='₹1 Cr+';if(label)label.textContent='AUM';});
   document.querySelectorAll('.float-card-2').forEach(card=>{const value=card.querySelector('strong'),label=card.querySelector('span');if(value)value.textContent='500+';if(label)label.textContent='Happy Families';});
   const heroCta=document.querySelector('.hero-btns .btn-primary');
