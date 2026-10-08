@@ -157,3 +157,20 @@ input:focus,textarea:focus,select:focus{box-shadow:0 0 0 3px rgba(36,72,216,.18)
   .footer-regulatory{grid-template-columns:1fr;padding:18px}
   .footer-regulatory .fr-ids{padding-left:0;border-left:0;border-top:1px solid rgba(255,255,255,.14);padding-top:14px}
 }
+
+/* ---------- Live market ticker ---------- */
+.ticker-wrap .ticker-msg{opacity:.8;font-style:italic}
+.ticker-wrap .t-pct.tick-flat{color:rgba(255,255,255,.7)}
+.ticker-status{position:absolute;right:0;top:0;bottom:0;z-index:3;display:flex;align-items:center;gap:7px;
+  padding:0 16px 0 46px;font:700 10px/1 Poppins,Inter,Arial,sans-serif;letter-spacing:.12em;color:#fff;
+  background:linear-gradient(90deg,rgba(52,30,94,0),#341e5e 38%);cursor:help}
+.ticker-status[hidden]{display:none}
+.ticker-status::before{content:"";width:7px;height:7px;border-radius:50%;background:#48D3C6;box-shadow:0 0 0 0 rgba(72,211,198,.7)}
+.ticker-status.is-closed::before{background:#D4AF37;box-shadow:none}
+@media (prefers-reduced-motion:no-preference){
+  .ticker-status.is-open::before{animation:pfLive 1.6s ease-out infinite}
+  @keyframes pfLive{70%{box-shadow:0 0 0 8px rgba(72,211,198,0)}100%{box-shadow:0 0 0 0 rgba(72,211,198,0)}}
+  .ticker-item.tick-flash{animation:pfTickFlash 1.2s ease-out}
+  @keyframes pfTickFlash{0%{background:rgba(72,211,198,.35)}100%{background:transparent}}
+}
+@media(max-width:640px){.ticker-status{padding-left:28px;font-size:9px}}

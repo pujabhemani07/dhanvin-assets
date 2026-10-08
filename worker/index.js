@@ -274,8 +274,52 @@ const HOME_UPDATE_JS = `
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',updateHome);else updateHome();
 })();`;
 
-export default {async fetch(request,env){
+
+/* ===== Live market ticker (/api/ticker) =====
+   Fetches delayed quotes server-side (no key exposed to the browser) and caches for 60s.
+   Provider is isolated in fetchQuote(): to move to a licensed feed, change only that function. */
+const TICKER_ITEMS=[
+ {k:'nifty50',n:'NIFTY 50',s:'^NSEI'},
+ {k:'sensex',n:'SENSEX',s:'^BSESN'},
+ {k:'banknifty',n:'BANK NIFTY',s:'^NSEBANK'},
+ {k:'niftymid',n:'NIFTY MIDCAP 100',s:'NIFTY_MIDCAP_100.NS'},
+ {k:'usdinr',n:'USD/INR',s:'INR=X',dec:2},
+ {k:'goldusd',n:'_',s:'GC=F',hidden:true}
+];
+async function fetchQuote(sym){
+ const r=await fetch('https://query1.finance.yahoo.com/v8/finance/chart/'+encodeURIComponent(sym)+'?interval=1d&range=1d',{
+  headers:{'User-Agent':'Mozilla/5.0 (compatible; DhanvinAssetsTicker/1.0)','Accept':'application/json'},
+  cf:{cacheTtl:60,cacheEverything:true}});
+ if(!r.ok) throw new Error('HTTP '+r.status);
+ const j=await r.json(); const m=j&&j.chart&&j.chart.result&&j.chart.result[0]&&j.chart.result[0].meta;
+ if(!m||typeof m.regularMarketPrice!=='number') throw new Error('no data');
+ const prev=(typeof m.chartPreviousClose==='number'?m.chartPreviousClose:m.previousClose);
+ return {price:m.regularMarketPrice,prev:prev,time:m.regularMarketTime||0};
+}
+async function handleTicker(request,ctx){
+ const cache=caches.default, key=new Request(new URL('/api/ticker',request.url).toString(),{method:'GET'});
+ const hit=await cache.match(key); if(hit) return hit;
+ const res=await Promise.allSettled(TICKER_ITEMS.map(i=>fetchQuote(i.s)));
+ const q={}; TICKER_ITEMS.forEach((i,ix)=>{ if(res[ix].status==='fulfilled') q[i.k]=res[ix].value; });
+ const items=[];
+ TICKER_ITEMS.forEach(i=>{ const v=q[i.k]; if(!v||i.hidden||!v.prev) return;
+  items.push({k:i.k,n:i.n,price:v.price,chg:v.price-v.prev,pct:(v.price-v.prev)/v.prev*100,dec:i.dec||2}); });
+ // Gold: international price converted to INR per 10g (excludes Indian import duty/GST, so it will read lower than Indian retail/MCX)
+ if(q.goldusd&&q.usdinr&&q.goldusd.prev&&q.usdinr.prev){
+  const OZ=31.1035, now=q.goldusd.price*q.usdinr.price/OZ*10, prev=q.goldusd.prev*q.usdinr.prev/OZ*10;
+  items.push({k:'gold',n:'GOLD (INTL)',price:now,chg:now-prev,pct:(now-prev)/prev*100,dec:0,prefix:'\u20B9',suffix:'/10g'});
+ }
+ const t=q.nifty50?q.nifty50.time:0, ageMin=t?(Date.now()/1000-t)/60:9999;
+ const body={updated:new Date().toISOString(),asOf:t?new Date(t*1000).toISOString():null,marketOpen:ageMin<20,source:'Yahoo Finance (delayed)',items:items};
+ const ok=items.length>0;
+ const out=new Response(JSON.stringify(ok?body:{error:'unavailable'}),{status:ok?200:502,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':ok?'public, max-age=60':'no-store','X-Robots-Tag':'noindex'}});
+ if(ok) ctx.waitUntil(cache.put(key,out.clone()));
+ return out;
+}
+
+export default {async fetch(request,env,ctx){
  const url=new URL(request.url);
+ if(url.pathname==='/api/ticker') return handleTicker(request,ctx);
  const response=await env.ASSETS.fetch(request);
  const contentType=response.headers.get('content-type')||'';
  const isHomepage=url.pathname==='/'||url.pathname==='/index.html';
@@ -293,7 +337,7 @@ export default {async fetch(request,env){
   if(isHomepage){
     headers.set('Cache-Control','no-store, no-cache, must-revalidate, max-age=0');
     headers.set('Pragma','no-cache');
-    headers.set('X-Dhanvin-Build','2026-10-08-premium-v1');
+    headers.set('X-Dhanvin-Build','2026-10-09-live-ticker-v1');
   }
   return new Response(transformed.body,{status:transformed.status,statusText:transformed.statusText,headers});
 }};
