@@ -623,3 +623,7 @@ footer.footer .footer-contact>li{display:flex!important;width:100%!important;mar
 
 /* FINAL: hide all logo/brand image elements site-wide */
 .logo-wrap,.logo-wrap .logo,.site-logo-link,.site-logo,.footer-logo,.da-brand-link,.da-brand-logo,.navbar-brand img,[src*="dhanvin-logo"]{display:none!important;visibility:hidden!important;width:0!important;height:0!important;max-width:0!important;max-height:0!important;overflow:hidden!important;}
+
+/* FINAL HERO WAVE / EDGE-GLITCH FIX */
+.hero-wave{position:absolute!important;left:50%!important;right:auto!important;bottom:-1px!important;width:100vw!important;height:80px!important;transform:translateX(-50%)!important;line-height:0!important;overflow:hidden!important;pointer-events:none!important;z-index:2!important}
+.hero-wave svg{display:block!important;width:100%!important;height:80px!important;min-width:100%!important;max-width:none!important;margin:0!important;padding:0!important}
