@@ -46,3 +46,5 @@
   .ml-fhead,.ml-frow{grid-template-columns:minmax(0,2fr) repeat(3,minmax(54px,1fr))}
 }
 @media (prefers-reduced-motion:reduce){.ml-skel{animation:none}}
+
+.ml-demo{margin:0 0 18px;padding:12px 16px;border-radius:12px;background:#fff7e0;border:1px dashed var(--g,#d4af37);color:var(--ink,#181522);font:600 .78rem/1.5 Inter,sans-serif}

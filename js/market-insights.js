@@ -5,6 +5,7 @@
   'use strict';
   var root = document.getElementById('liveMarket'); if (!root) return;
   var preview = /[?&]preview=1/.test(location.search);
+  var demo = /[?&]demo=1/.test(location.search);   // layout preview with clearly-labelled SAMPLE data (never used on the normal page)
   var REFRESH = 300000, state = {}, hiddenAll = false;
 
   function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
@@ -96,7 +97,24 @@
     }
     if (!state[sec]) c.querySelector('.ml-body').replaceChildren(el('div', 'ml-msg', 'Live data is temporarily unavailable. Please check back shortly.'));
   }
+  var DEMO = (function () {
+    function st(i, p, c) { return { symbol: 'SAMPLE' + i, name: 'Sample Company ' + i, price: p, pct: c, chg: 0, vol: 9000000 - i * 700000 }; }
+    function fd(n, a, r1, r3) { return { name: n, nav: 100 + a / 100, pct: 0.2, asset: a, r1y: r1, r3y: r3, r5y: null, rating: null }; }
+    var cat = function (g, n) { return { group: g, name: n, funds: [fd('Sample ' + n + ' Fund A', 24000, 12.4, 38.1), fd('Sample ' + n + ' Fund B', 15500, 10.2, 31.6), fd('Sample ' + n + ' Fund C', 9800, 14.7, 42.3), fd('Sample ' + n + ' Fund D', 6100, 9.1, 28.4)] }; };
+    var now = function () { return new Date().toISOString(); };
+    return {
+      trending: { updated: now(), source: 'SAMPLE', data: { gainers: [st(1, 1250.5, 3.2), st(2, 842.1, 2.6), st(3, 310.8, 2.1)], losers: [st(4, 990.4, -2.8), st(5, 455.2, -2.2), st(6, 128.9, -1.9)] } },
+      active: { updated: now(), source: 'SAMPLE', data: { stocks: [st(1, 1250.5, 0.9), st(2, 842.1, -0.4), st(3, 310.8, 1.3), st(4, 990.4, 0.2), st(5, 455.2, -1.1)] } },
+      highlow: { updated: now(), source: 'SAMPLE', data: { high: [{ symbol: 'SAMPLE1', name: 'Sample Company 1', price: 1250.5, level: 1262 }, { symbol: 'SAMPLE2', name: 'Sample Company 2', price: 842.1, level: 850 }], low: [{ symbol: 'SAMPLE3', name: 'Sample Company 3', price: 310.8, level: 305 }] } },
+      funds: { updated: now(), source: 'SAMPLE', data: { categories: [cat('Equity', 'Large Cap'), cat('Equity', 'Mid Cap'), cat('Equity', 'Flexi Cap'), cat('Debt', 'Short Duration')] } }
+    };
+  })();
+  if (demo) {
+    var bn = el('div', 'ml-demo', 'LAYOUT PREVIEW \u2014 the figures below are SAMPLE DATA, not real market data. Remove ?demo=1 from the address for the live view.');
+    var w0 = root.querySelector('.wrap'); if (w0) w0.insertBefore(bn, w0.firstChild);
+  }
   function load(sec) {
+    if (demo) { state[sec] = state[sec] || {}; state[sec].res = DEMO[sec]; render(sec); return Promise.resolve(); }
     return fetch('/api/market?section=' + sec, { headers: { Accept: 'application/json' } })
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
       .then(function (x) {
