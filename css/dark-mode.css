@@ -1,0 +1,212 @@
+/* =========================================================
+   DHANVIN ASSETS — DARK MODE (all pages)
+   Activated by <html data-theme="dark"> (see js/theme.js).
+   Palette = the site's existing dark palette:
+     page #0f0a1e · surface #1e1535 / #150e2a · border #2e2550 / #3b2d55
+     text #f0efff · muted #b0aac8 · soft-accent #d8cdf5 / #c9b8ff · blue-text #7f9cff
+   Brand colours (#4B2E83 #2448D8 #48D3C6 #D4AF37) are NOT changed: buttons, gradients,
+   hero and CTA bands keep them; only text/surfaces that would be unreadable are adapted.
+   ========================================================= */
+
+html[data-theme="light"]{color-scheme:light}
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --ink:#f0efff;--muted:#b0aac8;--bg:#0f0a1e;--line:#2e2550;--shadow:0 18px 45px rgba(0,0,0,.45);
+}
+
+/* referral page uses its own variable names */
+.referral-page{--primary:#4B2E83}
+html[data-theme="dark"] .referral-page{
+  --primary:#c9b8ff;--card-bg:#1e1535;--soft-bg:#150e2a;
+  --text-primary:#f0efff;--text-secondary:#b0aac8;--text-muted:#9d96b8;--ra-ink:#f0efff;
+}
+
+/* ---------- Page + navigation ---------- */
+html[data-theme="dark"] body{background:#0f0a1e;color:#f0efff}
+html[data-theme="dark"] .site-nav{background:rgba(24,16,44,.94);border-color:#2e2550;border-bottom-color:#2e2550;box-shadow:0 14px 38px rgba(0,0,0,.5)}
+html[data-theme="dark"] .site-nav .brand{background:transparent!important}
+html[data-theme="dark"] .navlinks a,html[data-theme="dark"] .site-nav .navlinks a{color:#b0aac8}
+html[data-theme="dark"] .navlinks a:hover,html[data-theme="dark"] .navlinks a.active,
+html[data-theme="dark"] .site-nav .navlinks a:hover,html[data-theme="dark"] .site-nav .navlinks a.active{color:#fff}
+html[data-theme="dark"] .theme,html[data-theme="dark"] .site-nav .theme{background:#1e1535;border-color:#3b2d55;color:#f5c842}
+html[data-theme="dark"] .hamb{color:#d8cdf5}
+html[data-theme="dark"] .drawer{background:#1a1130;box-shadow:-20px 0 60px rgba(0,0,0,.5)}
+html[data-theme="dark"] .drawer a{border-bottom-color:#2e2550;color:#d8cdf5}
+html[data-theme="dark"] .drawer a.active,html[data-theme="dark"] .drawer a:hover{background:#2a1f45;color:#fff}
+html[data-theme="dark"] .drawer .close{color:#b0aac8}
+
+/* ---------- Headings, copy, badges ---------- */
+html[data-theme="dark"] h1,html[data-theme="dark"] h2,html[data-theme="dark"] h3,html[data-theme="dark"] h4{color:#f0efff}
+html[data-theme="dark"] .head h2 span,html[data-theme="dark"] h2 span,html[data-theme="dark"] .kicker{color:#c9b8ff}
+html[data-theme="dark"] .pagehero .kicker,html[data-theme="dark"] .hero .kicker{color:#d4af37}
+html[data-theme="dark"] .pagehero h1,html[data-theme="dark"] .pagehero h2,html[data-theme="dark"] .founder h2,html[data-theme="dark"] .cta h2{color:#fff}
+html[data-theme="dark"] .hero h1 .dark{color:#f0efff}
+html[data-theme="dark"] .hero h1 .blue{color:#7f9cff}
+html[data-theme="dark"] .lead,html[data-theme="dark"] .head p,html[data-theme="dark"] .split p,html[data-theme="dark"] .contactitem,html[data-theme="dark"] .answer{color:#b0aac8}
+html[data-theme="dark"] .split p a,html[data-theme="dark"] .answer a,html[data-theme="dark"] .lead a{color:#9fb6ff}
+html[data-theme="dark"] .badge{background:rgba(75,46,131,.32);border-color:rgba(201,184,255,.32);color:#d8cdf5}
+html[data-theme="dark"] .soft{background:#150e2a}
+html[data-theme="dark"] .trusted{background:#0f0a1e;color:#b0aac8}
+
+/* ---------- Buttons ---------- */
+html[data-theme="dark"] .secondary{background:#1e1535;border-color:#3b2d55;color:#f0efff}
+html[data-theme="dark"] .cta .secondary,html[data-theme="dark"] .founder .secondary{background:#fff;color:#3b2870;border:0}
+
+/* ---------- Cards & surfaces ---------- */
+html[data-theme="dark"] .card,html[data-theme="dark"] .service-card,html[data-theme="dark"] .insight,
+html[data-theme="dark"] .testimonial,html[data-theme="dark"] .calcbox,html[data-theme="dark"] .age,
+html[data-theme="dark"] .contactbox,html[data-theme="dark"] .float,html[data-theme="dark"] .stats{
+  background:#1e1535;border-color:#2e2550;color:#f0efff;box-shadow:0 12px 32px rgba(0,0,0,.35)}
+html[data-theme="dark"] .card:hover,html[data-theme="dark"] .service-card:hover,html[data-theme="dark"] .insight:hover{
+  border-color:#4b3a7a;box-shadow:0 22px 52px rgba(0,0,0,.5),0 0 0 1px rgba(212,175,55,.35)}
+html[data-theme="dark"] .card p,html[data-theme="dark"] .service-card p,html[data-theme="dark"] .insight p,
+html[data-theme="dark"] .journey-step p,html[data-theme="dark"] .stat small,html[data-theme="dark"] .float small,
+html[data-theme="dark"] .result small,html[data-theme="dark"] .testimonial p{color:#b0aac8}
+html[data-theme="dark"] .float strong,html[data-theme="dark"] .stat b,html[data-theme="dark"] .stat strong{color:#f0efff}
+html[data-theme="dark"] .icon,html[data-theme="dark"] .tag{background:rgba(201,184,255,.14);color:#d8cdf5}
+html[data-theme="dark"] .service-card a{background:rgba(201,184,255,.14);color:#d8cdf5}
+html[data-theme="dark"] .service-card a:hover{background:#4B2E83;color:#fff}
+html[data-theme="dark"] .journey-num{background:#1e1535;border-color:#3b2d55;color:#d8cdf5}
+html[data-theme="dark"] .journey-step:hover .journey-num{background:#4B2E83;color:#fff;border-color:#4B2E83}
+html[data-theme="dark"] .result{background:#150e2a}
+html[data-theme="dark"] .age b{color:#35db8a}
+
+/* ---------- Forms, FAQ ---------- */
+html[data-theme="dark"] .formfield input,html[data-theme="dark"] .formfield textarea,html[data-theme="dark"] .formfield select{
+  background:#150e2a;border-color:#3b2d55;color:#f0efff}
+html[data-theme="dark"] .formfield input::placeholder,html[data-theme="dark"] .formfield textarea::placeholder{color:#8f88aa}
+html[data-theme="dark"] .formfield label{color:#d8cdf5}
+html[data-theme="dark"] .formfield input:focus,html[data-theme="dark"] .formfield textarea:focus,html[data-theme="dark"] .formfield select:focus{
+  border-color:#7f9cff;box-shadow:0 0 0 3px rgba(127,156,255,.22)}
+html[data-theme="dark"] .faqitem{border-color:#2e2550}
+html[data-theme="dark"] .faqitem button{color:#f0efff}
+
+/* ---------- Referral Associate page ---------- */
+html[data-theme="dark"] .referral-page{background:#0f0a1e}
+html[data-theme="dark"] .referral-section.soft{background:#150e2a}
+html[data-theme="dark"] .referral-tier,html[data-theme="dark"] .referral-panel,html[data-theme="dark"] .referral-step{
+  background:#1e1535;border-color:#2e2550;box-shadow:0 14px 34px rgba(0,0,0,.4)}
+html[data-theme="dark"] .referral-tier i{background:rgba(201,184,255,.14)}
+html[data-theme="dark"] .referral-check{background:rgba(201,184,255,.07)}
+html[data-theme="dark"] .referral-check i{color:#f5c842}
+html[data-theme="dark"] .referral-product-light{background:rgba(201,184,255,.07);border-color:#2e2550}
+html[data-theme="dark"] .referral-head h2,html[data-theme="dark"] .referral-panel h3,html[data-theme="dark"] .referral-tier h3,html[data-theme="dark"] .referral-step h3{color:#f0efff}
+html[data-theme="dark"] .referral-tier strong,html[data-theme="dark"] .referral-head .kicker,html[data-theme="dark"] .referral-head h2 span{color:#c9b8ff}
+
+/* ---------- Footer extras (footer itself is already dark) ---------- */
+html[data-theme="dark"] .footer-regulatory{border-color:rgba(212,175,55,.4)}
+
+/* ---------- Market Insights live dashboard ---------- */
+html[data-theme="dark"] .ml-card{background:#1e1535;border-color:#2e2550;box-shadow:0 18px 45px rgba(0,0,0,.45)}
+html[data-theme="dark"] .ml-card h3,html[data-theme="dark"] .ml-id b,html[data-theme="dark"] .ml-px,html[data-theme="dark"] .ml-lvl b{color:#f0efff}
+html[data-theme="dark"] .ml-id small,html[data-theme="dark"] .ml-stamp,html[data-theme="dark"] .ml-lvl,html[data-theme="dark"] .ml-fhead,
+html[data-theme="dark"] .ml-empty,html[data-theme="dark"] .ml-msg,html[data-theme="dark"] .ml-sub{color:#b0aac8}
+html[data-theme="dark"] .ml-row,html[data-theme="dark"] .ml-frow{border-top-color:#2e2550}
+html[data-theme="dark"] .ml-tabs button{background:#150e2a;border-color:#3b2d55;color:#d8cdf5}
+html[data-theme="dark"] .ml-tabs button:hover{border-color:#7f9cff}
+html[data-theme="dark"] .ml-tabs button.on{background:#4B2E83;border-color:#7f9cff;color:#fff}
+html[data-theme="dark"] .ml-up{background:rgba(53,219,138,.16);color:#4be39a}
+html[data-theme="dark"] .ml-down{background:rgba(255,104,112,.16);color:#ff8a91}
+html[data-theme="dark"] .ml-flat{background:#150e2a;color:#b0aac8}
+html[data-theme="dark"] .ml-skel{background:linear-gradient(90deg,#150e2a 25%,#241a40 50%,#150e2a 75%);background-size:200% 100%}
+html[data-theme="dark"] .ml-disclaimer{background:#150e2a;border-color:#2e2550;color:#b0aac8}
+html[data-theme="dark"] .ml-demo{background:#2a2314;color:#f0efff}
+
+/* ---------- Premium effects in dark ---------- */
+html[data-theme="dark"] .premium-card:hover,html[data-theme="dark"] .service-card:hover,html[data-theme="dark"] .card:hover,
+html[data-theme="dark"] .insight:hover,html[data-theme="dark"] .benefit-card:hover,html[data-theme="dark"] .referral-tier:hover,
+html[data-theme="dark"] .referral-step:hover{box-shadow:0 26px 60px rgba(0,0,0,.55),0 0 0 1px rgba(212,175,55,.4)}
+html[data-theme="dark"] .pf-orb{opacity:.38}
+html[data-theme="dark"] ::-webkit-scrollbar-thumb{background:linear-gradient(#6b47b8,#2448D8);background-clip:padding-box}
+html[data-theme="dark"] .ticker-status{background:linear-gradient(90deg,rgba(15,10,30,0),#0f0a1e 38%)}
+html[data-theme="dark"] :focus-visible{outline-color:#7f9cff}
+
+/* smooth, non-jarring switch */
+@media (prefers-reduced-motion:no-preference){
+  body,.site-nav,.card,.service-card,.insight,.testimonial,.calcbox,.contactbox,.ml-card,.referral-tier,.referral-panel,.referral-step{
+    transition:background-color .35s ease,border-color .35s ease,color .35s ease}
+}
+
+/* =========================================================
+   Contrast tweaks that apply in BOTH themes (WCAG AA, 4.5:1)
+   Only neutral greys / white-opacity text are nudged — no brand colours.
+   ========================================================= */
+.referral-legal-text{color:#555}
+html[data-theme="dark"] .referral-legal-text{color:#b0aac8}
+.split p,.contactitem{color:#666a7c}
+.card p,.service-card p,.insight p,.journey-step p,.answer,.head p{color:#6a6c80}
+.crumb{color:rgba(255,255,255,.82)}
+.referral-cta p,.referral-hero p{color:rgba(255,255,255,.92)}
+.footer-bottom,.footer-bottom span,.footer-bottom p,.footer p.copyright,.footer small{color:rgba(255,255,255,.7)}
+/* dark mode must win over the neutral greys above */
+html[data-theme="dark"] .split p,html[data-theme="dark"] .contactitem,html[data-theme="dark"] .card p,
+html[data-theme="dark"] .service-card p,html[data-theme="dark"] .insight p,html[data-theme="dark"] .journey-step p,
+html[data-theme="dark"] .answer,html[data-theme="dark"] .head p{color:#b0aac8}
+
+/* =========================================================
+   HOME PAGE + SERVICE PAGES (style.css / video-pages.css / inline index styles)
+   ========================================================= */
+/* gradient headline words: lighter stops so they read on dark (same hue family) */
+html[data-theme="dark"] .gradient-text{
+  background:linear-gradient(90deg,#c9b8ff,#7f9cff)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important}
+html[data-theme="dark"] .cta .gradient-text,html[data-theme="dark"] .cta-section .gradient-text{background:linear-gradient(90deg,#fff,#d8cdf5)!important;-webkit-background-clip:text!important;background-clip:text!important}
+
+/* brand-purple text that vanishes on dark surfaces */
+html[data-theme="dark"] .stat-value,html[data-theme="dark"] .stat-suffix{color:#d8cdf5}
+html[data-theme="dark"] .stat-label,html[data-theme="dark"] .trusted-label,html[data-theme="dark"] .comp-corpus span{color:#b0aac8}
+html[data-theme="dark"] .card-tag{background:rgba(201,184,255,.14);color:#d8cdf5}
+html[data-theme="dark"] .svc-link,html[data-theme="dark"] .insight-link{color:#c9b8ff}
+html[data-theme="dark"] .result-item.total .result-value{color:#d8cdf5}
+html[data-theme="dark"] .result-item.highlight .result-value{color:#9fb6ff}
+html[data-theme="dark"] .nav-referral-link{color:#c9b8ff!important}
+html[data-theme="dark"] .nav-referral-link:hover{color:#fff!important}
+html[data-theme="dark"] .service-page-theme .section-badge,html[data-theme="dark"] .service-page-theme .related-chip,
+html[data-theme="dark"] .service-page-theme .benefit-icon,html[data-theme="dark"] .service-page-theme .step-num{color:#d8cdf5}
+
+/* calculators page */
+html[data-theme="dark"] output,html[data-theme="dark"] .calcbox b,html[data-theme="dark"] .result b{color:#d8cdf5}
+html[data-theme="dark"] .calcbox label,html[data-theme="dark"] .calcbox small{color:#b0aac8}
+html[data-theme="dark"] input[type="range"]{accent-color:#7f9cff}
+
+/* homepage "Referral Associate" section (inline styles use !important) */
+html[data-theme="dark"] .referral-associate{background:linear-gradient(180deg,#120b25 0%,#150e2a 100%)!important}
+html[data-theme="dark"] .referral-associate:before{opacity:.5}
+html[data-theme="dark"] .referral-slab-strip,html[data-theme="dark"] .referral-product-strip{background:#1e1535;border-color:#2e2550;box-shadow:0 12px 35px rgba(0,0,0,.4)}
+html[data-theme="dark"] .referral-slab{background:#150e2a}
+html[data-theme="dark"] .referral-slab span{color:#b0aac8}
+html[data-theme="dark"] .referral-slab strong{color:#d8cdf5}
+html[data-theme="dark"] .referral-slab small{color:#9d96b8}
+html[data-theme="dark"] .referral-product-strip span{background:#150e2a;color:#d8cdf5}
+html[data-theme="dark"] .referral-product-strip i{color:#c9b8ff}
+html[data-theme="dark"] .referral-home-note{color:rgba(255,255,255,.8)}
+
+/* ---------- Muted-text variable (used by dozens of labels) ---------- */
+:root{--text-muted:#686f84}                          /* light: 4.9:1 on white (was 3.2:1) */
+html[data-theme="dark"]{--text-muted:#a29bc0}        /* dark : 6.3:1 on #1e1535 (was 3.4:1) */
+
+/* ---------- Light-mode greys that were just under AA (neutral greys only) ---------- */
+.stat small,.stat-label{color:#686f84}
+.float small{color:#6f6b7d}
+.referral-slab span{color:#5f6272}
+.referral-slab small{color:#666a7a}
+.comp-badge-green{color:#0f7a38}
+html[data-theme="dark"] .stat small,html[data-theme="dark"] .stat-label,html[data-theme="dark"] .float small{color:#b0aac8}
+html[data-theme="dark"] .referral-slab span{color:#b0aac8}
+html[data-theme="dark"] .referral-slab small{color:#9d96b8}
+html[data-theme="dark"] .comp-badge-green{color:#4be39a}
+html[data-theme="dark"] .comp-badge-red{color:#ff8a91}
+
+/* ---------- Final contrast fixes found by the audit ---------- */
+.founder .kicker{color:#d4af37}                       /* was dark purple on dark purple: invisible in both themes */
+.stat small,.stat-label{color:#5e657a}
+.float-card span,.float-card small,.float small{color:#6f6b7d}
+.result small{color:#6f6b7d}
+.referral-home-note{color:rgba(255,255,255,.84)}
+.comp-badge-red{color:#b91c1c}
+html[data-theme="dark"] .float-card span,html[data-theme="dark"] .float-card small,html[data-theme="dark"] .result small{color:#b0aac8}
+html[data-theme="dark"] .stat small,html[data-theme="dark"] .stat-label{color:#b0aac8}
+html[data-theme="dark"] .comp-badge-red{color:#ff8a91}
+
+/* ---------- Layout safety: stop sideways scrolling (referral page never loaded the ticker's overflow rule) ---------- */
+.ticker{overflow:hidden;max-width:100%}
+.referral-hero,.referral-cta{overflow:hidden}
