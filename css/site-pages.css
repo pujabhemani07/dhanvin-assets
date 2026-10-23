@@ -10,3 +10,27 @@
 
 /* FINAL: hide all logo/brand elements on internal pages */
 .site-nav .brand,.site-nav .brand img,.site-logo-link,.site-logo,.footer-logo,.logo-wrap,.da-brand-link,.da-brand-logo,[src*="dhanvin-logo"]{display:none!important;visibility:hidden!important;width:0!important;height:0!important;max-width:0!important;max-height:0!important;overflow:hidden!important;}
+
+/* GLOBAL INTERNAL-PAGE DARK MODE — contrast-safe shared tokens */
+html[data-theme="dark"] body{background:#0f0a1e!important;color:#f0efff!important}
+html[data-theme="dark"] .site-nav{background:rgba(18,12,35,.97)!important;border-color:#30264a!important;box-shadow:0 8px 25px rgba(0,0,0,.3)!important}
+html[data-theme="dark"] .site-nav .navlinks a{color:#d0c9e3!important}
+html[data-theme="dark"] .site-nav .navlinks a:hover,html[data-theme="dark"] .site-nav .navlinks a.active{color:#c9b8ff!important}
+html[data-theme="dark"] .site-nav .theme{background:#251a3c!important;border-color:#45365f!important;color:#f5d36d!important}
+html[data-theme="dark"] .site-nav .consult{color:#fff!important}
+html[data-theme="dark"] .section,html[data-theme="dark"] .section.soft,html[data-theme="dark"] .pagehero{background:#0f0a1e!important;color:#f0efff!important}
+html[data-theme="dark"] .section.soft{background:#171027!important}
+html[data-theme="dark"] .head h2,html[data-theme="dark"] .section h2,html[data-theme="dark"] .section h3,html[data-theme="dark"] .section h4,html[data-theme="dark"] .pagehero h1{color:#f0efff!important}
+html[data-theme="dark"] .section p,html[data-theme="dark"] .split p,html[data-theme="dark"] .section .muted{color:#bcb4d2!important}
+html[data-theme="dark"] .card,html[data-theme="dark"] .highlight,html[data-theme="dark"] .service-card,html[data-theme="dark"] .contact-card,html[data-theme="dark"] .calculator-card,html[data-theme="dark"] .disclaimer-card,html[data-theme="dark"] .journey-step{background:#211832!important;color:#f0efff!important;border-color:#3a2c53!important;box-shadow:0 14px 34px rgba(0,0,0,.22)!important}
+html[data-theme="dark"] .card h3,html[data-theme="dark"] .card h4,html[data-theme="dark"] .highlight b{color:#f0efff!important}
+html[data-theme="dark"] .card p,html[data-theme="dark"] .highlight p,html[data-theme="dark"] .journey-step p{color:#c4bad9!important}
+html[data-theme="dark"] input,html[data-theme="dark"] select,html[data-theme="dark"] textarea{background:#171027!important;color:#f0efff!important;border-color:#514165!important}
+html[data-theme="dark"] input::placeholder,html[data-theme="dark"] textarea::placeholder{color:#a99fbe!important}
+html[data-theme="dark"] .footer{background:linear-gradient(135deg,#090611,#171027)!important;border-top:1px solid #30264a!important}
+html[data-theme="dark"] .footer a{color:#c4bad9!important}
+html[data-theme="dark"] .footer-bottom{border-color:#30264a!important;color:#a99fbe!important}
+html[data-theme="dark"] .drawer{background:#171027!important;color:#f0efff!important}
+html[data-theme="dark"] .drawer a{color:#eae4f8!important}
+html[data-theme="dark"] .drawer a.active,html[data-theme="dark"] .drawer a:hover{background:#302442!important;color:#c9b8ff!important}
+html[data-theme="dark"] .ticker{background:#090611!important}
