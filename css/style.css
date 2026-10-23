@@ -731,3 +731,12 @@ img,svg,video,canvas,iframe{max-width:100%}
 }
 @media(prefers-reduced-motion:reduce){.mobile-drawer,.drawer-group summary i{transition:none!important}}
 
+
+/* MOBILE MENU VISIBILITY FIX — ensure drawer is rendered above page/Worker layers */
+.mobile-drawer{display:block!important;position:fixed!important;inset:0 0 0 auto!important;width:min(390px,88vw)!important;height:100vh!important;height:100dvh!important;max-height:100dvh!important;overflow-x:hidden!important;overflow-y:auto!important;z-index:99999!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;transform:translate3d(110%,0,0)!important;background:var(--bg-card,#fff)!important;color:var(--text-primary,#201735)!important}
+.mobile-drawer.open{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;transform:translate3d(0,0,0)!important}
+body.menu-open{overflow:hidden!important;touch-action:none}
+.mobile-drawer .drawer-group,.mobile-drawer .drawer-group summary{color:var(--text-primary)!important}
+.mobile-drawer .drawer-submenu a{display:block!important;color:var(--text-secondary)!important}
+.hamb{position:relative!important;z-index:100000!important;flex-shrink:0!important;touch-action:manipulation}
+@media(max-width:900px){.nav-inner>.links{display:none!important}.hamb{display:inline-flex!important}.mobile-drawer{padding:76px 20px 30px!important}}
