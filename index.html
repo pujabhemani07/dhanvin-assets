@@ -181,7 +181,13 @@
 <script>
 (function(){
  const hamb=document.getElementById('hamb'),drawer=document.getElementById('drawer'),close=document.getElementById('drawer-close');
- if(hamb) hamb.onclick=()=>drawer.classList.add('open'); if(close) close.onclick=()=>drawer.classList.remove('open'); drawer&&drawer.querySelectorAll('a').forEach(a=>a.onclick=()=>drawer.classList.remove('open'));
+ function openMenu(){if(!drawer)return;drawer.classList.add('open');drawer.setAttribute('aria-hidden','false');document.body.classList.add('menu-open');if(hamb){hamb.setAttribute('aria-expanded','true');hamb.setAttribute('aria-label','Close menu')} }
+ function closeMenu(){if(!drawer)return;drawer.classList.remove('open');drawer.setAttribute('aria-hidden','true');document.body.classList.remove('menu-open');if(hamb){hamb.setAttribute('aria-expanded','false');hamb.setAttribute('aria-label','Open menu')} }
+ if(drawer)drawer.setAttribute('aria-hidden','true');
+ if(hamb){hamb.setAttribute('aria-controls','drawer');hamb.setAttribute('aria-expanded','false');hamb.addEventListener('click',function(){drawer&&drawer.classList.contains('open')?closeMenu():openMenu()})}
+ if(close)close.addEventListener('click',closeMenu);
+ if(drawer)drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
  document.querySelectorAll('.faq-question').forEach(btn=>btn.addEventListener('click',()=>{const item=btn.parentElement;document.querySelectorAll('.faq-item').forEach(x=>{if(x!==item)x.classList.remove('open')});item.classList.toggle('open')}));
  const track=document.getElementById('testimonial-track'), dots=[...document.querySelectorAll('.dot')]; let cur=0;
  function slide(n){if(!track)return;cur=(n+3)%3;track.style.transform='translateX(-'+(cur*100)+'%)';dots.forEach((d,i)=>d.classList.toggle('active',i===cur));} document.getElementById('prev-btn')?.addEventListener('click',()=>slide(cur-1)); document.getElementById('next-btn')?.addEventListener('click',()=>slide(cur+1)); dots.forEach(d=>d.addEventListener('click',()=>slide(+d.dataset.index)));
