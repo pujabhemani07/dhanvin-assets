@@ -51,5 +51,13 @@
 </main>
 <footer class="footer"><div class="wrap footergrid"><div><p>Personalized financial planning for long-term wealth creation.</p></div><div><h4>Company</h4><a href="about.html">About Us</a><a href="services.html">Services</a><a href="contact.html">Contact</a></div><div><h4>Resources</h4><a href="calculators.html">Calculators</a><a href="market-insights.html">Market Insights</a><a href="blog.html">Resources</a></div><div><h4>Legal</h4><a href="disclaimer.html">Disclaimer</a><a href="faq.html">FAQ</a></div></div><div class="footer-bottom">© 2026 Dhanvin Assets Pvt Ltd. All rights reserved.</div></footer>
 <a class="wa" href="https://wa.me/919920082826" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-<script src="js/ticker.js" defer></script></body>
+<script src="js/ticker.js" defer></script><script id="site-page-theme">
+(function(){
+ const root=document.documentElement,body=document.body,btn=document.querySelector('.site-nav .theme');
+ let saved='light';try{saved=localStorage.getItem('da-theme')||'light'}catch(e){}
+ function apply(mode){const dark=mode==='dark';root.setAttribute('data-theme',dark?'dark':'light');body.classList.toggle('dark',dark);if(btn){const i=btn.querySelector('i');if(i)i.className=dark?'fa-solid fa-sun':'fa-solid fa-moon';btn.setAttribute('aria-pressed',String(dark));btn.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');btn.title=dark?'Switch to light mode':'Switch to dark mode'}}
+ apply(saved==='dark'?'dark':'light');
+ if(btn)btn.addEventListener('click',function(e){e.preventDefault();const next=root.getAttribute('data-theme')==='dark'?'light':'dark';apply(next);try{localStorage.setItem('da-theme',next)}catch(e){}});
+})();
+</script></body>
 </html>
