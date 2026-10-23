@@ -12,5 +12,13 @@
     <p>Your request has been received. The Dhanvin Assets team will get back to you shortly.</p>
     <a href="index.html" style="display:inline-block;margin-top:1rem">Back to Home</a>
   </main>
-</body>
+<script id="site-page-theme">
+(function(){
+ const root=document.documentElement,body=document.body,btn=document.querySelector('.site-nav .theme');
+ let saved='light';try{saved=localStorage.getItem('da-theme')||'light'}catch(e){}
+ function apply(mode){const dark=mode==='dark';root.setAttribute('data-theme',dark?'dark':'light');body.classList.toggle('dark',dark);if(btn){const i=btn.querySelector('i');if(i)i.className=dark?'fa-solid fa-sun':'fa-solid fa-moon';btn.setAttribute('aria-pressed',String(dark));btn.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');btn.title=dark?'Switch to light mode':'Switch to dark mode'}}
+ apply(saved==='dark'?'dark':'light');
+ if(btn)btn.addEventListener('click',function(e){e.preventDefault();const next=root.getAttribute('data-theme')==='dark'?'light':'dark';apply(next);try{localStorage.setItem('da-theme',next)}catch(e){}});
+})();
+</script></body>
 </html>
