@@ -121,6 +121,52 @@ html[data-theme="dark"] .footer-bottom{border-color:#30264a!important;color:#a99
 .referral-page,.referral-page *{transition:background-color .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease}
 @media(prefers-reduced-motion:reduce){.referral-page,.referral-page *{transition:none!important}}
 
+
+/* MOBILE EXPERIENCE — Referral Associate */
+@media(max-width:760px){
+ .site-nav{position:sticky!important;top:0!important;padding:10px 15px!important;gap:10px!important}
+ .site-nav .navlinks,.site-nav .nav-actions{display:none!important}
+ .site-nav .hamb{display:block!important;margin-left:auto!important;min-width:44px;min-height:44px}
+ .referral-hero{padding:54px 0 48px!important}
+ .referral-hero .hero-grid{grid-template-columns:minmax(0,1fr)!important;gap:24px!important}
+ .referral-hero h1{font-size:clamp(2.25rem,10.5vw,3.6rem)!important;line-height:1.04!important;overflow-wrap:normal}
+ .referral-hero p{font-size:1rem!important;line-height:1.7!important}
+ .referral-hero-actions{display:grid!important;grid-template-columns:minmax(0,1fr)!important}
+ .referral-hero-actions .btn{width:100%!important;min-height:48px!important;justify-content:center!important;box-sizing:border-box}
+ .referral-visual{grid-template-columns:minmax(0,1fr)!important;gap:12px!important;margin-top:1.5rem!important}
+ .referral-visual-card{padding:1rem!important;min-width:0}
+ .referral-product-row{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .referral-product-row .referral-product:last-child{grid-column:1/-1}
+ .referral-tier-grid,.referral-two{grid-template-columns:minmax(0,1fr)!important}
+ .referral-tier-grid{gap:14px!important}
+ .referral-tier,.referral-panel,.referral-step{min-width:0!important}
+ .referral-section{padding:52px 0!important}
+ .referral-section .wrap{width:calc(100% - 30px)!important}
+ .referral-head h2{font-size:clamp(1.8rem,8vw,2.5rem)!important;line-height:1.12!important}
+ .referral-slab-strip{grid-template-columns:minmax(0,1fr)!important}
+ .referral-slab{display:grid!important;grid-template-columns:1fr auto!important;gap:5px 12px!important;align-items:center}
+ .referral-slab small{grid-column:1}
+ .referral-slab strong{grid-column:2;grid-row:1/3}
+ .referral-cta{padding:28px 20px!important;border-radius:22px!important}
+ .referral-cta h2{font-size:clamp(1.8rem,8vw,2.5rem)!important}
+ .referral-page .disclaimer-card{padding:18px!important;overflow-wrap:anywhere}
+ .referral-page .contact-row{align-items:flex-start!important;overflow-wrap:anywhere}
+ .footergrid{grid-template-columns:minmax(0,1fr)!important;gap:24px!important}
+ .footer{padding:42px 0 20px!important}
+ .wa{right:14px!important;bottom:14px!important;width:48px!important;height:48px!important}
+ .drawer{width:min(330px,88vw)!important;max-width:100vw!important;overflow-y:auto!important;padding-bottom:30px!important}
+}
+@media(min-width:430px) and (max-width:760px){
+ .referral-product-row{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ .referral-product-row .referral-product:last-child{grid-column:auto}
+}
+@media(max-width:360px){
+ .referral-breadcrumb{font-size:.68rem!important;letter-spacing:.8px!important}
+ .referral-hero h1{font-size:2.1rem!important}
+ .referral-visual-card{padding:.8rem!important}
+ .referral-product{font-size:.68rem!important}
+}
+
 </style>
 <style id="referral-site-polish">
 :root{--ra-purple:#4b2e83;--ra-blue:#2448d8;--ra-teal:#48d3c6;--ra-gold:#d4af37;--ra-ink:#201735}
