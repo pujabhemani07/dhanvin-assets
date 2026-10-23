@@ -34,3 +34,36 @@ html[data-theme="dark"] .drawer{background:#171027!important;color:#f0efff!impor
 html[data-theme="dark"] .drawer a{color:#eae4f8!important}
 html[data-theme="dark"] .drawer a.active,html[data-theme="dark"] .drawer a:hover{background:#302442!important;color:#c9b8ff!important}
 html[data-theme="dark"] .ticker{background:#090611!important}
+
+/* MOBILE LAYOUT HARDENING FOR ALL INTERNAL PAGES */
+html,body{max-width:100%;overflow-x:clip}
+img,svg,video,iframe,canvas{max-width:100%}
+@media(max-width:760px){
+ .site-nav{position:sticky!important;top:0!important;display:flex!important;gap:10px!important;padding:10px 15px!important;min-height:60px}
+ .site-nav .navlinks{display:none!important}
+ .site-nav .hamb{display:block!important;margin-left:auto!important;min-width:44px;min-height:44px}
+ .site-nav .nav-actions{display:flex!important;margin-left:auto!important;gap:8px!important}
+ .site-nav .consult{display:none!important}
+ .site-nav .theme{width:42px!important;height:42px!important;flex:0 0 42px}
+ .wrap{width:calc(100% - 30px)!important;max-width:100%!important}
+ .pagehero{padding:54px 0 42px!important}
+ .pagehero h1{font-size:clamp(2rem,9vw,3rem)!important;line-height:1.08!important;overflow-wrap:anywhere}
+ .section{padding:52px 0!important}
+ .grid2,.grid3,.grid4,.services-grid,.contactgrid,.formgrid,.split,.founder,.journey{grid-template-columns:minmax(0,1fr)!important;gap:18px!important}
+ .card,.highlight,.service-card,.contact-card,.calculator-card{min-width:0!important;padding:20px!important}
+ .btn{min-height:44px}
+ .formfield,.formfield input,.formfield textarea,.formfield select,input,textarea,select{max-width:100%;box-sizing:border-box}
+ .footergrid{grid-template-columns:minmax(0,1fr)!important;gap:24px!important}
+ .footer{padding:42px 0 20px!important}
+ .wa{right:14px!important;bottom:14px!important;width:48px!important;height:48px!important}
+ .ticker{overflow:hidden!important}
+}
+@media(min-width:430px) and (max-width:760px){
+ .grid2,.grid3{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .contactgrid,.formgrid,.split,.founder,.journey{grid-template-columns:minmax(0,1fr)!important}
+}
+@media(max-width:360px){
+ .site-nav{padding-inline:10px!important}
+ .pagehero h1{font-size:2rem!important}
+ .card,.highlight,.service-card,.contact-card{padding:16px!important}
+}
