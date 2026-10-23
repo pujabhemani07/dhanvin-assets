@@ -172,10 +172,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script><script src="js/main.js"></script><script src="js/ticker.js" defer></script>
 <script>
 (function(){
- const body=document.body, theme=document.getElementById('theme'), icon=theme&&theme.querySelector('i');
- const saved=localStorage.getItem('da-theme'); if(saved==='dark') body.classList.add('dark');
- function syncTheme(){if(icon) icon.className=body.classList.contains('dark')?'fa-solid fa-sun':'fa-solid fa-moon'} syncTheme();
- if(theme) theme.addEventListener('click',()=>{body.classList.toggle('dark');localStorage.setItem('da-theme',body.classList.contains('dark')?'dark':'light');syncTheme();});
  const hamb=document.getElementById('hamb'),drawer=document.getElementById('drawer'),close=document.getElementById('drawer-close');
  if(hamb) hamb.onclick=()=>drawer.classList.add('open'); if(close) close.onclick=()=>drawer.classList.remove('open'); drawer&&drawer.querySelectorAll('a').forEach(a=>a.onclick=()=>drawer.classList.remove('open'));
  document.querySelectorAll('.faq-question').forEach(btn=>btn.addEventListener('click',()=>{const item=btn.parentElement;document.querySelectorAll('.faq-item').forEach(x=>{if(x!==item)x.classList.remove('open')});item.classList.toggle('open')}));
