@@ -133,3 +133,17 @@ function drawDonut(canvasId, existingChart, setter, labels, data, colors) {
     options: { responsive: true, cutout: '65%', plugins: { legend: { labels: { color: text } }, tooltip: { callbacks: { label: ctx => ctx.label + ': ' + fmtC(ctx.raw) } } } }
   }));
 }
+
+
+document.addEventListener('themechange', function () {
+  if (typeof Chart === 'undefined' || typeof Chart.getChart !== 'function') return;
+  var text = chartColors().text;
+  ['emi-chart','ret-chart','edu-chart','goal-chart'].forEach(function (id) {
+    var chart = Chart.getChart(id);
+    if (!chart) return;
+    if (chart.options && chart.options.plugins && chart.options.plugins.legend) {
+      chart.options.plugins.legend.labels.color = text;
+    }
+    chart.update();
+  });
+});

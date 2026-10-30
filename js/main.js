@@ -60,7 +60,7 @@ function theme(){
 
 function navbar(){const n=$('#navbar')||$('.nav');if(!n)return;const update=()=>n.classList.toggle('scrolled',scrollY>50);update();addEventListener('scroll',update,{passive:true})}
 function mobile(){
- const h=$('#hamb')||$('#hamburger'),m=$('#drawer')||$('#nav-menu');if(!h||!m)return;const close=$('#drawer-close');
+ const h=$('#hamb')||$('#hamburger'),m=$('#drawer')||$('#nav-menu');if(!h||!m)return;if(m.classList.contains('mobile-drawer'))return;const close=$('#drawer-close');
  const set=open=>{m.classList.toggle('open',open);h.classList.toggle('active',open);h.setAttribute('aria-expanded',open);document.body.style.overflow=open?'hidden':''};
  h.setAttribute('aria-expanded','false');h.addEventListener('click',e=>{e.stopPropagation();set(!m.classList.contains('open'))});
  if(close)close.addEventListener('click',()=>set(false));$$('a',m).forEach(a=>a.addEventListener('click',()=>set(false)));document.addEventListener('keydown',e=>{if(e.key==='Escape')set(false)});

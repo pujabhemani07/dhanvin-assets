@@ -1,0 +1,31 @@
+/* Shared mobile navigation for Dhanvin Assets */
+.mnav,.mnav-overlay,.mnav-drawer{display:none}
+@media(max-width:900px){
+ html.mnav-on .site-nav,html.mnav-on nav#navbar,html.mnav-on nav.nav,html.mnav-on #drawer,html.mnav-on .mobile-drawer,html.mnav-on .drawer,html.mnav-on #nav-menu,html.mnav-on #hamb,html.mnav-on #hamburger{display:none!important}
+ html.mnav-on{scroll-padding-top:112px} html.mnav-lock,html.mnav-lock body{overflow:hidden}
+ html.mnav-on body{padding-top:0!important}
+ html.mnav-on .hero{padding-top:34px!important;min-height:0!important}
+ .mnav{display:block;position:sticky;top:0;z-index:1200;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid #e7e3ef;box-shadow:0 8px 24px rgba(50,35,95,.08)}
+ .mnav-bar{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;gap:10px}
+ .mnav-brand{font:800 18px/1 Poppins,Inter,Arial,sans-serif;color:#181522;text-decoration:none;white-space:nowrap}.mnav-brand span{color:#2448d8}
+ .mnav-actions{display:flex;gap:8px}.mnav-btn{width:44px;height:44px;border:1px solid #e3ddf1;border-radius:13px;background:#fff;color:#4b2e83;display:inline-flex;align-items:center;justify-content:center;font-size:18px}
+ .mnav-burger{background:linear-gradient(135deg,#4b2e83,#2448d8);color:#fff;border:0}
+ .mnav-topics{border-top:1px solid #efeaf8}.mnav-chips{display:flex;gap:7px;overflow-x:auto;padding:8px 12px;scrollbar-width:none}.mnav-chips::-webkit-scrollbar{display:none}
+ .mnav-chip{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 13px;border-radius:999px;border:1px solid #e3ddf1;background:#f6f3fc;color:#3b2870;font:600 13px Inter,Arial,sans-serif;text-decoration:none;white-space:nowrap}
+ .mnav-chip.is-active{background:linear-gradient(135deg,#4b2e83,#2448d8);color:#fff;border-color:transparent}
+ .mnav-panel{position:absolute;top:100%;left:0;right:0;z-index:5;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px;background:#fff;box-shadow:0 20px 35px #21143b26;max-height:60vh;overflow:auto}.mnav-panel[hidden]{display:none}
+ .mnav-tile{display:flex;align-items:center;gap:9px;min-height:48px;padding:8px 10px;border-radius:12px;background:#f6f3fc;color:#29203f;text-decoration:none;font:600 13px Inter,Arial,sans-serif}.mnav-tile:first-child{grid-column:1/-1}
+ .mnav-overlay{display:block;position:fixed;inset:0;z-index:100040;background:#100a1f99;opacity:0;pointer-events:none;transition:opacity .25s}.mnav-overlay.open{opacity:1;pointer-events:auto}
+ .mnav-drawer{display:block;position:fixed;inset:0 0 0 auto;z-index:100050;width:min(88vw,370px);overflow:auto;background:#fff;padding:calc(env(safe-area-inset-top,0px) + 12px) 18px 24px;transform:translateX(105%);visibility:hidden;transition:transform .3s}
+ .mnav-drawer.open{transform:none;visibility:visible}.mnav-dhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.mnav-dhead strong{font-weight:800;color:#181522}
+ .mnav-item,.mnav-group>summary{display:flex;justify-content:space-between;align-items:center;min-height:50px;border-bottom:1px solid #eee9f5;color:#181522;text-decoration:none;font:600 15px Inter,Arial,sans-serif;list-style:none;cursor:pointer}
+ .mnav-group>summary::-webkit-details-marker{display:none}.mnav-sub{display:grid;padding:5px 0 10px}.mnav-sub a{display:flex;align-items:center;min-height:42px;padding:0 12px;color:#403653;text-decoration:none;font-size:14px}
+ .mnav-cta{display:flex;align-items:center;justify-content:center;min-height:50px;margin-top:16px;border-radius:13px;background:linear-gradient(135deg,#4b2e83,#2448d8);color:#fff;text-decoration:none;font-weight:700}
+ html[data-theme=dark] .mnav{background:rgba(21,14,42,.97);border-color:#30264a}html[data-theme=dark] .mnav-brand{color:#f0efff}html[data-theme=dark] .mnav-brand span{color:#9bb1ff}
+ html[data-theme=dark] .mnav-btn{background:#1e1535;border-color:#45365f;color:#f5d36d}html[data-theme=dark] .mnav-chip{background:#1e1535;border-color:#45365f;color:#ded5f4}
+ html[data-theme=dark] .mnav-chip.is-active{background:linear-gradient(135deg,#6545a5,#3559e8);color:#fff}
+ html[data-theme=dark] .mnav-panel,html[data-theme=dark] .mnav-drawer{background:#150e2a;color:#f0efff}
+ html[data-theme=dark] .mnav-tile{background:#211936;color:#f0efff}html[data-theme=dark] .mnav-item,html[data-theme=dark] .mnav-group>summary,html[data-theme=dark] .mnav-dhead strong{color:#f0efff;border-color:#30264a}
+ html[data-theme=dark] .mnav-sub a{color:#d8cdf5}
+}
+@media(max-width:900px) and (prefers-reduced-motion:reduce){.mnav,.mnav-drawer,.mnav-overlay{transition:none}}
