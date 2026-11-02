@@ -127,23 +127,17 @@ function drawDonut(canvasId, existingChart, setter, labels, data, colors) {
   if (!canvas || typeof Chart === 'undefined') return;
   if (existingChart) existingChart.destroy();
   const { text } = chartColors();
+  const darkMap = { '#4B2E83': '#a78bfa', '#2448D8': '#7f9cff' };
+  const fills = isDark() ? colors.map(color => darkMap[color] || color) : colors;
   setter(new Chart(canvas.getContext('2d'), {
     type: 'doughnut',
-    data: { labels, datasets: [{ data, backgroundColor: colors, borderWidth: 0 }] },
+    data: { labels, datasets: [{ data, backgroundColor: fills, borderWidth: isDark() ? 2 : 0, borderColor: '#1e1535' }] },
     options: { responsive: true, cutout: '65%', plugins: { legend: { labels: { color: text } }, tooltip: { callbacks: { label: ctx => ctx.label + ': ' + fmtC(ctx.raw) } } } }
   }));
 }
 
 
+
 document.addEventListener('themechange', function () {
-  if (typeof Chart === 'undefined' || typeof Chart.getChart !== 'function') return;
-  var text = chartColors().text;
-  ['emi-chart','ret-chart','edu-chart','goal-chart'].forEach(function (id) {
-    var chart = Chart.getChart(id);
-    if (!chart) return;
-    if (chart.options && chart.options.plugins && chart.options.plugins.legend) {
-      chart.options.plugins.legend.labels.color = text;
-    }
-    chart.update();
-  });
+  [calcEMI, calcRetirement, calcEducation, calcGoal].forEach(function (fn) { try { fn(); } catch (e) {} });
 });
