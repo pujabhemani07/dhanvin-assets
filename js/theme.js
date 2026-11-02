@@ -23,6 +23,7 @@
     if (persist) put(t);
     try { document.dispatchEvent(new CustomEvent('themechange', { detail: { theme: t } })); } catch (e) {}
   }
+  window.daTheme = { sync: function () { apply(root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light', false); } };
   function init() {
     apply(get() === 'dark' ? 'dark' : 'light', false);
     // capture phase + stopImmediatePropagation: neutralises any legacy inline/bubble toggle so it can never double-fire

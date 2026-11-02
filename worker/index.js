@@ -1,4 +1,4 @@
-const PREMIUM_V='2026-10-10a';
+const PREMIUM_V='2026-10-30a';
 const GLOBAL_CONTACT_FIX_JS = `
 document.querySelectorAll('a[href^="mailto:"],a[href*="wa.me"],a[href^="tel:"]').forEach(a=>{
   const h=(a.getAttribute('href')||'').toLowerCase();
@@ -384,12 +384,12 @@ export default {async fetch(request,env,ctx){
  const isHomepage=url.pathname==='/'||url.pathname==='/index.html';
  if(!contentType.includes('text/html'))return response;
  return new HTMLRewriter()
-  .on('head',{element(element){element.append(`<script id="da-theme-early">(function(){try{if(localStorage.getItem('da-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}})()</script><style id="dhanvin-reference-video">${BRAND_CSS}</style>`,{html:true});if(url.pathname.startsWith("/services/")&&!url.pathname.endsWith("/mutual-funds.html"))element.append(`<link rel="stylesheet" href="/css/service-theme.css">`,{html:true});element.append(`<link rel="stylesheet" href="/css/video-reference.css">`,{html:true});element.append(`<link rel="stylesheet" href="/css/premium.css?v=${PREMIUM_V}"><link rel="stylesheet" href="/css/dark-mode.css?v=${PREMIUM_V}">`,{html:true})}})
+  .on('head',{element(element){element.append(`<script id="da-theme-early">(function(){try{if(localStorage.getItem('da-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}})()</script><style id="dhanvin-reference-video">${BRAND_CSS}</style>`,{html:true});if(url.pathname.startsWith("/services/")&&!url.pathname.endsWith("/mutual-funds.html"))element.append(`<link rel="stylesheet" href="/css/service-theme.css">`,{html:true});element.append(`<link rel="stylesheet" href="/css/video-reference.css">`,{html:true});element.append(`<link rel="stylesheet" href="/css/premium.css?v=${PREMIUM_V}"><link rel="stylesheet" href="/css/dark-mode.css?v=${PREMIUM_V}"><link rel="stylesheet" href="/css/mobile-nav.css?v=${PREMIUM_V}"><link rel="stylesheet" href="/css/mobile-polish.css?v=${PREMIUM_V}">`,{html:true})}})
                 .on('footer.footer',{element(element){element.setInnerContent(FOOTER_HTML,{html:true})}})
   .on('body',{element(element){
     if(url.pathname.startsWith("/services/")&&!url.pathname.endsWith("/mutual-funds.html"))element.setAttribute("class",(element.getAttribute("class")||"")+" service-page-theme");
     const homepageScript=isHomepage?`<script id="dhanvin-home-update-js">${HOME_UPDATE_JS}</script>`:"";
-    element.append(homepageScript+`<script id="dhanvin-reference-video-js">${BRAND_JS}</script><script id="dhanvin-global-contact-fix">${GLOBAL_CONTACT_FIX_JS}</script><script src="/js/theme.js?v=${PREMIUM_V}" defer></script><script src="/js/premium.js?v=${PREMIUM_V}" defer></script>`,{html:true});
+    element.append(homepageScript+`<script id="dhanvin-reference-video-js">${BRAND_JS}</script><script id="dhanvin-global-contact-fix">${GLOBAL_CONTACT_FIX_JS}</script><script src="/js/theme.js?v=${PREMIUM_V}" defer></script><script src="/js/mobile-nav.js?v=${PREMIUM_V}" defer></script><script src="/js/premium.js?v=${PREMIUM_V}" defer></script>`,{html:true});
   }})
   .transform(response);
   const headers=new Headers(transformed.headers);

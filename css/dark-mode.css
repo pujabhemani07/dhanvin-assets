@@ -210,3 +210,30 @@ html[data-theme="dark"] .comp-badge-red{color:#ff8a91}
 /* ---------- Layout safety: stop sideways scrolling (referral page never loaded the ticker's overflow rule) ---------- */
 .ticker{overflow:hidden;max-width:100%}
 .referral-hero,.referral-cta{overflow:hidden}
+
+/* ---------- Contrast and component visibility audit ---------- */
+.service-card .svc-icon i{color:#fff}
+.service-card .svc-link i{color:inherit}
+html[data-theme="dark"] .service-card i,html[data-theme="dark"] .contactitem i,html[data-theme="dark"] .tl-content i,
+html[data-theme="dark"] .benefit-icon,html[data-theme="dark"] .card-icon.icon-purple,html[data-theme="dark"] .insight-icon i,
+html[data-theme="dark"] .icon-purple i,html[data-theme="dark"] .related-chip i,html[data-theme="dark"] .faqitem i{color:#c9b8ff}
+html[data-theme="dark"] .card-icon.icon-blue,html[data-theme="dark"] .icon-blue i,html[data-theme="dark"] .insight-icon.icon-blue i,
+html[data-theme="dark"] .insight-icon[class*="blue"] i{color:#9fb6ff}
+html[data-theme="dark"] .service-card .svc-icon i{color:#fff}
+html[data-theme="dark"] .service-card .svc-link i{color:inherit}
+html[data-theme="dark"] .service-illustration,html[data-theme="dark"] .service-illustration i{color:#c9b8ff!important}
+html[data-theme="dark"] .btn i{color:inherit}
+html[data-theme="dark"] .range-input-group input[type="range"],html[data-theme="dark"] .calcbox input[type="range"]{accent-color:#9f8bff}
+html[data-theme="dark"] .range-input-group input[type="range"]::-webkit-slider-thumb,html[data-theme="dark"] .calcbox input[type="range"]::-webkit-slider-thumb{background:#c9b8ff}
+html[data-theme="dark"] .range-input-group input[type="range"]::-moz-range-thumb,html[data-theme="dark"] .calcbox input[type="range"]::-moz-range-thumb{background:#c9b8ff}
+html:not([data-theme="dark"]) .navbar:not(.scrolled) .nav-links>li>a:not(.btn),
+html:not([data-theme="dark"]) .navbar:not(.scrolled) .nav-links>li>a:not(.btn) i{color:rgba(255,255,255,.9)}
+html:not([data-theme="dark"]) .navbar:not(.scrolled) .nav-links>li>a.active,
+html:not([data-theme="dark"]) .navbar:not(.scrolled) .nav-links>li>a:hover{color:#fff}
+html:not([data-theme="dark"]) .navbar:not(.scrolled) .nav-links>li>a.active::after{background:#D4AF37}
+.navbar .nav-links>li>a{white-space:nowrap}
+.ty-page{min-height:100vh;display:flex;flex-direction:column;text-align:center;font-family:Inter,Arial,sans-serif;background:#f8f9fc;color:#1a1a1a}
+.ty-page main{margin:auto;padding:2rem}
+.ty-page a.ty-link{display:inline-flex;align-items:center;min-height:48px;margin-top:1rem;padding:0 8px;color:#4B2E83;font-weight:600}
+html[data-theme="dark"] .ty-page{background:#0f0a1e;color:#f0efff}
+html[data-theme="dark"] .ty-page a.ty-link{color:#c9b8ff}
