@@ -43,3 +43,33 @@ html[data-theme="dark"] .service-page-theme .section-title,html[data-theme="dark
 .service-page-theme .site-logo-link{display:flex!important;align-items:center!important;width:205px;height:62px;overflow:hidden}
 .service-page-theme .site-logo{width:190px;height:58px;object-fit:contain;object-position:center}
 @media(max-width:760px){.service-page-theme .site-logo-link{width:170px;height:54px}.service-page-theme .site-logo{width:160px;height:52px}}
+
+
+/* Complete dark palette for all service-detail sections. */
+html[data-theme="dark"] .service-page-theme{
+  --bg-color:#0f0a1e;--bg-light:#15102a;--bg-card:#1e1535;
+  --text-primary:#f0efff;--text-secondary:#c0b8d5;--text-muted:#a29bc0;
+  --border-color:#35294f;--shadow-sm:0 4px 14px rgba(0,0,0,.25);
+  --shadow-md:0 10px 30px rgba(0,0,0,.32);--shadow-lg:0 18px 44px rgba(0,0,0,.4);
+}
+html[data-theme="dark"] .service-page-theme :is(main,section:not(.page-hero):not(.cta-section),.service-detail-intro,.related-services){
+  background-color:#0f0a1e;
+}
+html[data-theme="dark"] .service-page-theme :is(.section-padding[style],.service-detail-intro[style]){
+  background:#15102a!important;
+}
+html[data-theme="dark"] .service-page-theme :is(p,li,span:not(.section-badge):not(.gradient-text),.section-subtitle,.service-detail-intro){
+  color:#bdb5cc;
+}
+html[data-theme="dark"] .service-page-theme :is(.benefit-card,.step-card,.service-illustration,.related-chip){
+  background-color:#201638!important;border-color:#3b2d55!important;color:#f0efff!important;
+}
+html[data-theme="dark"] .service-page-theme :is(.benefit-card h3,.step-card h3,.section-title,.section-title span,.service-detail-intro h2,.service-detail-intro h3){
+  color:#f0efff;
+}
+html[data-theme="dark"] .service-page-theme :is(.benefit-card p,.step-card p,.service-detail-intro p,.service-detail-intro li){
+  color:#bdb5cc!important;
+}
+html[data-theme="dark"] .service-page-theme :is(.benefit-icon,.step-num){
+  background:#2a1f45!important;color:#d8cdf5!important;border-color:#493967!important;
+}
