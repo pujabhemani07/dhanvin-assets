@@ -237,3 +237,44 @@ html:not([data-theme="dark"]) .navbar:not(.scrolled) .nav-links>li>a.active::aft
 .ty-page a.ty-link{display:inline-flex;align-items:center;min-height:48px;margin-top:1rem;padding:0 8px;color:#4B2E83;font-weight:600}
 html[data-theme="dark"] .ty-page{background:#0f0a1e;color:#f0efff}
 html[data-theme="dark"] .ty-page a.ty-link{color:#c9b8ff}
+
+
+/* November 2026 — shared dark-mode foundation for legacy internal pages.
+   The Worker injects BRAND_CSS with !important backgrounds; this explicit
+   theme override must win on every page except the protected Mutual Funds page. */
+html[data-theme="dark"] body:not(.mutual-funds-page){
+  background:#0f0a1e!important;color:#f0efff!important;
+}
+html[data-theme="dark"] body:not(.mutual-funds-page) :is(main,section,article,.page,.page-content,.content-wrap,.main-content){
+  color:#f0efff;
+}
+html[data-theme="dark"] body:not(.mutual-funds-page) :is(p,li,dd,dt,label,.subtitle,.description,.section-subtitle){
+  color:#b0aac8;
+}
+html[data-theme="dark"] body:not(.mutual-funds-page) :is(.navbar,.site-nav){
+  background:rgba(24,16,44,.97)!important;border-color:#2e2550!important;
+  box-shadow:0 12px 34px rgba(0,0,0,.42)!important;
+}
+html[data-theme="dark"] body:not(.mutual-funds-page) :is(.nav-link,.nav-links a,.navbar a:not(.btn),.site-nav .navlinks a){
+  color:#ded5f4;
+}
+html[data-theme="dark"] body:not(.mutual-funds-page) :is(.dropdown-menu,.nav-menu,.mobile-menu,.drawer){
+  background:#1a1130!important;border-color:#3b2d55!important;color:#f0efff!important;
+}
+html[data-theme="dark"] body:not(.mutual-funds-page) :is(.dropdown-menu a,.drawer a,.mobile-menu a){
+  color:#ded5f4!important;
+}
+html[data-theme="dark"] body:not(.mutual-funds-page) :is(.card,.service-card,.benefit-card,.step-card,.contact-card,.contactbox,.calcbox,.faqitem,.panel,.feature-card,.info-card){
+  background:#1e1535!important;border-color:#35294f!important;color:#f0efff!important;
+  box-shadow:0 12px 32px rgba(0,0,0,.28);
+}
+html[data-theme="dark"] body:not(.mutual-funds-page) :is(input:not([type=range]),select,textarea){
+  background:#150e2a!important;border-color:#3b2d55!important;color:#f0efff!important;
+}
+html[data-theme="dark"] body:not(.mutual-funds-page) input::placeholder,
+html[data-theme="dark"] body:not(.mutual-funds-page) textarea::placeholder{color:#9189ad!important}
+html[data-theme="dark"] body:not(.mutual-funds-page) :is(.table-wrap,table,th,td){
+  border-color:#35294f!important;
+}
+html[data-theme="dark"] body:not(.mutual-funds-page) th{background:#201638!important;color:#ded5f4!important}
+html[data-theme="dark"] body:not(.mutual-funds-page) td{color:#b0aac8!important}
