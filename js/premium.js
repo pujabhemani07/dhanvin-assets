@@ -134,7 +134,7 @@
       if (t.closest(FIELD)) { root.classList.add('pf-cursor-hide'); setState(null); return; }
       root.classList.remove('pf-cursor-hide');
       // Keep homepage Why Us and Our Services cards on the normal cursor state (no View/Explore label).
-      if (t.closest('#why-choose')) { setState(null); return; }\n      if (t.closest('#services .service-card')) { setState('pf-state-card', 'View'); return; }
+      if (t.closest('#why-choose, #services .service-card')) { setState('pf-state-card', 'View'); return; }
       var custom = t.closest('[data-cursor]');
       if (custom) { setState('pf-state-card', custom.getAttribute('data-cursor')); return; }
       if (t.closest(LINK)) { setState('pf-state-link'); return; }

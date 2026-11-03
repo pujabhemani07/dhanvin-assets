@@ -742,7 +742,12 @@ body.menu-open{overflow:hidden!important;touch-action:none}
 @media(max-width:900px){.nav-inner>.links{display:none!important}.hamb{display:inline-flex!important}.mobile-drawer{padding:76px 20px 30px!important}}
 
 
-/* Homepage services grid: equal-height cards and aligned action links. */
-.services .cards-grid{align-items:stretch}
-.services .service-card{height:100%;display:flex;flex-direction:column}
-.services .service-card .svc-link{margin-top:auto;padding-top:1rem}
+
+/* Homepage services: exact 3-row desktop layout (5 / 4 / 4), with equal-height cards. */
+#services .cards-grid{align-items:stretch}
+#services .service-card{height:100%;display:flex;flex-direction:column;min-width:0}
+#services .service-card .svc-link{margin-top:auto;padding-top:1rem}
+@media(min-width:1100px){#services .cards-grid{grid-template-columns:repeat(20,minmax(0,1fr))!important}#services .service-card{grid-column:span 4}#services .service-card:nth-child(n+6){grid-column:span 5}}
+@media(min-width:700px) and (max-width:1099px){#services .cards-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}#services .service-card{grid-column:auto!important}}
+@media(max-width:699px){#services .cards-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}#services .service-card{grid-column:auto!important}}
+@media(max-width:420px){#services .cards-grid{grid-template-columns:1fr!important}}
