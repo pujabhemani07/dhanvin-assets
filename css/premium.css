@@ -177,3 +177,8 @@ input:focus,textarea:focus,select:focus{box-shadow:0 0 0 3px rgba(36,72,216,.18)
 .ticker .tick{padding:0 18px;white-space:nowrap}
 .ticker .tick.tick-flash{animation:pfTickFlash 1.2s ease-out}
 .ticker .ticker-msg{opacity:.8;font-style:italic}
+
+/* Why Us uses the compact animated orbit cursor shown in the supplied reference. */
+.pf-state-why .pf-cursor-ring{width:40px;height:40px;margin:-20px 0 0 -20px;background:rgba(255,255,255,.10);box-shadow:0 0 18px rgba(72,211,198,.38),0 0 24px rgba(36,72,216,.20)}
+.pf-state-why .pf-cursor-ring span{opacity:0}
+.pf-state-why .pf-cursor-dot{width:9px;height:9px;margin:-4.5px 0 0 -4.5px;opacity:1;background:#4B2E83}
