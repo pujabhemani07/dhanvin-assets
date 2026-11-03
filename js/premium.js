@@ -133,6 +133,8 @@
       var t = e.target; if (!t || !t.closest) return;
       if (t.closest(FIELD)) { root.classList.add('pf-cursor-hide'); setState(null); return; }
       root.classList.remove('pf-cursor-hide');
+      // Keep homepage Why Us and Our Services cards on the normal cursor state (no View/Explore label).
+      if (t.closest('#why-choose, #services')) { setState(null); return; }
       var custom = t.closest('[data-cursor]');
       if (custom) { setState('pf-state-card', custom.getAttribute('data-cursor')); return; }
       if (t.closest(LINK)) { setState('pf-state-link'); return; }
