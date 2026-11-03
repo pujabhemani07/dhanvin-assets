@@ -740,3 +740,9 @@ body.menu-open{overflow:hidden!important;touch-action:none}
 .mobile-drawer .drawer-submenu a{display:block!important;color:var(--text-secondary)!important}
 .hamb{position:relative!important;z-index:100000!important;flex-shrink:0!important;touch-action:manipulation}
 @media(max-width:900px){.nav-inner>.links{display:none!important}.hamb{display:inline-flex!important}.mobile-drawer{padding:76px 20px 30px!important}}
+
+
+/* Homepage services grid: equal-height cards and aligned action links. */
+.services .cards-grid{align-items:stretch}
+.services .service-card{height:100%;display:flex;flex-direction:column}
+.services .service-card .svc-link{margin-top:auto;padding-top:1rem}
