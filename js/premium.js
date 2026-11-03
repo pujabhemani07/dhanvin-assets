@@ -69,8 +69,12 @@
       if (t.closest('#services .service-card')) { setState(null); return; }
       // The dedicated Services listing page uses the animated View cursor.
       if (d.body.classList.contains('services-listing-page') && t.closest('.service-card')) { setState('pf-state-card', 'View'); return; }
+      // Referral Associate detail page keeps the normal cursor throughout.
+      if (d.body.classList.contains('referral-page')) { setState(null); return; }
       var custom = t.closest('[data-cursor]');
       if (custom) { setState('pf-state-card', custom.getAttribute('data-cursor')); return; }
+      // Homepage Referral CTA section stays normal except its explicit Explore button above.
+      if (t.closest('.referral-home-card')) { setState(null); return; }
       if (t.closest(LINK)) { setState('pf-state-link'); return; }
       var c = t.closest(CARD);
       if (c) { setState('pf-state-card', c.matches('.service-card') ? 'Explore' : 'View'); return; }
