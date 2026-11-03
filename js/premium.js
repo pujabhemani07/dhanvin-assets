@@ -65,10 +65,12 @@
       root.classList.remove('pf-cursor-hide');
       // Homepage: the Why Us section gets the compact orbit cursor only.
       if (t.closest('#why-choose')) { setState('pf-state-why'); return; }
-      // Homepage service cards do not use the View cursor.
+      // Homepage Our Services section keeps the normal cursor.
       if (t.closest('#services .service-card')) { setState(null); return; }
-      // The dedicated Services listing page uses the animated View cursor.
-      if (d.body.classList.contains('services-listing-page') && t.closest('.service-card')) { setState('pf-state-card', 'View'); return; }
+      // Homepage's separate Services listing cards use the animated View cursor.
+      if (t.closest('#homepage-services-listing .service-card')) { setState('pf-state-card', 'View'); return; }
+      // The Services listing page itself uses the normal cursor.
+      if (d.body.classList.contains('services-listing-page')) { setState(null); return; }
       // Referral Associate detail page keeps the normal cursor throughout.
       if (d.body.classList.contains('referral-page')) { setState(null); return; }
       var custom = t.closest('[data-cursor]');
