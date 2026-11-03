@@ -63,9 +63,12 @@
       var t = e.target; if (!t || !t.closest) return;
       if (t.closest(FIELD)) { root.classList.add('pf-cursor-hide'); setState(null); return; }
       root.classList.remove('pf-cursor-hide');
-      // Keep homepage Why Us and Our Services cards on the normal cursor state (no View/Explore label).
+      // Homepage: the Why Us section gets the compact orbit cursor only.
       if (t.closest('#why-choose')) { setState('pf-state-why'); return; }
-      if (t.closest('#services .service-card')) { setState('pf-state-card', 'View'); return; }
+      // Homepage service cards do not use the View cursor.
+      if (t.closest('#services .service-card')) { setState(null); return; }
+      // The dedicated Services listing page uses the animated View cursor.
+      if (d.body.classList.contains('services-listing-page') && t.closest('.service-card')) { setState('pf-state-card', 'View'); return; }
       var custom = t.closest('[data-cursor]');
       if (custom) { setState('pf-state-card', custom.getAttribute('data-cursor')); return; }
       if (t.closest(LINK)) { setState('pf-state-link'); return; }
