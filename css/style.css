@@ -655,6 +655,35 @@ img,svg,video,canvas,iframe{max-width:100%}
 @media(max-width:380px){.hero-title{font-size:2.1rem!important}.float-card{max-width:145px!important;padding:.55rem .7rem!important}.hero-illustration{min-height:280px!important}}
 
 
+/* DESKTOP DROPDOWN HOVER + SCROLL FIX */
+@media (min-width: 981px){
+  .nav-dropdown{position:relative}
+  .nav-dropdown-menu{
+    top:100%!important;
+    margin-top:0!important;
+    max-height:min(70vh,520px)!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-gutter:stable;
+    pointer-events:auto;
+  }
+  .nav-dropdown-menu::before{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    top:-14px;
+    height:14px;
+  }
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu{
+    display:block;
+  }
+  .nav-dropdown-menu a{position:relative}
+}
+
 /* MOBILE-FIRST NAVIGATION + RESPONSIVE POLISH */
 .nav{z-index:1500!important}
 .nav-inner{width:min(1240px,calc(100% - 36px))!important;margin-inline:auto!important}
