@@ -63,6 +63,10 @@
       var t = e.target; if (!t || !t.closest) return;
       if (t.closest(FIELD)) { root.classList.add('pf-cursor-hide'); setState(null); return; }
       root.classList.remove('pf-cursor-hide');
+      // Compact halo cursor on the opening hero/page intro and closing disclaimer area site-wide.
+      if (t.closest('.hero, .pagehero, .page-hero, .footer-disclaimer, .disclaimer-section, .disclaimer, .footer-bottom')) {
+        setState('pf-state-focus-zone'); return;
+      }
       // Homepage: the Why Us section gets the compact orbit cursor only.
       if (t.closest('#why-choose')) { setState('pf-state-why'); return; }
       // Homepage Our Services cards use the animated View cursor.
