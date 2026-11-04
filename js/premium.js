@@ -66,11 +66,11 @@
       // Homepage: the Why Us section gets the compact orbit cursor only.
       if (t.closest('#why-choose')) { setState('pf-state-why'); return; }
       // Homepage Our Services cards use the animated View cursor.
-      if (t.closest('#services .service-card')) { setState('pf-state-card', 'View'); return; }
+      if (t.closest('#services .service-card, .home-calculator-card')) { setState('pf-state-card', 'View'); return; }
       // On the dedicated Services page, only Explore links use the animated View cursor.
       if (d.body.classList.contains('services-listing-page')) {
-        var explore = t.closest('.service-card a[data-cursor="View"]');
-        if (explore) { setState('pf-state-card', 'View'); return; }
+        var serviceCard = t.closest('.service-card');
+        if (serviceCard) { setState('pf-state-card', 'View'); return; }
         setState(null); return;
       }
       // Referral Associate detail page keeps the normal cursor throughout.
