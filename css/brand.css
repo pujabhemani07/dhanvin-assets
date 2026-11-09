@@ -69,3 +69,233 @@ html[data-theme="dark"] .brand-logo .logo-dark{display:block}
  .nav-inner>.brand-logo{width:132px}
  .nav-inner>.brand-logo img{height:34px}
 }
+
+/* PR #23 follow-up: one balanced, single-row header system across page families. */
+@media (min-width:901px){
+  .nav-inner,
+  .site-nav,
+  .navbar .nav-container{
+    display:flex!important;
+    align-items:center!important;
+    flex-wrap:nowrap!important;
+  }
+
+  /* Homepage header */
+  .nav-inner{
+    gap:clamp(10px,1.15vw,18px)!important;
+    min-height:58px;
+  }
+  .nav-inner>.brand-logo{
+    flex:0 0 clamp(150px,14vw,180px)!important;
+    width:clamp(150px,14vw,180px)!important;
+    max-width:180px!important;
+    height:52px!important;
+    margin:0!important;
+  }
+  .nav-inner>.brand-logo img{
+    display:block!important;
+    width:100%!important;
+    height:46px!important;
+    max-width:100%!important;
+    object-fit:contain!important;
+    object-position:left center!important;
+  }
+  .nav-inner>.links{
+    flex:1 1 0!important;
+    min-width:0!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    flex-wrap:nowrap!important;
+    gap:clamp(6px,.75vw,12px)!important;
+    white-space:nowrap!important;
+  }
+  .nav-inner>.links>a,
+  .nav-inner>.links>.nav-dropdown>a{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    flex:0 0 auto!important;
+    min-height:40px;
+    padding:0 clamp(2px,.22vw,4px)!important;
+    font-size:clamp(10px,.76vw,12px)!important;
+    line-height:1.2!important;
+    white-space:nowrap!important;
+  }
+  .nav-inner>.actions{
+    flex:0 0 auto!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    gap:9px!important;
+    margin-left:0!important;
+    white-space:nowrap!important;
+  }
+  .nav-inner>.actions .theme{flex:0 0 40px}
+  .nav-inner>.actions .consult{white-space:nowrap!important}
+
+  /* Shared inner-page header */
+  .site-nav{
+    height:70px!important;
+    min-height:70px!important;
+    padding:7px clamp(14px,1.6vw,22px)!important;
+    gap:clamp(10px,1.15vw,17px)!important;
+  }
+  .site-nav>.brand-logo{
+    flex:0 0 clamp(150px,14vw,180px)!important;
+    width:clamp(150px,14vw,180px)!important;
+    max-width:180px!important;
+    height:54px!important;
+    margin:0!important;
+  }
+  .site-nav>.brand-logo img{
+    width:100%!important;
+    height:46px!important;
+    max-width:100%!important;
+    object-fit:contain!important;
+    object-position:left center!important;
+  }
+  .site-nav>.navlinks{
+    flex:1 1 0!important;
+    min-width:0!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    flex-wrap:nowrap!important;
+    gap:clamp(9px,1.05vw,16px)!important;
+    white-space:nowrap!important;
+  }
+  .site-nav>.navlinks>a{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    flex:0 0 auto!important;
+    min-height:40px;
+    padding:0!important;
+    font-size:clamp(10px,.84vw,12px)!important;
+    line-height:1.2!important;
+    white-space:nowrap!important;
+  }
+  .site-nav>.nav-actions{
+    flex:0 0 auto!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    gap:9px!important;
+    margin-left:0!important;
+    white-space:nowrap!important;
+  }
+  .site-nav>.nav-actions .theme{flex:0 0 42px}
+  .site-nav>.nav-actions .consult{white-space:nowrap!important}
+  .site-nav>.hamb{display:none!important}
+
+  /* Service-detail header */
+  .navbar .nav-container{
+    min-height:58px!important;
+    gap:clamp(10px,1.15vw,18px)!important;
+  }
+  .navbar .nav-container>.brand-logo{
+    flex:0 0 clamp(150px,14vw,180px)!important;
+    width:clamp(150px,14vw,180px)!important;
+    max-width:180px!important;
+    height:54px!important;
+    margin:0!important;
+  }
+  .navbar .nav-container>.brand-logo img{
+    width:100%!important;
+    height:46px!important;
+    max-width:100%!important;
+    object-fit:contain!important;
+    object-position:left center!important;
+  }
+  .navbar .nav-menu{
+    flex:1 1 0!important;
+    min-width:0!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    gap:clamp(8px,.9vw,14px)!important;
+  }
+  .navbar .nav-links{
+    flex:1 1 auto!important;
+    min-width:0!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    flex-wrap:nowrap!important;
+    gap:0!important;
+  }
+  .navbar .nav-links>li{flex:0 0 auto}
+  .navbar .nav-link{
+    display:inline-flex!important;
+    align-items:center!important;
+    min-height:40px;
+    padding:0 clamp(5px,.55vw,9px)!important;
+    font-size:clamp(10px,.78vw,12px)!important;
+    line-height:1.2!important;
+    white-space:nowrap!important;
+  }
+  .navbar .nav-actions{
+    flex:0 0 auto!important;
+    display:flex!important;
+    align-items:center!important;
+    gap:9px!important;
+    margin-left:8px!important;
+    white-space:nowrap!important;
+  }
+  .navbar .nav-actions .btn{white-space:nowrap!important}
+  .navbar .hamburger{flex:0 0 auto}
+}
+
+/* Compact desktop widths: preserve the same left / centre / right alignment. */
+@media (min-width:901px) and (max-width:1120px){
+  .nav-inner>.brand-logo,
+  .site-nav>.brand-logo,
+  .navbar .nav-container>.brand-logo{
+    flex-basis:138px!important;
+    width:138px!important;
+  }
+  .nav-inner>.links{gap:4px!important}
+  .nav-inner>.links>a,
+  .nav-inner>.links>.nav-dropdown>a{font-size:10px!important}
+  .site-nav>.navlinks{gap:8px!important}
+  .site-nav>.navlinks>a{font-size:10px!important}
+  .site-nav>.nav-actions .consult{padding:10px 13px!important;font-size:10px!important}
+  .navbar .nav-link{padding-inline:4px!important;font-size:10px!important}
+  .navbar .nav-menu{gap:6px!important}
+  .navbar .nav-actions .btn{padding:.55rem .7rem!important;font-size:10px!important}
+}
+
+/* Tablet headers collapse navigation cleanly instead of squeezing or wrapping. */
+@media (min-width:761px) and (max-width:900px){
+  .site-nav{
+    width:calc(100% - 28px)!important;
+    height:62px!important;
+    min-height:62px!important;
+    padding:6px 14px!important;
+    gap:10px!important;
+  }
+  .site-nav>.brand-logo{width:160px!important;flex-basis:160px!important;margin:0!important}
+  .site-nav>.brand-logo img{height:40px!important}
+  .site-nav>.navlinks{display:none!important}
+  .site-nav>.nav-actions{display:flex!important;margin-left:auto!important}
+  .site-nav>.nav-actions .consult{display:none!important}
+  .site-nav>.hamb{display:inline-flex!important;align-items:center!important;justify-content:center!important;margin-left:0!important}
+  .navbar .nav-menu{display:none!important}
+  .navbar .hamburger{display:flex!important;margin-left:auto!important}
+  .navbar .nav-container>.brand-logo{width:160px!important;flex-basis:160px!important}
+  .navbar .nav-container>.brand-logo img{height:40px!important}
+}
+
+/* Every header control shares a true vertical centre line. */
+.nav-inner>.brand-logo,
+.nav-inner>.links,
+.nav-inner>.actions,
+.site-nav>.brand-logo,
+.site-nav>.navlinks,
+.site-nav>.nav-actions,
+.navbar .nav-container>.brand-logo,
+.navbar .nav-menu,
+.navbar .nav-actions{
+  align-self:center!important;
+}
