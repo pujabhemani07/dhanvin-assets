@@ -378,3 +378,27 @@ html[data-theme="dark"] .brand-logo .logo-dark{display:block}
     max-height:40px!important;
   }
 }
+
+
+/* Critical fix: the shared sizing rule above uses display:block!important.
+   Explicitly switch the two header logo variants so only one can render. */
+.nav-inner>.brand-logo>.logo-light,
+.site-nav>.brand-logo>.logo-light,
+.navbar .nav-container>.brand-logo>.logo-light{
+  display:block!important;
+}
+.nav-inner>.brand-logo>.logo-dark,
+.site-nav>.brand-logo>.logo-dark,
+.navbar .nav-container>.brand-logo>.logo-dark{
+  display:none!important;
+}
+html[data-theme="dark"] .nav-inner>.brand-logo>.logo-light,
+html[data-theme="dark"] .site-nav>.brand-logo>.logo-light,
+html[data-theme="dark"] .navbar .nav-container>.brand-logo>.logo-light{
+  display:none!important;
+}
+html[data-theme="dark"] .nav-inner>.brand-logo>.logo-dark,
+html[data-theme="dark"] .site-nav>.brand-logo>.logo-dark,
+html[data-theme="dark"] .navbar .nav-container>.brand-logo>.logo-dark{
+  display:block!important;
+}
