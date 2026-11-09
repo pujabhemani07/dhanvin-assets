@@ -10,3 +10,39 @@ html[data-theme="dark"] .brand-logo .logo-dark{display:block}
 .ty-logo{margin:0 auto 1.6rem}.ty-logo img{height:64px}
 @media(max-width:760px){.brand-logo img{height:38px;max-width:46vw}.nav-inner>.brand-logo img,.site-nav>.brand-logo img{height:38px}}
 @media(max-width:360px){.brand-logo img{height:34px}}
+
+/* Consistent official-logo placement across every desktop and mobile header. */
+.site-nav,.navbar{box-sizing:border-box}
+.site-nav{gap:clamp(8px,1.15vw,16px)}
+.site-nav>.brand-logo{width:clamp(145px,15vw,190px);min-width:0;max-width:190px;height:100%;margin:0;justify-content:flex-start}
+.site-nav>.brand-logo img{width:100%;height:46px;max-width:100%;object-fit:contain;object-position:left center}
+.site-nav>.navlinks{min-width:0;gap:clamp(10px,1.55vw,24px)}
+.site-nav>.navlinks a{font-size:clamp(11px,.9vw,13px)}
+.site-nav>.nav-actions{flex:0 0 auto;gap:8px}
+.navbar>.nav-container{gap:clamp(10px,1.4vw,22px)}
+.navbar .nav-container>.brand-logo{width:clamp(145px,16vw,190px);min-width:0;max-width:190px;justify-content:flex-start}
+.navbar .nav-container>.brand-logo img{width:100%;height:46px;max-width:100%;object-fit:contain;object-position:left center}
+.navbar .nav-menu{flex:1 1 auto;min-width:0;justify-content:flex-end;gap:clamp(8px,1vw,16px)}
+.navbar .nav-links{gap:0;flex-wrap:nowrap}
+.navbar .nav-link{padding:.45rem clamp(.35rem,.65vw,.65rem);font-size:clamp(.72rem,.82vw,.86rem);white-space:nowrap}
+@media(min-width:761px) and (max-width:1100px){
+ .site-nav{width:calc(100% - 32px);padding:7px 14px}
+ .site-nav>.brand-logo{width:145px}
+ .site-nav>.navlinks{gap:9px}
+ .site-nav>.navlinks a{font-size:10.5px}
+ .site-nav>.nav-actions .consult{padding:11px 14px;font-size:10px}
+ .navbar .nav-container>.brand-logo{width:145px}
+ .navbar .nav-links{gap:0}
+ .navbar .nav-link{padding:.4rem .32rem;font-size:.7rem}
+}
+@media(max-width:760px){
+ .site-nav{width:calc(100% - 24px);padding:6px 12px;gap:8px}
+ .site-nav>.brand-logo{width:min(42vw,170px);max-width:170px}
+ .site-nav>.brand-logo img{height:38px;max-width:100%}
+ .navbar .nav-container>.brand-logo{width:min(42vw,170px);max-width:170px}
+ .navbar .nav-container>.brand-logo img{height:38px}
+}
+@media(max-width:360px){
+ .site-nav>.brand-logo,.navbar .nav-container>.brand-logo{width:132px}
+ .site-nav>.brand-logo img,.navbar .nav-container>.brand-logo img{height:34px}
+}
