@@ -299,3 +299,82 @@ html[data-theme="dark"] .brand-logo .logo-dark{display:block}
 .navbar .nav-actions{
   align-self:center!important;
 }
+
+
+/* Official logo final sizing: preserve the source artwork's 524:156 aspect ratio.
+   The previous fixed image heights constrained the width and made the wordmark
+   look undersized inside its allocated header column. */
+.brand-logo{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  flex:0 0 auto;
+  line-height:0!important;
+}
+.brand-logo>img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-width:100%!important;
+  max-height:54px!important;
+  object-fit:contain!important;
+  object-position:left center!important;
+}
+.site-nav>.brand-logo,
+.nav-inner>.brand-logo,
+.navbar .nav-container>.brand-logo{
+  overflow:visible!important;
+}
+@media(min-width:901px){
+  .site-nav>.brand-logo,
+  .nav-inner>.brand-logo,
+  .navbar .nav-container>.brand-logo{
+    flex-basis:190px!important;
+    width:190px!important;
+    max-width:190px!important;
+    height:56px!important;
+  }
+  .site-nav>.brand-logo>img,
+  .nav-inner>.brand-logo>img,
+  .navbar .nav-container>.brand-logo>img{
+    max-height:54px!important;
+  }
+}
+@media(min-width:761px) and (max-width:900px){
+  .site-nav>.brand-logo,
+  .navbar .nav-container>.brand-logo{
+    flex-basis:160px!important;
+    width:160px!important;
+    height:50px!important;
+  }
+  .site-nav>.brand-logo>img,
+  .navbar .nav-container>.brand-logo>img{
+    max-height:48px!important;
+  }
+}
+@media(max-width:760px){
+  .site-nav>.brand-logo,
+  .nav-inner>.brand-logo,
+  .navbar .nav-container>.brand-logo{
+    height:48px!important;
+  }
+  .site-nav>.brand-logo>img,
+  .nav-inner>.brand-logo>img,
+  .navbar .nav-container>.brand-logo>img{
+    height:auto!important;
+    max-height:44px!important;
+  }
+}
+@media(max-width:360px){
+  .site-nav>.brand-logo,
+  .nav-inner>.brand-logo,
+  .navbar .nav-container>.brand-logo{
+    flex-basis:132px!important;
+    width:132px!important;
+  }
+  .site-nav>.brand-logo>img,
+  .nav-inner>.brand-logo>img,
+  .navbar .nav-container>.brand-logo>img{
+    max-height:40px!important;
+  }
+}
