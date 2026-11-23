@@ -131,6 +131,14 @@ input,select,textarea,button{font-family:inherit}
 .tick-down{color:#f87171}
 @keyframes marquee-ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
+/* Responsive market ticker */
+.ticker-wrap{display:flex;align-items:center;gap:0;min-height:38px;padding:.45rem 0;max-width:100%;isolation:isolate}
+.ticker-status{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;margin-left:clamp(8px,1.5vw,20px);padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.12);font:700 .65rem/1.2 Inter,Arial,sans-serif;letter-spacing:.035em;white-space:nowrap}
+.ticker-status[hidden]{display:none}.ticker-status.is-open{color:#8cf0b0;background:rgba(40,190,105,.16)}.ticker-status.is-closed{color:#ffe29a;background:rgba(255,210,100,.13)}.ticker-status.is-delayed{color:#ffd18a;background:rgba(255,170,55,.16)}
+.ticker-viewport{flex:1 1 auto;min-width:0;overflow:hidden;white-space:nowrap}.marquee-inner-ticker{display:flex;width:max-content;max-width:none;will-change:transform}.ticker-item{flex:0 0 auto}.ticker-wrap:hover .marquee-inner-ticker{animation-play-state:paused}
+@media(max-width:600px){.ticker-wrap{min-height:42px;padding:6px 0;gap:5px}.ticker-status{margin-left:7px;padding:5px 7px;font-size:9px;letter-spacing:0;max-width:122px;white-space:normal;text-align:center}.ticker-item{font-size:11px;padding:0 12px;gap:4px}.ticker-sep{padding:0}.marquee-inner-ticker{animation-duration:34s}}
+@media(prefers-reduced-motion:reduce){.marquee-inner-ticker{animation:none!important;transform:none!important}.ticker-viewport{overflow-x:auto;scrollbar-width:none}}
+
 /* ---- HERO ---- */
 .hero{min-height:100vh;background:var(--gradient-hero);display:flex;align-items:center;position:relative;overflow:hidden;padding:6rem 0 4rem}
 .hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(75,46,131,.12) 0%,transparent 70%);border-radius:50%}

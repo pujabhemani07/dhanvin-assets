@@ -42,9 +42,9 @@
     var t = d.asOf ? new Date(d.asOf) : null;
     var when = t ? t.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit', hour12: false }) + ' IST' : '';
     status.hidden = false;
-    status.className = 'ticker-status ' + (d.marketOpen ? 'is-open' : 'is-closed');
-    status.textContent = d.marketOpen ? 'LIVE' : 'MARKET CLOSED';
-    status.title = 'Delayed data' + (when ? ' \u00B7 as of ' + when : '') + ' \u00B7 Source: ' + (d.source || 'market data provider') + '. For information only; not investment advice.';
+    status.className = 'ticker-status ' + (d.marketOpen ? (d.dataFresh ? 'is-open' : 'is-delayed') : 'is-closed');
+    status.textContent = d.marketOpen ? (d.dataFresh ? 'MARKET OPEN · DELAYED FEED' : 'MARKET OPEN · DATA DELAYED') : (d.marketLabel || 'MARKET CLOSED');
+    status.title = (d.calendarVerified ? 'Exchange session status' : 'Exchange calendar needs verification') + ' · ' + (d.dataStatus || 'UNKNOWN DATA STATUS') + (when ? ' · latest quote ' + when : '') + ' · Source: ' + (d.source || 'market data provider') + '. For information only; not investment advice.';
   }
   function fail() {
     if (!built) { track.innerHTML = inner ? '<div class="tick ticker-msg">Live market data temporarily unavailable</div>' : '<span class="ticker-item ticker-msg">Live market data temporarily unavailable</span>'; track.style.animation = 'none'; }
