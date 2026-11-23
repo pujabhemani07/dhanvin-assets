@@ -35,6 +35,10 @@ jobs:
             echo "::error::Deployment blocked: configure CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID in GitHub Actions repository secrets."
             exit 1
           else
+            if [[ ! "$CF_ACCOUNT_ID" =~ ^[a-fA-F0-9]{32}$ ]]; then
+              echo "::error::CLOUDFLARE_ACCOUNT_ID is present but malformed. Copy the 32-character Account ID from Cloudflare Dashboard > Workers & Pages > Overview (or Account details). Do not use an API token, zone ID, email, or account name."
+              exit 1
+            fi
             echo "available=true" >> "$GITHUB_OUTPUT"
           fi
 
