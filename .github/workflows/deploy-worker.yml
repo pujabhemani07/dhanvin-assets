@@ -32,8 +32,8 @@ jobs:
           CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           if [[ -z "$CF_API_TOKEN" || -z "$CF_ACCOUNT_ID" ]]; then
-            echo "available=false" >> "$GITHUB_OUTPUT"
-            echo "::warning::Worker code was committed, but deployment was skipped because CLOUDFLARE_API_TOKEN and/or CLOUDFLARE_ACCOUNT_ID is not configured in GitHub Actions secrets."
+            echo "::error::Deployment blocked: configure CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID in GitHub Actions repository secrets."
+            exit 1
           else
             echo "available=true" >> "$GITHUB_OUTPUT"
           fi
