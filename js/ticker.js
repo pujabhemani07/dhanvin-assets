@@ -47,8 +47,22 @@
     status.title = (d.calendarVerified ? 'Exchange session status' : 'Exchange calendar needs verification') + ' · ' + (d.dataStatus || 'UNKNOWN DATA STATUS') + (when ? ' · latest quote ' + when : '') + ' · Source: ' + (d.source || 'market data provider') + '. For information only; not investment advice.';
   }
   function fail() {
-    if (!built) { track.innerHTML = inner ? '<div class="tick ticker-msg">Live market data temporarily unavailable</div>' : '<span class="ticker-item ticker-msg">Live market data temporarily unavailable</span>'; track.style.animation = 'none'; }
-    if (status) status.hidden = true;
+    if (!built) {
+      track.innerHTML = inner ? '<div class="tick ticker-msg">Market data temporarily unavailable</div>' : '<span class="ticker-item ticker-msg">Market data temporarily unavailable</span>';
+      track.style.animation = 'none';
+    }
+    // If a previous successful quote is still on screen, never silently imply
+    // it is current after a refresh failure.
+    if (status) {
+      status.hidden = false;
+      status.className = 'ticker-status is-delayed';
+      status.textContent = built ? 'FEED CONNECTION ISSUE · CHECK DATA TIME' : 'MARKET DATA UNAVAILABLE';
+      status.title = 'The latest refresh failed. Any prices still visible are from the last successful response and may be stale. Please verify prices with the exchange or your broker before relying on them.';
+    }
+    if (inner) {
+      var box = track.parentNode;
+      if (box) box.title = 'Market data refresh failed. Prices shown may be from the last successful update and may be stale.';
+    }
   }
   function load() {
     if (document.hidden) return;
