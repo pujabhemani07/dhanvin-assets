@@ -282,7 +282,7 @@ const TICKER_ITEMS=[
  {k:'nifty50',n:'NIFTY 50',s:'^NSEI'},
  {k:'sensex',n:'SENSEX',s:'^BSESN'},
  {k:'banknifty',n:'BANK NIFTY',s:'^NSEBANK'},
- {k:'niftymid',n:'NIFTY MIDCAP 100',s:'NIFTY_MIDCAP_100.NS'},
+ {k:'niftymid',n:'NIFTY MIDCAP 100',s:'^NSMIDCP'},
  {k:'usdinr',n:'USD/INR',s:'INR=X',dec:2},
  {k:'goldusd',n:'_',s:'GC=F',hidden:true}
 ];
@@ -294,7 +294,7 @@ async function fetchQuote(sym){
  if(!m||typeof m.regularMarketPrice!=='number')throw new Error('Fallback quote unavailable');
  const prev=typeof m.chartPreviousClose==='number'?m.chartPreviousClose:m.previousClose;
  if(!(prev>0))throw new Error('Previous close unavailable');
- return {price:m.regularMarketPrice,prev,time:m.regularMarketTime||0,source:'Yahoo Finance fallback (delayed/indicative)'};
+ return {price:m.regularMarketPrice,prev,time:m.regularMarketTime||0,source:'Yahoo Finance (unofficial delayed/indicative)'};
 }
 
 // NSE holidays are maintained per published annual exchange calendar.
@@ -309,67 +309,24 @@ function nseSession(now){
  if(NSE_HOLIDAYS_2026.has(date))return {open:false,verified:true,label:'MARKET HOLIDAY'};
  return {open:minute>=555&&minute<930,verified:true,label:minute<555?'PRE-MARKET':minute<930?'MARKET OPEN':'MARKET CLOSED'};
 }
-function parseIndexTimestamp(row){
- if(!row||!row.date||!row.time)return 0;
- const value=Date.parse(String(row.date).trim()+'T'+String(row.time).trim()+'+05:30');
- return Number.isFinite(value)?Math.floor(value/1000):0;
-}
-async function fetchIndianIndices(env){
- if(!env.INDIANAPI_KEY)return {};
- const configured=String(env.INDIANAPI_BASE||'').trim();
- const host=configured?configured.replace(/^https?:\/\//i,'').replace(/\/+$/,''):'';
- const allowed=['dev.indianapi.in','analyst.indianapi.in','pro.indianapi.in'];
- if(!allowed.includes(host.toLowerCase()))return {};
- const base='https://'+host;
- let lastError;
- for(let attempt=0;attempt<2;attempt++){
-  try{
-   const headers={'X-Api-Key':env.INDIANAPI_KEY,'Accept':'application/json'};
-   const response=await fetch(base+'/indices?index_type=POPULAR',{headers,signal:AbortSignal.timeout(8000)});
-   if(!response.ok)throw new Error('IndianAPI HTTP '+response.status);
-   const payload=await response.json(),rows=Array.isArray(payload)?payload:(payload&&Array.isArray(payload.indices)?payload.indices:[]);
-   if(!rows.length)throw new Error('IndianAPI returned no index rows');
-   const out={};
-   const specs=[
-    {k:'nifty50',re:/^NIFTY\s*50$/i},
-    {k:'sensex',re:/^SENSEX$/i},
-    {k:'banknifty',re:/^(NIFTY\s*BANK|BANK\s*NIFTY)$/i},
-    {k:'niftymid',re:/^NIFTY\s*MIDCAP\s*100$/i}
-   ];
-   for(const spec of specs){
-    const row=rows.find(item=>spec.re.test(String(item&&item.name||'').trim()));
-    if(!row)continue;
-    const price=Number(row.price),pct=Number(row.percentChange),change=Number(row.netChange);
-    if(!Number.isFinite(price)||price<=0||!Number.isFinite(pct)||pct<=-100)continue;
-    out[spec.k]={price,prev:price/(1+pct/100),pct,chg:Number.isFinite(change)?change:undefined,time:parseIndexTimestamp(row),source:'IndianAPI'};
-   }
-   if(!Object.keys(out).length)throw new Error('IndianAPI response contained no recognized index values');
-   return out;
-  }catch(error){lastError=error;}
- }
- // Do not expose credentials or provider error details in the public response.
- return {};
-}
 async function handleTicker(request,env,ctx){
  const cache=caches.default,baseUrl=new URL('/api/ticker',request.url);
  const freshKey=new Request(baseUrl.toString()+'?cache=fresh'),lastGoodKey=new Request(baseUrl.toString()+'?cache=last-good');
  const freshHit=await cache.match(freshKey);
  if(freshHit)return freshHit;
 
- let primary={};
- try{primary=await fetchIndianIndices(env);}catch(e){primary={};}
+ // IndianAPI Free does not include /indices. Do not call a paid-only endpoint
+ // with a Free key or burn credits on a request that cannot succeed. Public
+ // reference quotes are used here and are always labelled delayed/indicative.
  const quotes=await Promise.allSettled(TICKER_ITEMS.map(item=>fetchQuote(item.s)));
  const q={};
  TICKER_ITEMS.forEach((item,index)=>{if(quotes[index].status==='fulfilled')q[item.k]=quotes[index].value;});
- // IndianAPI is the preferred source for Indian indices; Yahoo is an explicitly
- // identified fallback only when the primary endpoint is unavailable or incomplete.
- ['nifty50','sensex','banknifty','niftymid'].forEach(key=>{if(primary[key])q[key]=primary[key];});
  const items=[];
  TICKER_ITEMS.forEach(item=>{
   const value=q[item.k];
   if(!value||item.hidden||!(value.prev>0))return;
   const pct=value.pct!==undefined?value.pct:(value.price-value.prev)/value.prev*100;
-  items.push({k:item.k,n:item.n,price:value.price,chg:value.chg!==undefined?value.chg:value.price-value.prev,pct,dec:item.dec||2,asOf:value.time?new Date(value.time*1000).toISOString():null,source:value.source||'Yahoo Finance fallback (delayed/indicative)'});
+  items.push({k:item.k,n:item.n,price:value.price,chg:value.chg!==undefined?value.chg:value.price-value.prev,pct,dec:item.dec||2,asOf:value.time?new Date(value.time*1000).toISOString():null,source:value.source||'Yahoo Finance (unofficial delayed/indicative)'});
  });
  if(q.goldusd&&q.usdinr&&q.goldusd.prev>0&&q.usdinr.prev>0){
   const ounce=31.1035,now=q.goldusd.price*q.usdinr.price/ounce*10,previous=q.goldusd.prev*q.usdinr.prev/ounce*10;
@@ -378,7 +335,6 @@ async function handleTicker(request,env,ctx){
  const session=nseSession(new Date());
  const indexItems=items.filter(item=>['nifty50','sensex','banknifty','niftymid'].includes(item.k));
  const indexTimes=indexItems.map(item=>item.asOf?Date.parse(item.asOf):0);
- const allIndicesFromPrimary=indexItems.length===4&&indexItems.every(item=>item.source==='IndianAPI');
  const indicesFresh=indexItems.length===4&&indexTimes.every(ts=>ts>0&&(Date.now()-ts)/60000<=20);
  const newest=indexTimes.filter(Boolean).length?Math.max(...indexTimes.filter(Boolean)):0;
  const body={
@@ -386,8 +342,8 @@ async function handleTicker(request,env,ctx){
   asOf:newest?new Date(newest).toISOString():null,
   marketOpen:session.open,calendarVerified:session.verified,marketLabel:session.label,
   dataFresh:indicesFresh,dataStatus:indicesFresh?'RECENT':'DELAYED',
-  source:allIndicesFromPrimary?'IndianAPI':(indexItems.some(item=>item.source==='IndianAPI')?'IndianAPI + Yahoo fallback':'Yahoo Finance fallback (delayed/indicative)'),
-  providerStatus:allIndicesFromPrimary?'PRIMARY_OK':(indexItems.some(item=>item.source==='IndianAPI')?'PARTIAL_FALLBACK':'PRIMARY_UNAVAILABLE'),
+  source:'Yahoo Finance (unofficial delayed/indicative)',
+  providerStatus:'PUBLIC_REFERENCE_FEED_ONLY',
   items
  };
  if(items.length){
