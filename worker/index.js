@@ -287,51 +287,121 @@ const TICKER_ITEMS=[
  {k:'goldusd',n:'_',s:'GC=F',hidden:true}
 ];
 async function fetchQuote(sym){
- const r=await fetch('https://query1.finance.yahoo.com/v8/finance/chart/'+encodeURIComponent(sym)+'?interval=1d&range=1d',{headers:{'User-Agent':'Mozilla/5.0 (compatible; DhanvinAssetsTicker/1.0)','Accept':'application/json'},cf:{cacheTtl:60,cacheEverything:true}});
- if(!r.ok)throw new Error('HTTP '+r.status);
+ const url='https://query1.finance.yahoo.com/v8/finance/chart/'+encodeURIComponent(sym)+'?interval=1d&range=1d';
+ const r=await fetch(url,{headers:{'User-Agent':'Mozilla/5.0 (compatible; DhanvinAssetsTicker/1.0)','Accept':'application/json'},signal:AbortSignal.timeout(7000),cf:{cacheTtl:30,cacheEverything:true}});
+ if(!r.ok)throw new Error('Fallback quote HTTP '+r.status);
  const j=await r.json(),m=j&&j.chart&&j.chart.result&&j.chart.result[0]&&j.chart.result[0].meta;
- if(!m||typeof m.regularMarketPrice!=='number')throw new Error('no data');
- return {price:m.regularMarketPrice,prev:typeof m.chartPreviousClose==='number'?m.chartPreviousClose:m.previousClose,time:m.regularMarketTime||0};
+ if(!m||typeof m.regularMarketPrice!=='number')throw new Error('Fallback quote unavailable');
+ const prev=typeof m.chartPreviousClose==='number'?m.chartPreviousClose:m.previousClose;
+ if(!(prev>0))throw new Error('Previous close unavailable');
+ return {price:m.regularMarketPrice,prev,time:m.regularMarketTime||0,source:'Yahoo Finance fallback (delayed/indicative)'};
 }
+
+// NSE holidays are maintained per published annual exchange calendar.
+// Unknown years are deliberately marked unverified rather than guessed.
 const NSE_HOLIDAYS_2026=new Set(['2026-01-15','2026-01-26','2026-03-03','2026-03-26','2026-03-31','2026-04-03','2026-04-14','2026-05-01','2026-05-28','2026-06-26','2026-09-14','2026-10-02','2026-10-20','2026-11-10','2026-11-24','2026-12-25']);
 function nseSession(now){
- const p=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit',weekday:'short',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now),v={};
- p.forEach(x=>v[x.type]=x.value);
- const date=v.year+'-'+v.month+'-'+v.day,minute=Number(v.hour)*60+Number(v.minute);
- if(Number(v.year)!==2026)return {open:false,verified:false,label:'EXCHANGE CALENDAR CHECK'};
+ const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit',weekday:'short',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now),v={};
+ parts.forEach(p=>v[p.type]=p.value);
+ const year=Number(v.year),date=v.year+'-'+v.month+'-'+v.day,minute=Number(v.hour)*60+Number(v.minute),weekday=v.weekday;
+ if(weekday==='Sat'||weekday==='Sun')return {open:false,verified:true,label:'WEEKEND'};
+ if(year!==2026)return {open:false,verified:false,label:'EXCHANGE CALENDAR CHECK'};
  if(NSE_HOLIDAYS_2026.has(date))return {open:false,verified:true,label:'MARKET HOLIDAY'};
- if(v.weekday==='Sat'||v.weekday==='Sun')return {open:false,verified:true,label:'WEEKEND'};
  return {open:minute>=555&&minute<930,verified:true,label:minute<555?'PRE-MARKET':minute<930?'MARKET OPEN':'MARKET CLOSED'};
 }
+function parseIndexTimestamp(row){
+ if(!row||!row.date||!row.time)return 0;
+ const value=Date.parse(String(row.date).trim()+'T'+String(row.time).trim()+'+05:30');
+ return Number.isFinite(value)?Math.floor(value/1000):0;
+}
 async function fetchIndianIndices(env){
- const base=String(env.INDIANAPI_BASE||'https://stock.indianapi.in').replace(/\/+$/,'');
- if(!/^(dev|analyst|pro)\.indianapi\.in$/i.test(base.replace(/^https:\/\//,'')))return null;
- const hdr=env.INDIANAPI_HEADER||'X-Api-Key',r=await fetch(base+'/indices?index_type=POPULAR',{headers:{[hdr]:env.INDIANAPI_KEY,'Accept':'application/json'}});
- if(!r.ok)throw new Error('IndianAPI indices HTTP '+r.status);
- const j=await r.json(),rows=Array.isArray(j)?j:(j.indices||[]),out={};
- const maps=[['nifty50','NIFTY 50','^NSEI'],['sensex','SENSEX','^BSESN'],['banknifty','NIFTY BANK','^NSEBANK'],['niftymid','NIFTY MIDCAP 100','NIFTY_MIDCAP_100.NS']];
- for(const [k,name] of maps){const x=rows.find(a=>String(a.name||'').toUpperCase()===name);if(!x)continue;
-  const price=Number(x.price),pct=Number(x.percentChange),chg=Number(x.netChange);
-  if(!Number.isFinite(price)||!Number.isFinite(pct))continue;
-  const stamp=x.date&&x.time?Date.parse(x.date+'T'+x.time+ '+05:30')/1000:0;
-  out[k]={price,prev:price/(1+pct/100),pct,chg,time:Number.isFinite(stamp)?stamp:0,source:'IndianAPI'};
+ if(!env.INDIANAPI_KEY)return {};
+ const configured=String(env.INDIANAPI_BASE||'').trim();
+ const host=configured?configured.replace(/^https?:\/\//i,'').replace(/\/+$/,''):'';
+ const allowed=['dev.indianapi.in','analyst.indianapi.in','pro.indianapi.in'];
+ if(!allowed.includes(host.toLowerCase()))return {};
+ const base='https://'+host;
+ let lastError;
+ for(let attempt=0;attempt<2;attempt++){
+  try{
+   const headers={'X-Api-Key':env.INDIANAPI_KEY,'Accept':'application/json'};
+   const response=await fetch(base+'/indices?index_type=POPULAR',{headers,signal:AbortSignal.timeout(8000)});
+   if(!response.ok)throw new Error('IndianAPI HTTP '+response.status);
+   const payload=await response.json(),rows=Array.isArray(payload)?payload:(payload&&Array.isArray(payload.indices)?payload.indices:[]);
+   if(!rows.length)throw new Error('IndianAPI returned no index rows');
+   const out={};
+   const specs=[
+    {k:'nifty50',re:/^NIFTY\s*50$/i},
+    {k:'sensex',re:/^SENSEX$/i},
+    {k:'banknifty',re:/^(NIFTY\s*BANK|BANK\s*NIFTY)$/i},
+    {k:'niftymid',re:/^NIFTY\s*MIDCAP\s*100$/i}
+   ];
+   for(const spec of specs){
+    const row=rows.find(item=>spec.re.test(String(item&&item.name||'').trim()));
+    if(!row)continue;
+    const price=Number(row.price),pct=Number(row.percentChange),change=Number(row.netChange);
+    if(!Number.isFinite(price)||price<=0||!Number.isFinite(pct)||pct<=-100)continue;
+    out[spec.k]={price,prev:price/(1+pct/100),pct,chg:Number.isFinite(change)?change:undefined,time:parseIndexTimestamp(row),source:'IndianAPI'};
+   }
+   if(!Object.keys(out).length)throw new Error('IndianAPI response contained no recognized index values');
+   return out;
+  }catch(error){lastError=error;}
  }
- return out;
+ // Do not expose credentials or provider error details in the public response.
+ return {};
 }
 async function handleTicker(request,env,ctx){
- const cache=caches.default,key=new Request(new URL('/api/ticker',request.url).toString(),{method:'GET'}),hit=await cache.match(key);
- if(hit)return hit;
- let indian={};try{if(env.INDIANAPI_KEY)indian=await fetchIndianIndices(env)||{};}catch(e){indian={};}
- const res=await Promise.allSettled(TICKER_ITEMS.map(i=>fetchQuote(i.s))),q={};
- TICKER_ITEMS.forEach((i,ix)=>{if(res[ix].status==='fulfilled')q[i.k]=res[ix].value;});
- ['nifty50','sensex','banknifty','niftymid'].forEach(k=>{if(indian[k])q[k]=indian[k];});
+ const cache=caches.default,baseUrl=new URL('/api/ticker',request.url);
+ const freshKey=new Request(baseUrl.toString()+'?cache=fresh'),lastGoodKey=new Request(baseUrl.toString()+'?cache=last-good');
+ const freshHit=await cache.match(freshKey);
+ if(freshHit)return freshHit;
+
+ let primary={};
+ try{primary=await fetchIndianIndices(env);}catch(e){primary={};}
+ const quotes=await Promise.allSettled(TICKER_ITEMS.map(item=>fetchQuote(item.s)));
+ const q={};
+ TICKER_ITEMS.forEach((item,index)=>{if(quotes[index].status==='fulfilled')q[item.k]=quotes[index].value;});
+ // IndianAPI is the preferred source for Indian indices; Yahoo is an explicitly
+ // identified fallback only when the primary endpoint is unavailable or incomplete.
+ ['nifty50','sensex','banknifty','niftymid'].forEach(key=>{if(primary[key])q[key]=primary[key];});
  const items=[];
- TICKER_ITEMS.forEach(i=>{const v=q[i.k];if(!v||i.hidden||!v.prev)return;items.push({k:i.k,n:i.n,price:v.price,chg:v.chg!==undefined?v.chg:v.price-v.prev,pct:v.pct!==undefined?v.pct:(v.price-v.prev)/v.prev*100,dec:i.dec||2,asOf:v.time?new Date(v.time*1000).toISOString():null,source:v.source||'Yahoo Finance (delayed)'});});
- if(q.goldusd&&q.usdinr&&q.goldusd.prev&&q.usdinr.prev){const OZ=31.1035,now=q.goldusd.price*q.usdinr.price/OZ*10,prev=q.goldusd.prev*q.usdinr.prev/OZ*10;items.push({k:'gold',n:'GOLD (INTL)',price:now,chg:now-prev,pct:(now-prev)/prev*100,dec:0,prefix:'\u20B9',suffix:'/10g',asOf:q.goldusd.time?new Date(q.goldusd.time*1000).toISOString():null,source:'Yahoo Finance (international proxy)'});}
- const session=nseSession(new Date()),times=items.map(x=>x.asOf?Date.parse(x.asOf):0).filter(Boolean),newest=times.length?Math.max(...times):0,indexTimes=items.filter(x=>['nifty50','sensex','banknifty','niftymid'].includes(x.k)).map(x=>x.asOf?Date.parse(x.asOf):0),indicesFresh=indexTimes.length>0&&indexTimes.every(ts=>ts>0&&(Date.now()-ts)/60000<=20),
- const body={updated:new Date().toISOString(),asOf:newest?new Date(newest).toISOString():null,marketOpen:session.open,calendarVerified:session.verified,marketLabel:session.label,dataFresh:indicesFresh,dataStatus:indicesFresh?'RECENT':'DELAYED',source:items.some(x=>x.source==='IndianAPI')?'IndianAPI + Yahoo Finance':'Yahoo Finance (delayed)',items};
- const ok=items.length>0,out=new Response(JSON.stringify(ok?body:{error:'unavailable'}),{status:ok?200:502,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':ok?'public, max-age=30':'no-store','X-Robots-Tag':'noindex'}});
- if(ok)ctx.waitUntil(cache.put(key,out.clone()));return out;
+ TICKER_ITEMS.forEach(item=>{
+  const value=q[item.k];
+  if(!value||item.hidden||!(value.prev>0))return;
+  const pct=value.pct!==undefined?value.pct:(value.price-value.prev)/value.prev*100;
+  items.push({k:item.k,n:item.n,price:value.price,chg:value.chg!==undefined?value.chg:value.price-value.prev,pct,dec:item.dec||2,asOf:value.time?new Date(value.time*1000).toISOString():null,source:value.source||'Yahoo Finance fallback (delayed/indicative)'});
+ });
+ if(q.goldusd&&q.usdinr&&q.goldusd.prev>0&&q.usdinr.prev>0){
+  const ounce=31.1035,now=q.goldusd.price*q.usdinr.price/ounce*10,previous=q.goldusd.prev*q.usdinr.prev/ounce*10;
+  items.push({k:'gold',n:'GOLD (INTL)',price:now,chg:now-previous,pct:(now-previous)/previous*100,dec:0,prefix:'\u20B9',suffix:'/10g',asOf:q.goldusd.time?new Date(q.goldusd.time*1000).toISOString():null,source:'Yahoo Finance international proxy; not Indian retail/MCX'});
+ }
+ const session=nseSession(new Date());
+ const indexItems=items.filter(item=>['nifty50','sensex','banknifty','niftymid'].includes(item.k));
+ const indexTimes=indexItems.map(item=>item.asOf?Date.parse(item.asOf):0);
+ const allIndicesFromPrimary=indexItems.length===4&&indexItems.every(item=>item.source==='IndianAPI');
+ const indicesFresh=indexItems.length===4&&indexTimes.every(ts=>ts>0&&(Date.now()-ts)/60000<=20);
+ const newest=indexTimes.filter(Boolean).length?Math.max(...indexTimes.filter(Boolean)):0;
+ const body={
+  updated:new Date().toISOString(),
+  asOf:newest?new Date(newest).toISOString():null,
+  marketOpen:session.open,calendarVerified:session.verified,marketLabel:session.label,
+  dataFresh:indicesFresh,dataStatus:indicesFresh?'RECENT':'DELAYED',
+  source:allIndicesFromPrimary?'IndianAPI':(indexItems.some(item=>item.source==='IndianAPI')?'IndianAPI + Yahoo fallback':'Yahoo Finance fallback (delayed/indicative)'),
+  providerStatus:allIndicesFromPrimary?'PRIMARY_OK':(indexItems.some(item=>item.source==='IndianAPI')?'PARTIAL_FALLBACK':'PRIMARY_UNAVAILABLE'),
+  items
+ };
+ if(items.length){
+  const response=new Response(JSON.stringify(body),{status:200,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'public, max-age=20','X-Robots-Tag':'noindex'}});
+  ctx.waitUntil(Promise.all([cache.put(freshKey,response.clone()),cache.put(lastGoodKey,new Response(JSON.stringify(body),{headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'public, max-age=86400'}}))]));
+  return response;
+ }
+ const previous=await cache.match(lastGoodKey);
+ if(previous){
+  const stale=await previous.json();
+  stale.dataFresh=false;stale.dataStatus='STALE';stale.providerStatus='ALL_PROVIDERS_UNAVAILABLE';stale.warning='Showing last successfully received prices; these are not live.';
+  return new Response(JSON.stringify(stale),{status:200,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Robots-Tag':'noindex'}});
+ }
+ return new Response(JSON.stringify({error:'Market data temporarily unavailable',marketOpen:session.open,calendarVerified:session.verified,marketLabel:session.label,dataFresh:false,dataStatus:'UNAVAILABLE',items:[]}),{status:503,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Robots-Tag':'noindex'}});
 }
 
 
