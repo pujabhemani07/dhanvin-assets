@@ -287,34 +287,51 @@ const TICKER_ITEMS=[
  {k:'goldusd',n:'_',s:'GC=F',hidden:true}
 ];
 async function fetchQuote(sym){
- const r=await fetch('https://query1.finance.yahoo.com/v8/finance/chart/'+encodeURIComponent(sym)+'?interval=1d&range=1d',{
-  headers:{'User-Agent':'Mozilla/5.0 (compatible; DhanvinAssetsTicker/1.0)','Accept':'application/json'},
-  cf:{cacheTtl:60,cacheEverything:true}});
- if(!r.ok) throw new Error('HTTP '+r.status);
- const j=await r.json(); const m=j&&j.chart&&j.chart.result&&j.chart.result[0]&&j.chart.result[0].meta;
- if(!m||typeof m.regularMarketPrice!=='number') throw new Error('no data');
- const prev=(typeof m.chartPreviousClose==='number'?m.chartPreviousClose:m.previousClose);
- return {price:m.regularMarketPrice,prev:prev,time:m.regularMarketTime||0};
+ const r=await fetch('https://query1.finance.yahoo.com/v8/finance/chart/'+encodeURIComponent(sym)+'?interval=1d&range=1d',{headers:{'User-Agent':'Mozilla/5.0 (compatible; DhanvinAssetsTicker/1.0)','Accept':'application/json'},cf:{cacheTtl:60,cacheEverything:true}});
+ if(!r.ok)throw new Error('HTTP '+r.status);
+ const j=await r.json(),m=j&&j.chart&&j.chart.result&&j.chart.result[0]&&j.chart.result[0].meta;
+ if(!m||typeof m.regularMarketPrice!=='number')throw new Error('no data');
+ return {price:m.regularMarketPrice,prev:typeof m.chartPreviousClose==='number'?m.chartPreviousClose:m.previousClose,time:m.regularMarketTime||0};
 }
-async function handleTicker(request,ctx){
- const cache=caches.default, key=new Request(new URL('/api/ticker',request.url).toString(),{method:'GET'});
- const hit=await cache.match(key); if(hit) return hit;
- const res=await Promise.allSettled(TICKER_ITEMS.map(i=>fetchQuote(i.s)));
- const q={}; TICKER_ITEMS.forEach((i,ix)=>{ if(res[ix].status==='fulfilled') q[i.k]=res[ix].value; });
- const items=[];
- TICKER_ITEMS.forEach(i=>{ const v=q[i.k]; if(!v||i.hidden||!v.prev) return;
-  items.push({k:i.k,n:i.n,price:v.price,chg:v.price-v.prev,pct:(v.price-v.prev)/v.prev*100,dec:i.dec||2}); });
- // Gold: international price converted to INR per 10g (excludes Indian import duty/GST, so it will read lower than Indian retail/MCX)
- if(q.goldusd&&q.usdinr&&q.goldusd.prev&&q.usdinr.prev){
-  const OZ=31.1035, now=q.goldusd.price*q.usdinr.price/OZ*10, prev=q.goldusd.prev*q.usdinr.prev/OZ*10;
-  items.push({k:'gold',n:'GOLD (INTL)',price:now,chg:now-prev,pct:(now-prev)/prev*100,dec:0,prefix:'\u20B9',suffix:'/10g'});
+const NSE_HOLIDAYS_2026=new Set(['2026-01-15','2026-01-26','2026-03-03','2026-03-26','2026-03-31','2026-04-03','2026-04-14','2026-05-01','2026-05-28','2026-06-26','2026-09-14','2026-10-02','2026-10-20','2026-11-10','2026-11-24','2026-12-25']);
+function nseSession(now){
+ const p=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit',weekday:'short',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now),v={};
+ p.forEach(x=>v[x.type]=x.value);
+ const date=v.year+'-'+v.month+'-'+v.day,minute=Number(v.hour)*60+Number(v.minute);
+ if(Number(v.year)!==2026)return {open:false,verified:false,label:'EXCHANGE CALENDAR CHECK'};
+ if(NSE_HOLIDAYS_2026.has(date))return {open:false,verified:true,label:'MARKET HOLIDAY'};
+ if(v.weekday==='Sat'||v.weekday==='Sun')return {open:false,verified:true,label:'WEEKEND'};
+ return {open:minute>=555&&minute<930,verified:true,label:minute<555?'PRE-MARKET':minute<930?'MARKET OPEN':'MARKET CLOSED'};
+}
+async function fetchIndianIndices(env){
+ const base=String(env.INDIANAPI_BASE||'https://stock.indianapi.in').replace(/\/+$/,'');
+ if(!/^(dev|analyst|pro)\.indianapi\.in$/i.test(base.replace(/^https:\/\//,'')))return null;
+ const hdr=env.INDIANAPI_HEADER||'X-Api-Key',r=await fetch(base+'/indices?index_type=POPULAR',{headers:{[hdr]:env.INDIANAPI_KEY,'Accept':'application/json'}});
+ if(!r.ok)throw new Error('IndianAPI indices HTTP '+r.status);
+ const j=await r.json(),rows=Array.isArray(j)?j:(j.indices||[]),out={};
+ const maps=[['nifty50','NIFTY 50','^NSEI'],['sensex','SENSEX','^BSESN'],['banknifty','NIFTY BANK','^NSEBANK'],['niftymid','NIFTY MIDCAP 100','NIFTY_MIDCAP_100.NS']];
+ for(const [k,name] of maps){const x=rows.find(a=>String(a.name||'').toUpperCase()===name);if(!x)continue;
+  const price=Number(x.price),pct=Number(x.percentChange),chg=Number(x.netChange);
+  if(!Number.isFinite(price)||!Number.isFinite(pct))continue;
+  const stamp=x.date&&x.time?Date.parse(x.date+'T'+x.time+ '+05:30')/1000:0;
+  out[k]={price,prev:price/(1+pct/100),pct,chg,time:Number.isFinite(stamp)?stamp:0,source:'IndianAPI'};
  }
- const t=q.nifty50?q.nifty50.time:0, ageMin=t?(Date.now()/1000-t)/60:9999;
- const body={updated:new Date().toISOString(),asOf:t?new Date(t*1000).toISOString():null,marketOpen:ageMin<20,source:'Yahoo Finance (delayed)',items:items};
- const ok=items.length>0;
- const out=new Response(JSON.stringify(ok?body:{error:'unavailable'}),{status:ok?200:502,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':ok?'public, max-age=60':'no-store','X-Robots-Tag':'noindex'}});
- if(ok) ctx.waitUntil(cache.put(key,out.clone()));
  return out;
+}
+async function handleTicker(request,env,ctx){
+ const cache=caches.default,key=new Request(new URL('/api/ticker',request.url).toString(),{method:'GET'}),hit=await cache.match(key);
+ if(hit)return hit;
+ let indian={};try{if(env.INDIANAPI_KEY)indian=await fetchIndianIndices(env)||{};}catch(e){indian={};}
+ const res=await Promise.allSettled(TICKER_ITEMS.map(i=>fetchQuote(i.s))),q={};
+ TICKER_ITEMS.forEach((i,ix)=>{if(res[ix].status==='fulfilled')q[i.k]=res[ix].value;});
+ ['nifty50','sensex','banknifty','niftymid'].forEach(k=>{if(indian[k])q[k]=indian[k];});
+ const items=[];
+ TICKER_ITEMS.forEach(i=>{const v=q[i.k];if(!v||i.hidden||!v.prev)return;items.push({k:i.k,n:i.n,price:v.price,chg:v.chg!==undefined?v.chg:v.price-v.prev,pct:v.pct!==undefined?v.pct:(v.price-v.prev)/v.prev*100,dec:i.dec||2,asOf:v.time?new Date(v.time*1000).toISOString():null,source:v.source||'Yahoo Finance (delayed)'});});
+ if(q.goldusd&&q.usdinr&&q.goldusd.prev&&q.usdinr.prev){const OZ=31.1035,now=q.goldusd.price*q.usdinr.price/OZ*10,prev=q.goldusd.prev*q.usdinr.prev/OZ*10;items.push({k:'gold',n:'GOLD (INTL)',price:now,chg:now-prev,pct:(now-prev)/prev*100,dec:0,prefix:'\u20B9',suffix:'/10g',asOf:q.goldusd.time?new Date(q.goldusd.time*1000).toISOString():null,source:'Yahoo Finance (international proxy)'});}
+ const session=nseSession(new Date()),times=items.map(x=>x.asOf?Date.parse(x.asOf):0).filter(Boolean),newest=times.length?Math.max(...times):0,ageMin=newest?(Date.now()-newest)/60000:9999;
+ const body={updated:new Date().toISOString(),asOf:newest?new Date(newest).toISOString():null,marketOpen:session.open,calendarVerified:session.verified,marketLabel:session.label,dataFresh:ageMin<=20,dataStatus:ageMin<=20?'RECENT':'DELAYED',source:items.some(x=>x.source==='IndianAPI')?'IndianAPI + Yahoo Finance':'Yahoo Finance (delayed)',items};
+ const ok=items.length>0,out=new Response(JSON.stringify(ok?body:{error:'unavailable'}),{status:ok?200:502,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':ok?'public, max-age=30':'no-store','X-Robots-Tag':'noindex'}});
+ if(ok)ctx.waitUntil(cache.put(key,out.clone()));return out;
 }
 
 
@@ -377,7 +394,7 @@ async function handleMarket(request,env,ctx){
 
 export default {async fetch(request,env,ctx){
  const url=new URL(request.url);
- if(url.pathname==='/api/ticker') return handleTicker(request,ctx);
+ if(url.pathname==='/api/ticker') return handleTicker(request,env,ctx);
  if(url.pathname==='/api/market') return handleMarket(request,env,ctx);
  const response=await env.ASSETS.fetch(request);
  const contentType=response.headers.get('content-type')||'';
