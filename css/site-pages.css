@@ -8,8 +8,7 @@
 .site-logo-link{display:flex!important;align-items:center!important;width:205px!important;height:62px!important;overflow:visible!important;background:transparent!important}
 .site-logo{display:block!important;width:205px!important;height:auto!important;max-width:205px!important;max-height:62px!important;object-fit:contain!important;object-position:center!important;filter:none!important}
 
-/* FINAL: hide all logo/brand elements on internal pages */
-.site-nav .brand,.site-nav .brand img,.site-logo-link,.site-logo,.footer-logo,.logo-wrap,.da-brand-link,.da-brand-logo,[src*="dhanvin-logo"]{display:none!important;visibility:hidden!important;width:0!important;height:0!important;max-width:0!important;max-height:0!important;overflow:hidden!important;}
+/* Preserve the official logo on internal pages; removed conflicting global hide override. */
 
 /* GLOBAL INTERNAL-PAGE DARK MODE — contrast-safe shared tokens */
 html[data-theme="dark"] body{background:#0f0a1e!important;color:#f0efff!important}
