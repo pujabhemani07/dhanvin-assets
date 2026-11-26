@@ -50,3 +50,26 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy
+
+      - name: Smoke test production ticker and Market Insights API
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE_URL="https://www.dhanvinassets.com"
+
+          echo "Checking production ticker endpoint..."
+          curl --fail --silent --show-error --retry 8 --retry-delay 5 --retry-all-errors --max-time 20 \
+            "$BASE_URL/api/ticker" -o /tmp/ticker.json
+          jq -e '(.items | type == "array") and (.marketOpen | type == "boolean") and (.marketLabel | type == "string") and (.source | type == "string")' /tmp/ticker.json >/dev/null
+          jq '{marketLabel, calendarVerified, dataFresh, dataStatus, source, itemCount:(.items|length)}' /tmp/ticker.json
+
+          echo "Checking IndianAPI Market Insights endpoint..."
+          market_code=$(curl --silent --show-error --retry 3 --retry-delay 5 --retry-all-errors --max-time 25 \
+            -o /tmp/market.json -w "%{http_code}" "$BASE_URL/api/market?section=trending")
+          if [[ "$market_code" != "200" ]]; then
+            echo "::error::Market Insights endpoint returned HTTP $market_code. Check the INDIANAPI_KEY Worker secret, Free-plan host, endpoint access, and API credits."
+            cat /tmp/market.json
+            exit 1
+          fi
+          jq -e '(.section == "trending") and (.data | type == "object")' /tmp/market.json >/dev/null
+          echo "Production ticker and Market Insights smoke tests passed."
