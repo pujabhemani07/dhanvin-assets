@@ -629,8 +629,7 @@ footer.footer .footer-contact>li{display:flex!important;width:100%!important;mar
 @media(max-width:900px){footer.footer .footer-grid{grid-template-columns:1fr 1fr!important}}
 @media(max-width:600px){footer.footer .footer-grid{grid-template-columns:1fr!important}}
 
-/* FINAL: hide all logo/brand image elements site-wide */
-.logo-wrap,.logo-wrap .logo,.site-logo-link,.site-logo,.footer-logo,.da-brand-link,.da-brand-logo,.navbar-brand img,[src*="dhanvin-logo"]{display:none!important;visibility:hidden!important;width:0!important;height:0!important;max-width:0!important;max-height:0!important;overflow:hidden!important;}
+/* Preserve the official Dhanvin logo; earlier global hide override removed. */
 
 /* FINAL HERO WAVE / EDGE-GLITCH FIX */
 .hero-wave{position:absolute!important;left:50%!important;right:auto!important;bottom:-1px!important;width:100vw!important;height:80px!important;transform:translateX(-50%)!important;line-height:0!important;overflow:hidden!important;pointer-events:none!important;z-index:2!important}
