@@ -8,6 +8,12 @@ on:
       - "wrangler.jsonc"
       - ".assetsignore"
       - ".github/workflows/deploy-worker.yml"
+      - "**/*.html"
+      - "css/**"
+      - "js/**"
+      - "images/**"
+      - "assets/**"
+      - "fonts/**"
   workflow_dispatch:
  
 permissions:
