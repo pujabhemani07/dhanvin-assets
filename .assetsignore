@@ -1,0 +1,9 @@
+# Keep repository tooling and server-side Worker code out of public static assets
+node_modules/
+.git/
+.github/
+.wrangler/
+worker/
+wrangler.jsonc
+.gitignore
+.assetsignore
