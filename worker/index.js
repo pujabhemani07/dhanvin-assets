@@ -299,7 +299,7 @@ async function fetchQuote(sym){
 
 // NSE holidays are maintained per published annual exchange calendar.
 // Unknown years are deliberately marked unverified rather than guessed.
-const NSE_HOLIDAYS_2026=new Set(['2026-01-26','2026-03-03','2026-03-26','2026-03-31','2026-04-03','2026-04-14','2026-05-01','2026-05-28','2026-06-26','2026-09-14','2026-10-02','2026-10-20','2026-11-10','2026-11-24','2026-12-25']);
+const NSE_HOLIDAYS_2026=new Set(['2026-01-15','2026-01-26','2026-03-03','2026-03-26','2026-03-31','2026-04-03','2026-04-14','2026-05-01','2026-05-28','2026-06-26','2026-09-14','2026-10-02','2026-10-20','2026-11-10','2026-11-24','2026-12-25']);
 function nseSession(now){
  const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit',weekday:'short',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now),v={};
  parts.forEach(p=>v[p.type]=p.value);
